@@ -1,0 +1,59 @@
+{
+  "country_code": "BD",
+  "country_name": "Bangladesh",
+  "default_city": "Dhaka",
+  "locale": "en-BD",
+  "currency": "BDT",
+  "supported_languages": ["Bengali", "English"],
+  "education_levels": [
+    {
+      "id": "none",
+      "label": "No formal education",
+      "isced": "0",
+      "credential_tier": "none"
+    },
+    {
+      "id": "jsc",
+      "label": "JSC / lower secondary",
+      "isced": "2",
+      "credential_tier": "lower_secondary"
+    },
+    {
+      "id": "ssc",
+      "label": "SSC",
+      "isced": "3",
+      "credential_tier": "secondary"
+    },
+    {
+      "id": "hsc",
+      "label": "HSC",
+      "isced": "3",
+      "credential_tier": "upper_secondary"
+    },
+    {
+      "id": "tvet",
+      "label": "TVET / technical certificate",
+      "isced": "3-4",
+      "credential_tier": "vocational"
+    },
+    {
+      "id": "tertiary",
+      "label": "Tertiary / university",
+      "isced": "5-7",
+      "credential_tier": "tertiary"
+    }
+  ],
+  "priority_sectors": [
+    "garments",
+    "technical_services",
+    "retail_trade",
+    "transport",
+    "construction",
+    "food_services"
+  ],
+  "priority_isco_groups": ["7531", "7533", "7422", "7421", "5223", "5230", "7115", "8322", "9412"],
+  "ui": {
+    "intake_title": "Build your skills profile",
+    "intake_greeting": "Tell us about the work you already do. We will translate it into a portable skills profile."
+  }
+}

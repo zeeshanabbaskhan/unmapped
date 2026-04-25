@@ -1,0 +1,53 @@
+{
+  "country_code": "GH",
+  "country_name": "Ghana",
+  "default_city": "Accra",
+  "locale": "en-GH",
+  "currency": "GHS",
+  "supported_languages": ["English", "Twi", "Ga", "Hausa", "Ewe"],
+  "education_levels": [
+    {
+      "id": "none",
+      "label": "No formal education",
+      "isced": "0",
+      "credential_tier": "none"
+    },
+    {
+      "id": "jhs",
+      "label": "Basic / JHS",
+      "isced": "2",
+      "credential_tier": "lower_secondary"
+    },
+    {
+      "id": "wassce",
+      "label": "SHS / WASSCE",
+      "isced": "3",
+      "credential_tier": "secondary"
+    },
+    {
+      "id": "tvet",
+      "label": "TVET certificate",
+      "isced": "3-4",
+      "credential_tier": "vocational"
+    },
+    {
+      "id": "tertiary",
+      "label": "Tertiary / university",
+      "isced": "5-7",
+      "credential_tier": "tertiary"
+    }
+  ],
+  "priority_sectors": [
+    "technical_services",
+    "retail_trade",
+    "construction",
+    "garments",
+    "transport",
+    "food_services"
+  ],
+  "priority_isco_groups": ["7422", "7421", "5223", "5230", "7115", "7212", "7531", "8322", "9412"],
+  "ui": {
+    "intake_title": "Build your skills profile",
+    "intake_greeting": "Tell us about the work you already do. We will translate it into a portable skills profile."
+  }
+}
