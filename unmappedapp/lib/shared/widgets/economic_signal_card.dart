@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import '../../core/theme/app_theme.dart';
-import '../../models/opportunity.dart';
 
 class EconomicSignalCard extends StatelessWidget {
-  final PolicyInsight signal;
-  const EconomicSignalCard({super.key, required this.signal});
+  final String label;
+  final String value;
+
+  const EconomicSignalCard({super.key, required this.label, required this.value});
 
   @override
   Widget build(BuildContext context) {
@@ -17,12 +18,12 @@ class EconomicSignalCard extends StatelessWidget {
             const SizedBox(width: 10),
             Expanded(
               child: Text(
-                signal.label,
+                label,
                 style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
               ),
             ),
             Text(
-              signal.value,
+              value,
               style: const TextStyle(
                 fontSize: 14,
                 fontWeight: FontWeight.w700,

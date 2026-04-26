@@ -14,35 +14,13 @@ class OpportunityCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                Expanded(
-                  child: Text(
-                    item.title,
-                    style: const TextStyle(
-                      fontSize: 15,
-                      fontWeight: FontWeight.w600,
-                      color: AppColors.textPrimary,
-                    ),
-                  ),
-                ),
-                if (item.score > 0)
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 3),
-                    decoration: BoxDecoration(
-                      color: AppColors.opportunity.withValues(alpha: 0.1),
-                      borderRadius: BorderRadius.circular(6),
-                    ),
-                    child: Text(
-                      '${(item.score * 100).toInt()}%',
-                      style: const TextStyle(
-                        fontSize: 12,
-                        fontWeight: FontWeight.w700,
-                        color: AppColors.opportunity,
-                      ),
-                    ),
-                  ),
-              ],
+            Text(
+              item.title,
+              style: const TextStyle(
+                fontSize: 15,
+                fontWeight: FontWeight.w600,
+                color: AppColors.textPrimary,
+              ),
             ),
             const SizedBox(height: 8),
             Wrap(
@@ -51,26 +29,33 @@ class OpportunityCard extends StatelessWidget {
               children: [
                 if (item.incomeRange != null)
                   _tag(Icons.payments_outlined, item.incomeRange!),
-                if (item.demandLevel != null)
-                  _tag(Icons.trending_up, item.demandLevel!),
+                if (item.demandStrength != null)
+                  _tag(Icons.trending_up, item.demandStrength!),
                 if (item.stability != null)
                   _tag(Icons.shield_outlined, item.stability!),
+                if (item.entryBarrier != null)
+                  _tag(Icons.lock_outline, 'Barrier: ${item.entryBarrier!}'),
                 if (item.iscoCode != null)
                   _tag(Icons.tag, 'ISCO ${item.iscoCode}'),
               ],
             ),
-            if (item.rationale != null) ...[
+            if (item.reason != null) ...[
               const SizedBox(height: 8),
               Text(
-                item.rationale!,
+                item.reason!,
                 style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
               ),
             ],
-            if (item.providers.isNotEmpty) ...[
+            if (item.requiredUpskilling.isNotEmpty) ...[
               const SizedBox(height: 6),
-              Text(
-                'Via: ${item.providers.join(', ')}',
-                style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+              Wrap(
+                spacing: 6,
+                runSpacing: 4,
+                children: item.requiredUpskilling.map((s) => Chip(
+                  avatar: const Icon(Icons.arrow_upward, size: 14),
+                  label: Text(s, style: const TextStyle(fontSize: 11)),
+                  visualDensity: VisualDensity.compact,
+                )).toList(),
               ),
             ],
           ],

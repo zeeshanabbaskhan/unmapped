@@ -1,117 +1,162 @@
 class OpportunityItem {
-  final String id;
-  final String type;
   final String title;
-  final String? incomeRange;
-  final String? demandLevel;
-  final String? stability;
-  final String? rationale;
   final String? iscoCode;
-  final double score;
-  final List<String> providers;
+  final String? incomeRange;
+  final String? demandStrength;
+  final String? entryBarrier;
+  final String? stability;
+  final String? reason;
+  final List<String> requiredUpskilling;
 
   const OpportunityItem({
-    required this.id,
-    required this.type,
     required this.title,
-    this.incomeRange,
-    this.demandLevel,
-    this.stability,
-    this.rationale,
     this.iscoCode,
-    this.score = 0,
-    this.providers = const [],
+    this.incomeRange,
+    this.demandStrength,
+    this.entryBarrier,
+    this.stability,
+    this.reason,
+    this.requiredUpskilling = const [],
   });
 
   factory OpportunityItem.fromJson(Map<String, dynamic> json) {
-    final provRaw = json['providers'] as List? ?? [];
+    final upskilling = json['required_upskilling'];
     return OpportunityItem(
-      id: json['id'] as String? ?? '',
-      type: json['type'] as String? ?? 'unknown',
-      title: json['title'] as String? ?? json['label'] as String? ?? 'Untitled',
-      incomeRange: json['income_range'] as String? ?? json['wage_range'] as String?,
-      demandLevel: json['demand_level'] as String? ?? json['demand'] as String?,
-      stability: json['stability'] as String?,
-      rationale: json['rationale'] as String? ?? json['reason'] as String?,
+      title: json['title'] as String? ?? 'Untitled',
       iscoCode: json['isco_code'] as String?,
-      score: (json['score'] as num?)?.toDouble() ?? 0,
-      providers: provRaw.map((e) => e.toString()).toList(),
+      incomeRange: json['income_range'] as String?,
+      demandStrength: json['demand_strength'] as String?,
+      entryBarrier: json['entry_barrier'] as String?,
+      stability: json['stability'] as String?,
+      reason: json['reason'] as String?,
+      requiredUpskilling: upskilling is List ? upskilling.map((e) => e.toString()).toList() : [],
     );
   }
 }
 
-class PolicyInsight {
-  final String label;
-  final String value;
-  final String? detail;
+class RankingItem {
+  final String opportunity;
+  final double score;
+  final String? reason;
 
-  const PolicyInsight({required this.label, required this.value, this.detail});
+  const RankingItem({required this.opportunity, required this.score, this.reason});
 
-  factory PolicyInsight.fromJson(Map<String, dynamic> json) {
-    return PolicyInsight(
-      label: json['label'] as String? ?? json['indicator'] as String? ?? '',
-      value: json['value']?.toString() ?? 'N/A',
-      detail: json['detail'] as String?,
+  factory RankingItem.fromJson(Map<String, dynamic> json) {
+    return RankingItem(
+      opportunity: json['opportunity'] as String? ?? '',
+      score: (json['score'] as num?)?.toDouble() ?? 0,
+      reason: json['reason'] as String?,
     );
+  }
+}
+
+class PolicyView {
+  final String? laborGap;
+  final String? sectorShortage;
+  final String? recommendation;
+
+  const PolicyView({this.laborGap, this.sectorShortage, this.recommendation});
+
+  factory PolicyView.fromJson(Map<String, dynamic> json) {
+    return PolicyView(
+      laborGap: json['labor_gap_identified'] as String?,
+      sectorShortage: json['sector_shortage_signal'] as String?,
+      recommendation: json['recommendation_for_government_or_ngos'] as String?,
+    );
+  }
+}
+
+class LaborMarketSignals {
+  final String? wageFloor;
+  final String? sectorEmployment;
+  final String? youthUnemployment;
+  final String? neetRate;
+  final String? gdpPerCapita;
+  final String? selfEmployed;
+  final String? digitalInfra;
+
+  const LaborMarketSignals({
+    this.wageFloor, this.sectorEmployment, this.youthUnemployment,
+    this.neetRate, this.gdpPerCapita, this.selfEmployed, this.digitalInfra,
+  });
+
+  factory LaborMarketSignals.fromJson(Map<String, dynamic> json) {
+    return LaborMarketSignals(
+      wageFloor: json['wage_floor'] as String?,
+      sectorEmployment: json['sector_employment_share'] as String?,
+      youthUnemployment: json['youth_unemployment_rate'] as String?,
+      neetRate: json['neet_rate'] as String?,
+      gdpPerCapita: json['gdp_per_capita'] as String?,
+      selfEmployed: json['self_employed_share'] as String?,
+      digitalInfra: json['digital_infrastructure'] as String?,
+    );
+  }
+
+  List<MapEntry<String, String>> get entries {
+    return [
+      if (wageFloor != null && wageFloor != 'Not available') MapEntry('Wage floor', wageFloor!),
+      if (youthUnemployment != null && youthUnemployment != 'Not available') MapEntry('Youth unemployment', youthUnemployment!),
+      if (neetRate != null && neetRate != 'Not available') MapEntry('NEET rate', neetRate!),
+      if (selfEmployed != null && selfEmployed != 'Not available') MapEntry('Self-employed', selfEmployed!),
+      if (sectorEmployment != null && sectorEmployment != 'Not available') MapEntry('Sector employment', sectorEmployment!),
+      if (gdpPerCapita != null && gdpPerCapita != 'Not available') MapEntry('GDP per capita', gdpPerCapita!),
+      if (digitalInfra != null && digitalInfra != 'Not available') MapEntry('Digital infrastructure', digitalInfra!),
+    ];
   }
 }
 
 class OpportunityResult {
-  final List<OpportunityItem> opportunities;
-  final List<PolicyInsight> youthSignals;
-  final List<PolicyInsight> policySignals;
-  final String? topOccupation;
+  final String? occupationTitle;
+  final String? iscoCode;
+  final String? country;
+  final String? informalityLevel;
+  final LaborMarketSignals signals;
+  final List<OpportunityItem> directJobs;
+  final List<OpportunityItem> adjacentOpps;
+  final List<OpportunityItem> microEnterprise;
+  final List<RankingItem> ranking;
+  final PolicyView policyView;
 
   const OpportunityResult({
-    this.opportunities = const [],
-    this.youthSignals = const [],
-    this.policySignals = const [],
-    this.topOccupation,
+    this.occupationTitle,
+    this.iscoCode,
+    this.country,
+    this.informalityLevel,
+    this.signals = const LaborMarketSignals(),
+    this.directJobs = const [],
+    this.adjacentOpps = const [],
+    this.microEnterprise = const [],
+    this.ranking = const [],
+    this.policyView = const PolicyView(),
   });
 
+  /// Parses the response from POST /api/module3/opportunities
+  /// which returns { opportunities: { ... } }
   factory OpportunityResult.fromJson(Map<String, dynamic> json) {
-    final oppsRaw = json['opportunities'] as List? ?? json['ranked_opportunities'] as List? ?? [];
-    final youthRaw = json['youth_view'] as Map<String, dynamic>? ?? {};
-    final policyRaw = json['policymaker_view'] as Map<String, dynamic>? ?? {};
+    final root = json['opportunities'] as Map<String, dynamic>? ?? json;
 
-    List<PolicyInsight> parseSignals(Map<String, dynamic> view) {
-      final signals = <PolicyInsight>[];
-      final econDash = view['econometric_dashboard'] as Map<String, dynamic>?
-          ?? view['labor_market_snapshot'] as Map<String, dynamic>?
-          ?? view;
-      for (final entry in econDash.entries) {
-        if (entry.value is Map) continue;
-        signals.add(PolicyInsight(
-          label: _humanize(entry.key),
-          value: entry.value?.toString() ?? 'N/A',
-        ));
-      }
-      return signals;
+    final opps = root['opportunities'] as Map<String, dynamic>? ?? {};
+    final lmc = root['labor_market_context'] as Map<String, dynamic>? ?? {};
+    final sig = lmc['key_economic_signals'] as Map<String, dynamic>? ?? {};
+    final rkRaw = root['ranking'] as List? ?? [];
+    final pvRaw = root['policy_view'] as Map<String, dynamic>? ?? {};
+
+    List<OpportunityItem> parseList(dynamic raw) {
+      if (raw is List) return raw.whereType<Map<String, dynamic>>().map(OpportunityItem.fromJson).toList();
+      return [];
     }
 
     return OpportunityResult(
-      opportunities: oppsRaw.whereType<Map<String, dynamic>>().map(OpportunityItem.fromJson).toList(),
-      youthSignals: parseSignals(youthRaw),
-      policySignals: parseSignals(policyRaw),
-      topOccupation: json['top_occupation'] as String?,
+      occupationTitle: root['occupation_title'] as String?,
+      iscoCode: root['isco_code'] as String?,
+      country: lmc['country'] as String?,
+      informalityLevel: lmc['informality_level'] as String?,
+      signals: LaborMarketSignals.fromJson(sig),
+      directJobs: parseList(opps['direct']),
+      adjacentOpps: parseList(opps['adjacent']),
+      microEnterprise: parseList(opps['micro_enterprise']),
+      ranking: rkRaw.whereType<Map<String, dynamic>>().map(RankingItem.fromJson).toList(),
+      policyView: PolicyView.fromJson(pvRaw),
     );
   }
-
-  List<OpportunityItem> byType(String type) =>
-      opportunities.where((o) => o.type == type).toList();
-
-  List<OpportunityItem> get directJobs => opportunities.where((o) =>
-      o.type == 'formal_employment' || o.type == 'formal').toList();
-
-  List<OpportunityItem> get adjacentOpps => opportunities.where((o) =>
-      o.type == 'training' || o.type == 'upskilling' || o.type == 'gig').toList();
-
-  List<OpportunityItem> get microEnterprise => opportunities.where((o) =>
-      o.type == 'self_employment' || o.type == 'microenterprise' || o.type == 'agriculture').toList();
-}
-
-String _humanize(String key) {
-  return key
-      .replaceAll('_', ' ')
-      .replaceAllMapped(RegExp(r'(^|\s)\w'), (m) => m[0]!.toUpperCase());
 }

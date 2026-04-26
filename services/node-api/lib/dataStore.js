@@ -106,6 +106,34 @@ export function getConfigStats() {
   return getConfigLoaderStats();
 }
 
+export function getGeneratedCountryConfig(countryCode) {
+  if (!countryCode) return null;
+  const code = String(countryCode).toUpperCase().trim().slice(0, 3);
+  const genPath = join(root, "config", "generated", "countries", `${code.slice(0, 2)}.json`);
+  if (!existsSync(genPath)) return null;
+  try { return JSON.parse(readFileSync(genPath, "utf-8")); } catch { return null; }
+}
+
+export function getOpportunitiesConfig(countryCode) {
+  if (!countryCode) return null;
+  const code = String(countryCode).toUpperCase().trim().slice(0, 2);
+  const manualPath = join(root, "config", "opportunities", `${code}.json`);
+  if (existsSync(manualPath)) {
+    try { return JSON.parse(readFileSync(manualPath, "utf-8")); } catch { /* fall through */ }
+  }
+  const genPath = join(root, "config", "generated", "opportunities", `${code}.json`);
+  if (existsSync(genPath)) {
+    try { return JSON.parse(readFileSync(genPath, "utf-8")); } catch { /* fall through */ }
+  }
+  return null;
+}
+
+export function getI18nStrings(locale = "en") {
+  const i18nPath = join(root, "config", "i18n", `${locale}.json`);
+  if (!existsSync(i18nPath)) return {};
+  try { return JSON.parse(readFileSync(i18nPath, "utf-8")); } catch { return {}; }
+}
+
 export function getTaxonomyIndex() {
   return taxonomyIndex;
 }

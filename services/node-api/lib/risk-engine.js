@@ -1,21 +1,10 @@
 /**
  * Module 2 — Labor Market Risk Analysis Engine.
  *
- * Analyses an occupation profile and estimates automation / AI impact in a
- * specific country context. The pipeline has five steps:
- *
- *   Steps 1–2  Deterministic (no LLM):
- *     1. Automation risk estimation (Frey-Osborne + O*NET crosswalk)
- *     2. LMIC calibration (country config + ILOSTAT labor structure)
- *
- *   Steps 3–5  LLM-assisted (OpenRouter, falls back to structured templates):
- *     3. Task decomposition (high-risk vs low-risk tasks)
- *     4. Skill resilience analysis (at-risk / durable / adjacent)
- *     5. Macro context overlay (education projection + labor shift trend)
- *
- * Output is the strict JSON schema defined in the product spec.
- * Numeric values in the output come ONLY from the deterministic steps or the
- * Module 1 profile — the LLM provides narrative and classification only.
+ * Five-step pipeline:
+ *   1–2  Deterministic: Frey-Osborne + O*NET crosswalk → LMIC calibration
+ *   3–5  LLM-assisted (OpenRouter, template fallback):
+ *         task decomposition, skill resilience, macro context
  */
 
 import { OpenRouter } from "@openrouter/sdk";
@@ -40,27 +29,16 @@ function withTimeout(promise, ms) {
   return Promise.race([promise, deadline]).finally(() => clearTimeout(timer));
 }
 
-// ---------------------------------------------------------------------------
-// Step 1 — Automation risk estimation
-// ---------------------------------------------------------------------------
-
 function computeBaseAutomation(occupation) {
-  // Tier 1: weighted average via pre-computed O*NET links in taxonomy
   const onetLinks = occupation.onet?.matches ?? [];
   const onetResult = getByONetLinks(onetLinks);
   if (onetResult) return onetResult;
 
-  // Tier 2: ISCO major-group fallback (documented group averages)
   const groupResult = getByISCOGroup(occupation.isco_code);
   if (groupResult) return groupResult;
 
-  // Tier 3: no data — return null; risk engine will mark confidence as none
   return null;
 }
-
-// ---------------------------------------------------------------------------
-// Step 3–5 — LLM analysis prompt
-// ---------------------------------------------------------------------------
 
 const SYSTEM_PROMPT = `You are a labor economics analyst specialising in automation risk and LMIC labor markets.
 
@@ -94,12 +72,11 @@ function buildAnalysisPrompt(occupation, skills, country, automation, laborStats
     country: {
       name: country.country_name,
       code: country.country_code,
-      world_bank_income: country.world_bank?.income_level_iso3v3 ?? "unknown",
+      world_bank_income: country.world_bank?.income_level_iso3v3 ?? country.world_bank?.income_level_id ?? "unknown",
       agriculture_share_2024: laborStats?.employment_by_sector?.agriculture_share ?? null,
       advanced_education_share_2024: laborStats?.labor_force_by_education?.advanced_share ?? null,
       wittgenstein_secondary_completion_2040: wic?.secondary_completion_2040 ?? null,
       wittgenstein_tertiary_share_2040: wic?.tertiary_share_2040 ?? null,
-      wittgenstein_source: wic?.source ?? null,
     },
     pre_computed_automation: {
       base_probability: automation.base,
@@ -114,12 +91,8 @@ function buildAnalysisPrompt(occupation, skills, country, automation, laborStats
 Analyse this occupation profile and return ONLY the following JSON object:
 {
   "task_breakdown": {
-    "high_risk_tasks": [
-      { "task": "<task description>", "risk_score": <0.0-1.0> }
-    ],
-    "low_risk_tasks": [
-      { "task": "<task description>", "risk_score": <0.0-1.0> }
-    ]
+    "high_risk_tasks": [{ "task": "<description>", "risk_score": <0.0-1.0> }],
+    "low_risk_tasks": [{ "task": "<description>", "risk_score": <0.0-1.0> }]
   },
   "skill_resilience_analysis": {
     "at_risk_skills": ["<skill label>"],
@@ -127,8 +100,8 @@ Analyse this occupation profile and return ONLY the following JSON object:
     "adjacent_skills": ["<skill label — upskilling pathway>"]
   },
   "macro_signals": {
-    "education_projection": "<1-2 sentences on education trend in this country, citing Wittgenstein projections if available>",
-    "labor_shift_trend": "<1-2 sentences on informal→semi-formal transition trend>"
+    "education_projection": "<1-2 sentences>",
+    "labor_shift_trend": "<1-2 sentences>"
   },
   "final_readiness_profile": {
     "risk_level": "<low|medium|high|very high>",
@@ -136,104 +109,26 @@ Analyse this occupation profile and return ONLY the following JSON object:
     "opportunity_type": "<displacement|stable|upskilling_required|growth_area>",
     "summary": "<2-3 sentence summary>"
   },
-  "explainability": {
-    "key_drivers": ["<driver 1>", "<driver 2>", "<driver 3>"]
-  }
+  "explainability": { "key_drivers": ["<driver 1>", "<driver 2>", "<driver 3>"] }
 }
 
 Constraints:
-- high_risk_tasks: 2–4 tasks. low_risk_tasks: 2–4 tasks.
-- at_risk_skills and durable_skills must come ONLY from skills_from_profile.
-- adjacent_skills may suggest 1-3 closely related upskilling areas not in the profile.
-- risk_level and resilience_level must be consistent with adjusted_probability ${automation.adjusted}.
+- high_risk_tasks: 2-4. low_risk_tasks: 2-4.
+- at_risk_skills and durable_skills ONLY from skills_from_profile.
+- adjacent_skills: 1-3 closely related upskilling areas.
 - key_drivers: exactly 3 items.`;
 }
 
-// ---------------------------------------------------------------------------
-// LLM call with template fallback
-// ---------------------------------------------------------------------------
-
-async function runLLMAnalysis(occupation, skills, country, automation, laborStats) {
-  if (!process.env.OPENROUTER_API_KEY) {
-    return buildTemplateFallback(occupation, skills, automation);
-  }
-
-  try {
-    const client = getClient();
-    const result = await withTimeout(
-      client.chat.send({
-        chatRequest: {
-          model: OPENROUTER_MODEL,
-          maxTokens: 1200,
-          responseFormat: { type: "json_object" },
-          stream: false,
-          messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            { role: "user", content: buildAnalysisPrompt(occupation, skills, country, automation, laborStats) },
-          ],
-        },
-      }),
-      LLM_TIMEOUT_MS
-    );
-
-    const raw = result.choices?.[0]?.message?.content ?? "";
-    if (!raw.trim()) throw new Error("Empty LLM response");
-
-    const parsed = JSON.parse(
-      raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "").trim()
-    );
-
-    // Validate required keys — if anything is missing, fall back
-    const required = ["task_breakdown", "skill_resilience_analysis", "macro_signals", "final_readiness_profile", "explainability"];
-    for (const key of required) {
-      if (!parsed[key]) throw new Error(`LLM response missing key: ${key}`);
-    }
-    return { ...parsed, _provider: `openrouter/${OPENROUTER_MODEL}` };
-  } catch (err) {
-    console.warn(`[risk-engine] LLM failed (${err.message}) — using template fallback`);
-    return buildTemplateFallback(occupation, skills, automation);
-  }
-}
-
-// Generic ISCO task templates used when O*NET data is not available in the
-// taxonomy. Based on ILO task classification by ISCO major group.
 const ISCO_TEMPLATE_TASKS = {
-  "1": {
-    high: ["Coordinate and schedule operational activities", "Monitor budget and resource allocation"],
-    low:  ["Negotiate with clients and partners", "Mentor and develop team members"],
-  },
-  "2": {
-    high: ["Document and file case records", "Apply established research procedures"],
-    low:  ["Diagnose complex or unusual situations", "Advise clients on specialized matters"],
-  },
-  "3": {
-    high: ["Record and log data from instruments or equipment", "Apply standard testing protocols"],
-    low:  ["Troubleshoot non-routine technical faults", "Coordinate with clients on technical issues"],
-  },
-  "4": {
-    high: ["Process and file standard documents", "Enter data into information systems"],
-    low:  ["Handle customer inquiries and complaints", "Resolve data discrepancies"],
-  },
-  "5": {
-    high: ["Process routine transactions", "Maintain inventory counts"],
-    low:  ["Serve and assist customers directly", "Adapt service to customer needs"],
-  },
-  "6": {
-    high: ["Apply standard planting or harvesting methods", "Sort and grade produce"],
-    low:  ["Monitor crop or animal health conditions", "Operate in variable terrain and weather"],
-  },
-  "7": {
-    high: ["Perform repetitive assembly or fabrication tasks", "Apply standard finishing operations"],
-    low:  ["Diagnose and repair non-standard faults", "Adapt methods to varying materials or conditions"],
-  },
-  "8": {
-    high: ["Operate machinery on a fixed production line", "Load and unload materials according to schedule"],
-    low:  ["Monitor equipment for abnormal conditions", "Respond to mechanical breakdowns"],
-  },
-  "9": {
-    high: ["Perform routine cleaning or sorting tasks", "Follow simple sequential instructions"],
-    low:  ["Navigate changing physical environments", "Interact directly with the public"],
-  },
+  "1": { high: ["Coordinate and schedule operational activities", "Monitor budget and resource allocation"], low: ["Negotiate with clients and partners", "Mentor and develop team members"] },
+  "2": { high: ["Document and file case records", "Apply established research procedures"], low: ["Diagnose complex or unusual situations", "Advise clients on specialized matters"] },
+  "3": { high: ["Record and log data from instruments or equipment", "Apply standard testing protocols"], low: ["Troubleshoot non-routine technical faults", "Coordinate with clients on technical issues"] },
+  "4": { high: ["Process and file standard documents", "Enter data into information systems"], low: ["Handle customer inquiries and complaints", "Resolve data discrepancies"] },
+  "5": { high: ["Process routine transactions", "Maintain inventory counts"], low: ["Serve and assist customers directly", "Adapt service to customer needs"] },
+  "6": { high: ["Apply standard planting or harvesting methods", "Sort and grade produce"], low: ["Monitor crop or animal health conditions", "Operate in variable terrain and weather"] },
+  "7": { high: ["Perform repetitive assembly or fabrication tasks", "Apply standard finishing operations"], low: ["Diagnose and repair non-standard faults", "Adapt methods to varying materials or conditions"] },
+  "8": { high: ["Operate machinery on a fixed production line", "Load and unload materials according to schedule"], low: ["Monitor equipment for abnormal conditions", "Respond to mechanical breakdowns"] },
+  "9": { high: ["Perform routine cleaning or sorting tasks", "Follow simple sequential instructions"], low: ["Navigate changing physical environments", "Interact directly with the public"] },
 };
 
 function buildTemplateFallback(occupation, skills, automation) {
@@ -268,38 +163,71 @@ function buildTemplateFallback(occupation, skills, automation) {
       risk_level: riskLevel,
       resilience_level: prob >= 0.6 ? "low" : "medium",
       opportunity_type: prob >= 0.65 ? "upskilling_required" : "stable",
-      summary: `Template fallback (LLM unavailable). Adjusted automation probability ${prob} implies ${riskLevel} risk for this occupation in the given country context.`,
+      summary: `Template fallback. Adjusted automation probability ${prob} implies ${riskLevel} risk.`,
     },
     explainability: {
       key_drivers: [
-        `Adjusted automation probability ${prob} (base × LMIC factor ${automation.adjustment_factor}).`,
-        `ISCO group ${iscoMajor} task structure — high-risk tasks are repetitive/procedural; low-risk tasks involve contextual judgment.`,
-        "LMIC context reduces near-term automation risk vs OECD baseline due to informality and infrastructure constraints.",
+        `Adjusted automation probability ${prob} (base x LMIC factor ${automation.adjustment_factor}).`,
+        `ISCO group ${iscoMajor} task structure.`,
+        "LMIC context reduces near-term automation risk vs OECD baseline.",
       ],
     },
     _provider: "template_fallback",
   };
 }
 
-// ---------------------------------------------------------------------------
-// Main entry point
-// ---------------------------------------------------------------------------
+async function runLLMAnalysis(occupation, skills, country, automation, laborStats) {
+  if (!process.env.OPENROUTER_API_KEY) {
+    return buildTemplateFallback(occupation, skills, automation);
+  }
+
+  try {
+    const client = getClient();
+    const result = await withTimeout(
+      client.chat.send({
+        chatRequest: {
+          model: OPENROUTER_MODEL,
+          maxTokens: 1200,
+          responseFormat: { type: "json_object" },
+          stream: false,
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            { role: "user", content: buildAnalysisPrompt(occupation, skills, country, automation, laborStats) },
+          ],
+        },
+      }),
+      LLM_TIMEOUT_MS
+    );
+
+    const raw = result.choices?.[0]?.message?.content ?? "";
+    if (!raw.trim()) throw new Error("Empty LLM response");
+
+    const parsed = JSON.parse(
+      raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "").trim()
+    );
+
+    const required = ["task_breakdown", "skill_resilience_analysis", "macro_signals", "final_readiness_profile", "explainability"];
+    for (const key of required) {
+      if (!parsed[key]) throw new Error(`LLM response missing key: ${key}`);
+    }
+    return { ...parsed, _provider: `openrouter/${OPENROUTER_MODEL}` };
+  } catch (err) {
+    console.warn(`[risk-engine] LLM failed (${err.message}) — using template fallback`);
+    return buildTemplateFallback(occupation, skills, automation);
+  }
+}
 
 /**
  * Run the full Module 2 risk analysis pipeline.
  *
- * @param {object} params
- * @param {object} params.profile    - Module 1 profile output (from buildProfile)
- * @param {object} params.country    - Country config object from country_registry
- * @returns {Promise<object>}        - Risk analysis in the Module 2 JSON schema
+ * @param {{ profile: object, country: object }} params
+ * @returns {Promise<object>}
  */
 export async function analyseRisk({ profile, country }) {
-  // Resolve occupation from taxonomy for O*NET task data
   const taxonomy = getTaxonomyIndex();
   const occupationId = profile.primary_occupation?.occupation_id;
   const occupation = occupationId ? taxonomy.occupations[occupationId] : null;
 
-  // Step 1 — Base automation probability
   const baseResult =
     occupation
       ? computeBaseAutomation(occupation)
@@ -308,7 +236,6 @@ export async function analyseRisk({ profile, country }) {
   const baseProbability = baseResult?.probability ?? null;
   const baseSource      = baseResult?.source ?? "unavailable";
 
-  // Step 2 — LMIC calibration
   const lmicResult = baseProbability !== null
     ? calibrateForLMIC(baseProbability, country)
     : null;
@@ -323,16 +250,11 @@ export async function analyseRisk({ profile, country }) {
     base_source: baseSource,
   };
 
-  // Collect skills from the profile (Module 1 only — no hallucination)
   const skillLabels = (profile.skills?.mapped ?? []).map((s) => s.plain_label || s.label);
-
-  // Country labor stats for macro context
   const laborStats = getCountryLaborStats(country.country_code);
 
-  // Steps 3–5 — LLM analysis
   const llmResult = await runLLMAnalysis(occupation ?? {}, skillLabels, country, automationSummary, laborStats);
 
-  // Assemble final output per the strict JSON schema
   return {
     isco_code: profile.primary_occupation?.isco_code ?? "",
     occupation_title: profile.primary_occupation?.title ?? "",
@@ -341,11 +263,11 @@ export async function analyseRisk({ profile, country }) {
       source_model: "Frey-Osborne (2017) + ILO LMIC adjustment",
       base_automation_probability: baseProbability,
       base_source: baseSource,
-      lmic_adjustment_explanation: lmicResult?.explanation ?? [
-        "No LMIC adjustment applied — base probability unavailable.",
-      ],
+      lmic_adjustment_explanation: lmicResult?.explanation ?? ["No LMIC adjustment applied — base probability unavailable."],
       adjustment_factor: adjustmentFactor,
       adjusted_automation_probability: adjustedProbability,
+      uncertainty_band: lmicResult?.uncertainty_band ?? 0.15,
+      scenario_toggles: lmicResult?.scenario_toggles ?? [],
       sources: lmicResult?.sources ?? [],
     },
 

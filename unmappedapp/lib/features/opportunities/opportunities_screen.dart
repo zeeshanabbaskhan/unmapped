@@ -62,16 +62,26 @@ class _OpportunitiesScreenState extends State<OpportunitiesScreen> {
       );
     }
 
+    final signalEntries = result.signals.entries;
+
     return Scaffold(
       body: SafeArea(
         child: ListView(
           padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
           children: [
-            if (result.topOccupation != null)
+            if (result.occupationTitle != null)
               Text(
-                'Opportunities for: ${result.topOccupation}',
+                'Opportunities for: ${result.occupationTitle}',
                 style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
               ),
+
+            if (result.country != null || result.informalityLevel != null) ...[
+              const SizedBox(height: 4),
+              Text(
+                '${result.country ?? ''} | Formality: ${result.informalityLevel ?? 'unknown'}',
+                style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+              ),
+            ],
 
             if (result.directJobs.isNotEmpty) ...[
               const SectionHeader(
@@ -85,7 +95,7 @@ class _OpportunitiesScreenState extends State<OpportunitiesScreen> {
             if (result.adjacentOpps.isNotEmpty) ...[
               const SectionHeader(
                 title: 'Adjacent Opportunities',
-                subtitle: 'Upskilling, gig work and training pathways',
+                subtitle: 'Upskilling pathways and related roles',
                 color: AppColors.opportunity,
               ),
               ..._buildCards(result.adjacentOpps),
@@ -100,21 +110,23 @@ class _OpportunitiesScreenState extends State<OpportunitiesScreen> {
               ..._buildCards(result.microEnterprise),
             ],
 
-            if (result.youthSignals.isNotEmpty) ...[
+            if (signalEntries.isNotEmpty) ...[
               const SectionHeader(title: 'Economic Signals'),
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Column(
-                    children: result.youthSignals.map((s) => Padding(
+                    children: signalEntries.map((e) => Padding(
                       padding: const EdgeInsets.symmetric(vertical: 4),
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           Expanded(
-                            child: Text(s.label, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                            child: Text(e.key, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
                           ),
-                          Text(s.value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600)),
+                          Flexible(
+                            child: Text(e.value, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600), textAlign: TextAlign.end),
+                          ),
                         ],
                       ),
                     )).toList(),

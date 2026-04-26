@@ -61,9 +61,6 @@ class _RiskScreenState extends State<RiskScreen> {
       );
     }
 
-    final highRisk = risk.tasks.where((t) => t.isHighRisk).toList();
-    final lowRisk = risk.tasks.where((t) => !t.isHighRisk).toList();
-
     return Scaffold(
       body: SafeArea(
         child: ListView(
@@ -80,7 +77,7 @@ class _RiskScreenState extends State<RiskScreen> {
               ),
             ],
 
-            if (risk.countryAdjustmentNote != null) ...[
+            if (risk.lmicExplanation.isNotEmpty) ...[
               const SizedBox(height: 12),
               Container(
                 padding: const EdgeInsets.all(12),
@@ -88,71 +85,128 @@ class _RiskScreenState extends State<RiskScreen> {
                   color: AppColors.opportunityLight,
                   borderRadius: BorderRadius.circular(8),
                 ),
-                child: Row(
+                child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.public, size: 16, color: AppColors.opportunity),
-                    const SizedBox(width: 8),
-                    Expanded(
-                      child: Text(
-                        risk.countryAdjustmentNote!,
-                        style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
-                      ),
+                    const Row(
+                      children: [
+                        Icon(Icons.public, size: 16, color: AppColors.opportunity),
+                        SizedBox(width: 8),
+                        Text('LMIC Adjustment', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.opportunity)),
+                      ],
                     ),
+                    const SizedBox(height: 6),
+                    ...risk.lmicExplanation.map((e) => Padding(
+                      padding: const EdgeInsets.only(bottom: 3),
+                      child: Text(e, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                    )),
                   ],
                 ),
               ),
             ],
 
-            if (highRisk.isNotEmpty) ...[
-              const SectionHeader(title: 'High-risk tasks', color: AppColors.risk),
-              ...highRisk.map((t) => Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child: RiskTaskCard(task: t),
-              )),
-            ],
-
-            if (lowRisk.isNotEmpty) ...[
-              const SectionHeader(title: 'Lower-risk tasks', color: AppColors.stable),
-              ...lowRisk.map((t) => Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child: RiskTaskCard(task: t),
-              )),
-            ],
-
-            if (risk.econometricSignals.isNotEmpty) ...[
-              const SectionHeader(title: 'Economic context'),
+            if (risk.readinessSummary != null) ...[
+              const SizedBox(height: 12),
               Card(
                 child: Padding(
                   padding: const EdgeInsets.all(12),
                   child: Column(
-                    children: risk.econometricSignals.map((s) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Row(
                         children: [
-                          Expanded(
-                            child: Text(
-                              s.label,
-                              style: const TextStyle(fontSize: 13, color: AppColors.textSecondary),
-                            ),
-                          ),
-                          Text(
-                            '${s.value}${s.unit != null ? ' ${s.unit}' : ''}',
-                            style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600),
-                          ),
+                          if (risk.riskLevel != null) Chip(label: Text(risk.riskLevel!.toUpperCase(), style: const TextStyle(fontSize: 11))),
+                          const SizedBox(width: 6),
+                          if (risk.resilienceLevel != null) Chip(label: Text('Resilience: ${risk.resilienceLevel!}', style: const TextStyle(fontSize: 11))),
                         ],
                       ),
-                    )).toList(),
+                      const SizedBox(height: 8),
+                      Text(risk.readinessSummary!, style: const TextStyle(fontSize: 13)),
+                    ],
                   ),
                 ),
               ),
             ],
 
-            if (risk.scenario != null) ...[
+            if (risk.highRiskTasks.isNotEmpty) ...[
+              const SectionHeader(title: 'High-risk tasks', color: AppColors.risk),
+              ...risk.highRiskTasks.map((t) => Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: RiskTaskCard(task: t),
+              )),
+            ],
+
+            if (risk.lowRiskTasks.isNotEmpty) ...[
+              const SectionHeader(title: 'Lower-risk tasks', color: AppColors.stable),
+              ...risk.lowRiskTasks.map((t) => Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: RiskTaskCard(task: t),
+              )),
+            ],
+
+            if (risk.durableSkills.isNotEmpty || risk.atRiskSkills.isNotEmpty) ...[
+              const SectionHeader(title: 'Skill Resilience'),
+              if (risk.durableSkills.isNotEmpty) ...[
+                const Text('Durable skills:', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.stable)),
+                Wrap(
+                  spacing: 6, runSpacing: 4,
+                  children: risk.durableSkills.map((s) => Chip(
+                    avatar: const Icon(Icons.check_circle_outline, size: 16, color: AppColors.stable),
+                    label: Text(s, style: const TextStyle(fontSize: 12)),
+                  )).toList(),
+                ),
+                const SizedBox(height: 8),
+              ],
+              if (risk.atRiskSkills.isNotEmpty) ...[
+                const Text('At-risk skills:', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.risk)),
+                Wrap(
+                  spacing: 6, runSpacing: 4,
+                  children: risk.atRiskSkills.map((s) => Chip(
+                    avatar: const Icon(Icons.warning_amber_rounded, size: 16, color: AppColors.risk),
+                    label: Text(s, style: const TextStyle(fontSize: 12)),
+                  )).toList(),
+                ),
+                const SizedBox(height: 8),
+              ],
+              if (risk.adjacentSkills.isNotEmpty) ...[
+                const Text('Adjacent (upskilling):', style: TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.opportunity)),
+                Wrap(
+                  spacing: 6, runSpacing: 4,
+                  children: risk.adjacentSkills.map((s) => Chip(
+                    avatar: const Icon(Icons.arrow_upward, size: 16, color: AppColors.opportunity),
+                    label: Text(s, style: const TextStyle(fontSize: 12)),
+                  )).toList(),
+                ),
+              ],
+            ],
+
+            if (risk.educationProjection != null || risk.laborShiftTrend != null) ...[
+              const SectionHeader(title: 'Macro Signals'),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (risk.educationProjection != null) ...[
+                        const Text('Education projection', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+                        Text(risk.educationProjection!, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                        const SizedBox(height: 8),
+                      ],
+                      if (risk.laborShiftTrend != null) ...[
+                        const Text('Labor shift trend', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600)),
+                        Text(risk.laborShiftTrend!, style: const TextStyle(fontSize: 12, color: AppColors.textSecondary)),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ],
+
+            if (risk.analysisProvider != null) ...[
               const SizedBox(height: 12),
               Text(
-                'Scenario: ${risk.scenario}',
+                'Analysis: ${risk.analysisProvider}',
                 style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
               ),
             ],

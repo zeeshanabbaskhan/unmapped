@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../shared/widgets/status_states.dart';
-import '../../shared/widgets/economic_signal_card.dart';
 import '../../shared/widgets/section_header.dart';
 import '../../state/app_state.dart';
 
@@ -49,7 +48,8 @@ class InsightsScreen extends StatelessWidget {
       );
     }
 
-    final signals = result.policySignals.isNotEmpty ? result.policySignals : result.youthSignals;
+    final pv = result.policyView;
+    final signalEntries = result.signals.entries;
 
     return Scaffold(
       body: SafeArea(
@@ -62,19 +62,60 @@ class InsightsScreen extends StatelessWidget {
             ),
             const SizedBox(height: 4),
             Text(
-              'Labor market signals for ${state.selectedCountry}',
+              'Labor market signals for ${result.country ?? state.selectedCountry}',
               style: const TextStyle(fontSize: 14, color: AppColors.textSecondary),
             ),
 
-            if (signals.isNotEmpty) ...[
+            if (pv.laborGap != null || pv.sectorShortage != null || pv.recommendation != null) ...[
+              const SectionHeader(title: 'Policy View'),
+              Card(
+                child: Padding(
+                  padding: const EdgeInsets.all(12),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      if (pv.laborGap != null) ...[
+                        const Text('Labor gap', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.opportunity)),
+                        Text(pv.laborGap!, style: const TextStyle(fontSize: 13)),
+                        const SizedBox(height: 8),
+                      ],
+                      if (pv.sectorShortage != null) ...[
+                        const Text('Sector shortage signal', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.opportunity)),
+                        Text(pv.sectorShortage!, style: const TextStyle(fontSize: 13)),
+                        const SizedBox(height: 8),
+                      ],
+                      if (pv.recommendation != null) ...[
+                        const Text('Recommendation', style: TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.opportunity)),
+                        Text(pv.recommendation!, style: const TextStyle(fontSize: 13)),
+                      ],
+                    ],
+                  ),
+                ),
+              ),
+            ],
+
+            if (signalEntries.isNotEmpty) ...[
               const SectionHeader(title: 'Economic Indicators'),
-              ...signals.map((s) => Padding(
-                padding: const EdgeInsets.only(bottom: 6),
-                child: EconomicSignalCard(signal: s),
+              ...signalEntries.map((e) => Card(
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+                  child: Row(
+                    children: [
+                      const Icon(Icons.insights, size: 20, color: AppColors.opportunity),
+                      const SizedBox(width: 10),
+                      Expanded(
+                        child: Text(e.key, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
+                      ),
+                      Flexible(
+                        child: Text(e.value, style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w700, color: AppColors.textPrimary), textAlign: TextAlign.end),
+                      ),
+                    ],
+                  ),
+                ),
               )),
             ],
 
-            if (result.policySignals.isEmpty && result.youthSignals.isEmpty) ...[
+            if (signalEntries.isEmpty && pv.laborGap == null) ...[
               const SizedBox(height: 32),
               const EmptyState(
                 message: 'No policy signals available for this country yet.',

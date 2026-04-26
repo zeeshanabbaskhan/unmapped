@@ -9,36 +9,21 @@
  *   2. Weighted average via O*NET links (already in taxonomy index)
  *                               → source: "frey_osborne_onet_weighted"
  *   3. ISCO major-group fallback → source: "isco_group_fallback_arntz_2016"
- *
- * References:
- *   Frey, C.B. & Osborne, M.A. (2017). The future of employment: How susceptible
- *   are jobs to computerisation? Technological Forecasting and Social Change, 114, 254–280.
- *
- *   Arntz, M., Gregory, T. & Zierahn, U. (2016). The risk of automation for jobs
- *   in OECD countries: A comparative analysis. OECD Social, Employment and
- *   Migration Working Papers, No. 189. OECD Publishing, Paris.
  */
 
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..", "..", "..");
-const CSV_PATH = join(
-  root,
-  "data",
-  "jobautomationprobability",
-  "job-automation-probability.csv"
-);
-
-// ---------------------------------------------------------------------------
-// CSV parsing — extract SOC code (col 1) and probability (col 2).
-// The occupation title columns may contain quoted commas, so we read only
-// the first two commas to avoid a full CSV parse dependency.
-// ---------------------------------------------------------------------------
+const CSV_PATH = join(root, "data", "jobautomationprobability", "job-automation-probability.csv");
 
 function loadFreyOsborne() {
+  if (!existsSync(CSV_PATH)) {
+    console.warn(`[automation-lookup] CSV not found at ${CSV_PATH} — Frey-Osborne lookup disabled.`);
+    return new Map();
+  }
   const content = readFileSync(CSV_PATH, "utf-8");
   const lookup = new Map();
 
@@ -61,15 +46,7 @@ function loadFreyOsborne() {
 
 const automationBySoc = loadFreyOsborne();
 
-// ---------------------------------------------------------------------------
-// ISCO major-group fallback rates.
-//
-// Source: Arntz, Gregory & Zierahn (2016, Table A1) recalibrated against
-// Frey-Osborne occupation-level means by ILO (2018) "The Future of Work in
-// Sub-Saharan Africa", Table 3.1. Used only when no O*NET/SOC match exists.
-// Confidence is flagged as "low" to signal the fallback.
-// ---------------------------------------------------------------------------
-
+// ISCO major-group fallback rates (Arntz, Gregory & Zierahn 2016).
 const ISCO_GROUP_RATES = {
   "1": { rate: 0.1,  label: "Managers" },
   "2": { rate: 0.15, label: "Professionals" },
@@ -82,16 +59,6 @@ const ISCO_GROUP_RATES = {
   "9": { rate: 0.75, label: "Elementary Occupations" },
 };
 
-// ---------------------------------------------------------------------------
-// Public API
-// ---------------------------------------------------------------------------
-
-/**
- * Direct lookup by O*NET SOC code (e.g. "49-2022" or "49-2022.00").
- *
- * @param {string} socCode
- * @returns {{ probability: number, source: string, soc_code: string } | null}
- */
 export function getBySOCCode(socCode) {
   if (!socCode) return null;
   const normalized = socCode.replace(/\.00$/, "").trim();
@@ -100,14 +67,6 @@ export function getBySOCCode(socCode) {
   return { probability: prob, source: "frey_osborne_direct", soc_code: normalized };
 }
 
-/**
- * Weighted average probability via an occupation's O*NET links.
- * Links are pre-computed by the taxonomy build scripts and stored in
- * `occupation.onet.matches[]`.
- *
- * @param {Array<{ soc_code: string, link_score: number }>} onetLinks
- * @returns {{ probability: number, source: string, matched_soc_codes: string[], match_count: number } | null}
- */
 export function getByONetLinks(onetLinks = []) {
   const matches = [];
   for (const link of onetLinks) {
@@ -129,13 +88,6 @@ export function getByONetLinks(onetLinks = []) {
   };
 }
 
-/**
- * ISCO major-group fallback when no SOC/O*NET match is available.
- * Returns a low-confidence estimate based on published ISCO group averages.
- *
- * @param {string} iscoCode - Full ISCO-08 code (e.g. "7422")
- * @returns {{ probability: number, source: string, confidence: string, note: string } | null}
- */
 export function getByISCOGroup(iscoCode) {
   if (!iscoCode) return null;
   const major = String(iscoCode)[0];
@@ -152,5 +104,4 @@ export function getByISCOGroup(iscoCode) {
   };
 }
 
-/** Total number of occupations loaded from the Frey-Osborne dataset. */
 export const LOADED_COUNT = automationBySoc.size;

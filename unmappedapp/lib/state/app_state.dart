@@ -7,19 +7,16 @@ import '../models/automation_risk.dart';
 import '../models/opportunity.dart';
 import '../models/intake_form.dart';
 import '../services/country_service.dart';
-import '../services/risk_service.dart';
 import '../services/opportunity_service.dart';
 
 class AppState extends ChangeNotifier {
   final ApiClient _api;
   late final CountryService _countryService;
-  late final RiskService _riskService;
   late final OpportunityService _opportunityService;
 
   AppState()
       : _api = ApiClient(baseUrl: ApiConfig.baseUrl) {
     _countryService = CountryService(_api);
-    _riskService = RiskService(_api);
     _opportunityService = OpportunityService(_api);
   }
 
@@ -47,6 +44,7 @@ class AppState extends ChangeNotifier {
   bool get riskLoading => _riskLoading;
   String? _riskError;
   String? get riskError => _riskError;
+  Map<String, dynamic>? _lastRiskRaw;
 
   // --- Opportunities (Module 3) ---
   OpportunityResult? _opportunities;
@@ -88,7 +86,12 @@ class AppState extends ChangeNotifier {
     _riskError = null;
     _opportunitiesError = null;
     _lastProfileRaw = null;
+    _lastRiskRaw = null;
     notifyListeners();
+  }
+
+  Map<String, dynamic>? get profilePayload {
+    return _lastProfileRaw?['profile'] as Map<String, dynamic>?;
   }
 
   Future<void> generateProfile(IntakeForm form) async {
@@ -100,6 +103,9 @@ class AppState extends ChangeNotifier {
       final json = await _api.post('/api/module1/profile', form.toJson());
       _lastProfileRaw = json;
       _profile = SkillProfile.fromJson(json);
+      _risk = null;
+      _opportunities = null;
+      _lastRiskRaw = null;
     } on ApiException catch (e) {
       _profileError = e.message;
     } catch (e) {
@@ -110,7 +116,8 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> fetchRisk() async {
-    if (_profile == null) {
+    final p = profilePayload;
+    if (p == null) {
       _riskError = 'Generate a skills profile first.';
       notifyListeners();
       return;
@@ -119,11 +126,12 @@ class AppState extends ChangeNotifier {
     _riskError = null;
     notifyListeners();
     try {
-      _risk = await _riskService.fetchRisk(
-        countryCode: _selectedCountry,
-        occupationTitle: _profile!.primaryOccupation.title,
-        automationRiskBase: _profile!.primaryOccupation.automationRiskBase,
-      );
+      final json = await _api.post('/api/module2/risk-analysis', {
+        'country_code': _selectedCountry,
+        'profile': p,
+      });
+      _lastRiskRaw = json;
+      _risk = AutomationRisk.fromJson(json);
     } on ApiException catch (e) {
       _riskError = e.message;
     } catch (e) {
@@ -134,7 +142,8 @@ class AppState extends ChangeNotifier {
   }
 
   Future<void> fetchOpportunities() async {
-    if (_profile == null) {
+    final p = profilePayload;
+    if (p == null) {
       _opportunitiesError = 'Generate a skills profile first.';
       notifyListeners();
       return;
@@ -143,10 +152,11 @@ class AppState extends ChangeNotifier {
     _opportunitiesError = null;
     notifyListeners();
     try {
-      final m1Output = _lastProfileRaw?['profile'] as Map<String, dynamic>? ?? {};
+      final module2Analysis = _lastRiskRaw?['analysis'] as Map<String, dynamic>?;
       _opportunities = await _opportunityService.fetchOpportunities(
         countryCode: _selectedCountry,
-        module1Output: m1Output,
+        profile: p,
+        module2: module2Analysis,
       );
     } on ApiException catch (e) {
       _opportunitiesError = e.message;
