@@ -34,3 +34,7 @@ Thumbs.db
 
 # Generated country configs (reproducible from scripts)
 config/generated/countries/
+
+# Large/generated datasets
+data/
+config/ilostat/
