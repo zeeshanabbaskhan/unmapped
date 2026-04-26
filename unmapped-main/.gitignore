@@ -1,0 +1,8 @@
+node_modules/
+.env
+*.env.local
+
+# ILOSTAT source CSVs — too large for git (140–320 MB each).
+# Extracted statistics live in config/country_labor_stats.json instead.
+data/
+config/

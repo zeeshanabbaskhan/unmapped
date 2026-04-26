@@ -7,21 +7,18 @@ import '../models/automation_risk.dart';
 import '../models/opportunity.dart';
 import '../models/intake_form.dart';
 import '../services/country_service.dart';
-import '../services/profile_service.dart';
 import '../services/risk_service.dart';
 import '../services/opportunity_service.dart';
 
 class AppState extends ChangeNotifier {
   final ApiClient _api;
   late final CountryService _countryService;
-  late final ProfileService _profileService;
   late final RiskService _riskService;
   late final OpportunityService _opportunityService;
 
   AppState()
       : _api = ApiClient(baseUrl: ApiConfig.baseUrl) {
     _countryService = CountryService(_api);
-    _profileService = ProfileService(_api);
     _riskService = RiskService(_api);
     _opportunityService = OpportunityService(_api);
   }

@@ -1,0 +1,17 @@
+{
+  "name": "unmapped-node-api",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "build:index": "node ../../scripts/build-module1-index.mjs",
+    "dev": "node --env-file=.env server.js",
+    "start": "node --env-file=.env server.js"
+  },
+  "engines": {
+    "node": ">=18"
+  },
+  "dependencies": {
+    "@openrouter/sdk": "^0.12.21"
+  }
+}
