@@ -8,13 +8,11 @@
  */
 
 import { OpenRouter } from "@openrouter/sdk";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getByONetLinks, getByISCOGroup } from "./automation-lookup.js";
 import { calibrateForLMIC, getCountryLaborStats } from "./lmic-calibrator.js";
 import { getTaxonomyIndex } from "./dataStore.js";
 
 const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? "openai/gpt-oss-120b:free";
-const GEMINI_MODEL = process.env.GEMINI_MODEL ?? "gemini-1.5-flash";
 const LLM_TIMEOUT_MS   = Number(
   process.env.RISK_LLM_TIMEOUT_MS ??
   process.env.LLM_TIMEOUT_MS ??
@@ -22,14 +20,9 @@ const LLM_TIMEOUT_MS   = Number(
 );
 
 let _client = null;
-let _geminiClient = null;
 function getClient() {
   _client ??= new OpenRouter({ apiKey: process.env.OPENROUTER_API_KEY });
   return _client;
-}
-function getGeminiClient() {
-  _geminiClient ??= new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  return _geminiClient;
 }
 
 function withTimeout(promise, ms) {
@@ -38,6 +31,37 @@ function withTimeout(promise, ms) {
     timer = setTimeout(() => reject(new Error(`LLM timeout after ${ms}ms`)), ms);
   });
   return Promise.race([promise, deadline]).finally(() => clearTimeout(timer));
+}
+
+function formatErrorDetails(err) {
+  if (!err) return "unknown error";
+  if (!(err instanceof Error)) return String(err);
+  const details = {
+    name: err.name,
+    message: err.message,
+    stack: err.stack,
+  };
+  const maybe = err;
+  if (maybe.status != null) details.status = maybe.status;
+  if (maybe.code != null) details.code = maybe.code;
+  if (maybe.response != null) details.response = maybe.response;
+  if (maybe.cause != null) details.cause = maybe.cause;
+  try {
+    return JSON.stringify(details, null, 2);
+  } catch {
+    return `${err.name}: ${err.message}`;
+  }
+}
+
+function normalizeRiskResponse(parsed, fallback) {
+  if (!parsed || typeof parsed !== "object") return fallback;
+  return {
+    task_breakdown: parsed.task_breakdown ?? fallback.task_breakdown,
+    skill_resilience_analysis: parsed.skill_resilience_analysis ?? fallback.skill_resilience_analysis,
+    macro_signals: parsed.macro_signals ?? fallback.macro_signals,
+    final_readiness_profile: parsed.final_readiness_profile ?? fallback.final_readiness_profile,
+    explainability: parsed.explainability ?? fallback.explainability,
+  };
 }
 
 function computeBaseAutomation(occupation) {
@@ -214,7 +238,7 @@ function buildTemplateFallback(occupation, skills, automation, laborStats) {
 }
 
 async function runLLMAnalysis(occupation, skills, country, automation, laborStats) {
-  if (!process.env.GEMINI_API_KEY && !process.env.OPENROUTER_API_KEY) {
+  if (!process.env.OPENROUTER_API_KEY) {
     return {
       ...buildTemplateFallback(occupation, skills, automation, laborStats),
       _fallback_reason: "missing_llm_api_key",
@@ -223,46 +247,31 @@ async function runLLMAnalysis(occupation, skills, country, automation, laborStat
 
   const callLLMOnce = async () => {
     let raw = "";
-    if (process.env.GEMINI_API_KEY) {
-      const model = getGeminiClient().getGenerativeModel({ model: GEMINI_MODEL });
-      const result = await withTimeout(
-        model.generateContent(
-          `${SYSTEM_PROMPT}\n\n${buildAnalysisPrompt(occupation, skills, country, automation, laborStats)}`
-        ),
-        LLM_TIMEOUT_MS
-      );
-      raw = result.response?.text?.() ?? "";
-    } else {
-      const client = getClient();
-      const result = await withTimeout(
-        client.chat.send({
-          chatRequest: {
-            model: OPENROUTER_MODEL,
-            maxTokens: 1200,
-            responseFormat: { type: "json_object" },
-            stream: false,
-            messages: [
-              { role: "system", content: SYSTEM_PROMPT },
-              { role: "user", content: buildAnalysisPrompt(occupation, skills, country, automation, laborStats) },
-            ],
-          },
-        }),
-        LLM_TIMEOUT_MS
-      );
-      raw = result.choices?.[0]?.message?.content ?? "";
-    }
+    const client = getClient();
+    const result = await withTimeout(
+      client.chat.send({
+        chatRequest: {
+          model: OPENROUTER_MODEL,
+          maxTokens: 1200,
+          responseFormat: { type: "json_object" },
+          stream: false,
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            { role: "user", content: buildAnalysisPrompt(occupation, skills, country, automation, laborStats) },
+          ],
+        },
+      }),
+      LLM_TIMEOUT_MS
+    );
+    raw = result.choices?.[0]?.message?.content ?? "";
 
     if (!raw.trim()) throw new Error("Empty LLM response");
 
     const parsed = JSON.parse(
       raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "").trim()
     );
-
-    const required = ["task_breakdown", "skill_resilience_analysis", "macro_signals", "final_readiness_profile", "explainability"];
-    for (const key of required) {
-      if (!parsed[key]) throw new Error(`LLM response missing key: ${key}`);
-    }
-    return parsed;
+    const fallback = buildTemplateFallback(occupation, skills, automation, laborStats);
+    return normalizeRiskResponse(parsed, fallback);
   };
 
   const attempts = [1, 2];
@@ -272,12 +281,13 @@ async function runLLMAnalysis(occupation, skills, country, automation, laborStat
       const parsed = await callLLMOnce();
       return {
         ...parsed,
-        _provider: process.env.GEMINI_API_KEY ? `gemini/${GEMINI_MODEL}` : `openrouter/${OPENROUTER_MODEL}`,
+        _provider: `openrouter/${OPENROUTER_MODEL}`,
       };
     } catch (err) {
       lastError = err;
-      const msg = err instanceof Error ? err.message : String(err);
-      console.warn(`[risk-engine] LLM attempt ${attempt}/${attempts.length} failed (${msg})`);
+      console.warn(
+        `[risk-engine] LLM attempt ${attempt}/${attempts.length} failed\n${formatErrorDetails(err)}`
+      );
       if (attempt < attempts.length) continue;
     }
   }

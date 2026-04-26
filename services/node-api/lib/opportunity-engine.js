@@ -15,23 +15,16 @@
  */
 
 import { OpenRouter } from "@openrouter/sdk";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getCountryLaborStats } from "./lmic-calibrator.js";
 import { getOpportunitiesConfig, getGeneratedCountryConfig } from "./dataStore.js";
 
 const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? "openai/gpt-oss-120b:free";
-const GEMINI_MODEL = process.env.GEMINI_MODEL ?? "gemini-1.5-flash";
 const LLM_TIMEOUT_MS   = Number(process.env.LLM_TIMEOUT_MS ?? 20000);
 
 let _client = null;
-let _geminiClient = null;
 function getClient() {
   _client ??= new OpenRouter({ apiKey: process.env.OPENROUTER_API_KEY });
   return _client;
-}
-function getGeminiClient() {
-  _geminiClient ??= new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  return _geminiClient;
 }
 
 function withTimeout(promise, ms) {
@@ -40,6 +33,36 @@ function withTimeout(promise, ms) {
     timer = setTimeout(() => reject(new Error(`LLM timeout after ${ms}ms`)), ms);
   });
   return Promise.race([promise, deadline]).finally(() => clearTimeout(timer));
+}
+
+function formatErrorDetails(err) {
+  if (!err) return "unknown error";
+  if (!(err instanceof Error)) return String(err);
+  const details = {
+    name: err.name,
+    message: err.message,
+    stack: err.stack,
+  };
+  const maybe = err;
+  if (maybe.status != null) details.status = maybe.status;
+  if (maybe.code != null) details.code = maybe.code;
+  if (maybe.response != null) details.response = maybe.response;
+  if (maybe.cause != null) details.cause = maybe.cause;
+  try {
+    return JSON.stringify(details, null, 2);
+  } catch {
+    return `${err.name}: ${err.message}`;
+  }
+}
+
+function normalizeOpportunityResponse(parsed, fallback) {
+  if (!parsed || typeof parsed !== "object") return fallback;
+  return {
+    opportunities: parsed.opportunities ?? fallback.opportunities,
+    ranking: parsed.ranking ?? fallback.ranking,
+    policy_view: parsed.policy_view ?? fallback.policy_view,
+    explainability: parsed.explainability ?? fallback.explainability,
+  };
 }
 
 const ISCO_SECTOR_MAP = {
@@ -205,57 +228,43 @@ function buildOpportunityFallback(profile, module2, country, anchor, signals, op
 }
 
 async function runLLMOpportunityAnalysis(profile, module2, country, laborStats, anchor, signals, oppConfig) {
-  if (!process.env.GEMINI_API_KEY && !process.env.OPENROUTER_API_KEY) {
+  if (!process.env.OPENROUTER_API_KEY) {
     return buildOpportunityFallback(profile, module2, country, anchor, signals, oppConfig);
   }
 
   try {
     let raw = "";
-    if (process.env.GEMINI_API_KEY) {
-      const model = getGeminiClient().getGenerativeModel({ model: GEMINI_MODEL });
-      const result = await withTimeout(
-        model.generateContent(
-          `${SYSTEM_PROMPT}\n\n${buildOpportunityPrompt(profile, module2, country, laborStats, anchor, signals, oppConfig)}`
-        ),
-        LLM_TIMEOUT_MS
-      );
-      raw = result.response?.text?.() ?? "";
-    } else {
-      const client = getClient();
-      const result = await withTimeout(
-        client.chat.send({
-          chatRequest: {
-            model: OPENROUTER_MODEL,
-            maxTokens: 1500,
-            responseFormat: { type: "json_object" },
-            stream: false,
-            messages: [
-              { role: "system", content: SYSTEM_PROMPT },
-              { role: "user", content: buildOpportunityPrompt(profile, module2, country, laborStats, anchor, signals, oppConfig) },
-            ],
-          },
-        }),
-        LLM_TIMEOUT_MS
-      );
-      raw = result.choices?.[0]?.message?.content ?? "";
-    }
+    const client = getClient();
+    const result = await withTimeout(
+      client.chat.send({
+        chatRequest: {
+          model: OPENROUTER_MODEL,
+          maxTokens: 1500,
+          responseFormat: { type: "json_object" },
+          stream: false,
+          messages: [
+            { role: "system", content: SYSTEM_PROMPT },
+            { role: "user", content: buildOpportunityPrompt(profile, module2, country, laborStats, anchor, signals, oppConfig) },
+          ],
+        },
+      }),
+      LLM_TIMEOUT_MS
+    );
+    raw = result.choices?.[0]?.message?.content ?? "";
 
     if (!raw.trim()) throw new Error("Empty LLM response");
 
     const parsed = JSON.parse(
       raw.replace(/^```(?:json)?\s*/i, "").replace(/\s*```\s*$/, "").trim()
     );
-
-    const required = ["opportunities", "ranking", "policy_view", "explainability"];
-    for (const key of required) {
-      if (!parsed[key]) throw new Error(`LLM response missing key: ${key}`);
-    }
+    const fallback = buildOpportunityFallback(profile, module2, country, anchor, signals, oppConfig);
+    const normalized = normalizeOpportunityResponse(parsed, fallback);
     return {
-      ...parsed,
-      _provider: process.env.GEMINI_API_KEY ? `gemini/${GEMINI_MODEL}` : `openrouter/${OPENROUTER_MODEL}`,
+      ...normalized,
+      _provider: `openrouter/${OPENROUTER_MODEL}`,
     };
   } catch (err) {
-    console.warn(`[opportunity-engine] LLM failed (${err.message}) — using template fallback`);
+    console.warn(`[opportunity-engine] LLM failed — using template fallback.\n${formatErrorDetails(err)}`);
     return buildOpportunityFallback(profile, module2, country, anchor, signals, oppConfig);
   }
 }

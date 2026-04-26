@@ -45,6 +45,15 @@ function hasMacroValue(value: string | null | undefined) {
   return !normalized.includes("not available");
 }
 
+function formatRankingScore(score: unknown) {
+  if (typeof score === "number" && Number.isFinite(score)) return score.toFixed(2);
+  if (typeof score === "string") {
+    const parsed = Number(score);
+    if (Number.isFinite(parsed)) return parsed.toFixed(2);
+  }
+  return "—";
+}
+
 export default function Home() {
   const [countries, setCountries] = useState<SupportedCountry[]>([]);
   const [countryCode, setCountryCode] = useState<string>("");
@@ -239,7 +248,7 @@ export default function Home() {
                   <div key={`${r.opportunity}-${i}`} className="rounded-2xl border border-stone-200 p-4">
                     <div className="flex items-center justify-between gap-2">
                       <p className="font-semibold text-stone-900">{r.opportunity}</p>
-                      <span className="text-xs font-semibold text-stone-600">{r.score.toFixed(2)}</span>
+                      <span className="text-xs font-semibold text-stone-600">{formatRankingScore(r.score)}</span>
                     </div>
                     <p className="mt-1 text-sm text-stone-600">{r.reason}</p>
                   </div>

@@ -5,17 +5,17 @@
   "type": "module",
   "scripts": {
     "build:index": "node ../../scripts/build-module1-index.mjs",
-    "dev": "node server.js",
+    "dev": "nodemon server.js",
     "start": "node server.js"
   },
   "engines": {
     "node": ">=18"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.24.1",
     "@openrouter/sdk": "^0.12.21",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "express": "^5.2.1"
+    "express": "^5.2.1",
+    "nodemon": "^3.1.14"
   }
 }

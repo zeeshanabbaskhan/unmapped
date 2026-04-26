@@ -1,7 +1,6 @@
 /**
- * LLM-based skill extractor — Gemini first, OpenRouter fallback.
+ * LLM-based skill extractor — powered by OpenRouter.
  *
- * Uses the @openrouter/sdk to call any model available on OpenRouter.
  * Falls back to deterministic heuristic extraction when OPENROUTER_API_KEY
  * is absent or the LLM call fails, so the system runs fully offline.
  *
@@ -15,12 +14,9 @@
  */
 
 import { OpenRouter } from "@openrouter/sdk";
-import { GoogleGenerativeAI } from "@google/generative-ai";
 import { normalizeText } from "./text.js";
 
-const OPENROUTER_MODEL =
-  process.env.OPENROUTER_MODEL ?? "openai/gpt-oss-120b:free";
-const GEMINI_MODEL = process.env.GEMINI_MODEL ?? "gemini-1.5-flash";
+const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? "openai/gpt-oss-120b:free";
 // Reasoning models can take 10-20s on free tier — give them enough headroom.
 const LLM_TIMEOUT_MS = Number(process.env.LLM_TIMEOUT_MS ?? 20000);
 
@@ -197,7 +193,6 @@ function stripCodeFences(raw) {
 }
 
 let _openRouterClient = null;
-let _geminiClient = null;
 function getClient() {
   if (!_openRouterClient) {
     _openRouterClient = new OpenRouter({
@@ -205,13 +200,6 @@ function getClient() {
     });
   }
   return _openRouterClient;
-}
-
-function getGeminiClient() {
-  if (!_geminiClient) {
-    _geminiClient = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
-  }
-  return _geminiClient;
 }
 
 /**
@@ -231,61 +219,43 @@ function withTimeout(promise, ms) {
   return Promise.race([promise, deadline]).finally(() => clearTimeout(timer));
 }
 
-async function callLLM(answers) {
-  if (process.env.GEMINI_API_KEY) {
-    const model = getGeminiClient().getGenerativeModel({ model: GEMINI_MODEL });
-    const result = await model.generateContent(
-      `${SYSTEM_PROMPT}\n\n${buildUserPrompt(answers)}`
-    );
-    const raw = result.response?.text?.() ?? "";
-    if (!raw.trim()) throw new Error("Gemini returned an empty response");
-    const parsed = JSON.parse(stripCodeFences(raw));
-    const extractedSkills = (parsed.extracted_skills ?? [])
-      .filter((s) => s && typeof s.label === "string" && s.label.trim())
-      .slice(0, 8)
-      .map((s) => ({
-        label: s.label.trim().toLowerCase(),
-        confidence: Math.min(1, Math.max(0, Number(s.confidence) || 0.7)),
-        esco_hint: typeof s.esco_hint === "string" ? s.esco_hint : null,
-        source: "llm",
-      }));
+function formatErrorDetails(err) {
+  if (!err) return "unknown error";
+  if (!(err instanceof Error)) return String(err);
 
-    const extractedTasks = (parsed.extracted_tasks ?? [])
-      .filter((t) => typeof t === "string" && t.trim())
-      .slice(0, 6)
-      .map((t) => t.trim().toLowerCase());
+  const details = {
+    name: err.name,
+    message: err.message,
+    stack: err.stack,
+  };
 
-    const likelySector =
-      typeof parsed.likely_sector === "string" && parsed.likely_sector.trim()
-        ? parsed.likely_sector.trim()
-        : answers.sector ?? null;
+  const maybe = err;
+  if (maybe.status != null) details.status = maybe.status;
+  if (maybe.code != null) details.code = maybe.code;
+  if (maybe.response != null) details.response = maybe.response;
+  if (maybe.cause != null) details.cause = maybe.cause;
 
-    const modelSlug = GEMINI_MODEL.replace(/[^a-z0-9]/gi, "_");
-    return {
-      skills: extractedSkills.map((s) => s.label),
-      tools: answers.tools ?? [],
-      extracted_skills: extractedSkills,
-      extracted_tasks: extractedTasks,
-      likely_sector: likelySector,
-      confidence: "llm",
-      notes: [`llm_gemini_${modelSlug}`],
-      provider: "gemini",
-      model: GEMINI_MODEL,
-    };
+  try {
+    return JSON.stringify(details, null, 2);
+  } catch {
+    return `${err.name}: ${err.message}`;
   }
+}
 
+function toArray(value) {
+  if (Array.isArray(value)) return value;
+  if (value == null) return [];
+  if (typeof value === "string") return [value];
+  if (typeof value === "object") return Object.values(value);
+  return [];
+}
+
+async function callLLM(answers) {
   const client = getClient();
-
-  // Non-streaming call — structured JSON extraction doesn't benefit from
-  // streaming and keeps error handling simple.
-  // Note: gpt-oss-120b is a reasoning model; temperature/responseFormat
-  // flags are set conservatively to maximise cross-model compatibility.
   const result = await client.chat.send({
     chatRequest: {
       model: OPENROUTER_MODEL,
       maxTokens: 800,
-      // Request JSON output. Not all models honour this; robust parsing
-      // (stripCodeFences) handles the fallback cases.
       responseFormat: { type: "json_object" },
       stream: false,
       messages: [
@@ -294,15 +264,12 @@ async function callLLM(answers) {
       ],
     },
   });
-
   const raw = result.choices?.[0]?.message?.content ?? "";
-  if (!raw.trim()) {
-    throw new Error("OpenRouter returned an empty response");
-  }
+  if (!raw.trim()) throw new Error("OpenRouter returned an empty response");
 
   const parsed = JSON.parse(stripCodeFences(raw));
 
-  const extractedSkills = (parsed.extracted_skills ?? [])
+  const extractedSkills = toArray(parsed.extracted_skills)
     .filter((s) => s && typeof s.label === "string" && s.label.trim())
     .slice(0, 8)
     .map((s) => ({
@@ -312,7 +279,7 @@ async function callLLM(answers) {
       source: "llm",
     }));
 
-  const extractedTasks = (parsed.extracted_tasks ?? [])
+  const extractedTasks = toArray(parsed.extracted_tasks)
     .filter((t) => typeof t === "string" && t.trim())
     .slice(0, 6)
     .map((t) => t.trim().toLowerCase());
@@ -344,7 +311,7 @@ async function callLLM(answers) {
 /**
  * Extract skills, tasks, and sector signal from Module1 intake answers.
  *
- * Uses OpenRouter (via @openrouter/sdk) when OPENROUTER_API_KEY is set;
+ * Uses OpenRouter when OPENROUTER_API_KEY is set;
  * otherwise falls back to deterministic heuristic extraction at zero cost.
  * LLM failures also fall back automatically — the pipeline never breaks.
  *
@@ -354,16 +321,14 @@ async function callLLM(answers) {
  * @returns {Promise<object>}
  */
 export async function extractSkills(answers) {
-  if (!process.env.GEMINI_API_KEY && !process.env.OPENROUTER_API_KEY) {
+  if (!process.env.OPENROUTER_API_KEY) {
     return heuristicExtract(answers);
   }
 
   try {
     return await withTimeout(callLLM(answers), LLM_TIMEOUT_MS);
   } catch (err) {
-    console.warn(
-      `[llm-extractor] LLM call failed — using heuristic fallback. Reason: ${err.message}`
-    );
+    console.warn(`[llm-extractor] LLM call failed — using heuristic fallback.\n${formatErrorDetails(err)}`);
     const fallback = heuristicExtract(answers);
     return {
       ...fallback,

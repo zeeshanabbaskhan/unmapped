@@ -141,7 +141,14 @@ class ProfileScreen extends StatelessWidget {
 
   Future<void> _exportProfilePdf(BuildContext context, SkillProfile profile) async {
     try {
-      final doc = pw.Document();
+      final baseFont = await PdfGoogleFonts.notoSansRegular();
+      final boldFont = await PdfGoogleFonts.notoSansBold();
+      final doc = pw.Document(
+        theme: pw.ThemeData.withFont(
+          base: baseFont,
+          bold: boldFont,
+        ),
+      );
       final generatedAt = DateTime.now().toIso8601String().replaceFirst('T', ' ').split('.').first;
 
       doc.addPage(
