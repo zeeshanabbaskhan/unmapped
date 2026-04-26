@@ -20,6 +20,11 @@ const laborStats = existsSync(laborStatsPath)
   ? JSON.parse(readFileSync(laborStatsPath, "utf-8"))
   : { countries: {} };
 
+const wittgensteinPath = join(root, "config", "wittgenstein_education.json");
+const wittgensteinData = existsSync(wittgensteinPath)
+  ? JSON.parse(readFileSync(wittgensteinPath, "utf-8"))
+  : { countries: {} };
+
 const INCOME_FACTORS = {
   low:            { factor: 0.45, label: "Low income" },
   "lower-middle": { factor: 0.55, label: "Lower-middle income" },
@@ -123,5 +128,46 @@ export function calibrateForLMIC(baseProbability, country) {
 }
 
 export function getCountryLaborStats(countryCode) {
-  return laborStats.countries[countryCode] ?? null;
+  const stats = laborStats.countries[countryCode] ?? null;
+  const wic = wittgensteinData.countries?.[countryCode] ?? null;
+  if (!stats && !wic) return null;
+
+  const merged = { ...(stats ?? {}) };
+  if (wic) {
+    merged.wittgenstein_projections = buildWittgensteinSummary(wic);
+  }
+  return merged;
+}
+
+function buildWittgensteinSummary(wic) {
+  const years = Object.keys(wic.years ?? {}).sort();
+  if (years.length === 0) return null;
+
+  const latest = years[years.length - 1];
+  const youth = wic.years[latest]?.youth_15_24 ?? {};
+
+  const noEdu = youth.no_education ?? 0;
+  const incPrimary = youth.incomplete_primary ?? 0;
+  const primary = youth.primary ?? 0;
+  const lowerSec = youth.lower_secondary ?? 0;
+  const upperSec = youth.upper_secondary ?? 0;
+  const postSec = youth.post_secondary ?? 0;
+  const shortPost = youth.short_post_secondary ?? 0;
+  const bachelor = youth.bachelor ?? 0;
+  const master = youth.master_and_higher ?? 0;
+
+  const belowSecondary = noEdu + incPrimary + primary;
+  const secondaryOrBelow = belowSecondary + lowerSec;
+  const tertiaryShare = postSec + shortPost + bachelor + master;
+
+  return {
+    source: "Wittgenstein Centre WCDE v3.0 (SSP2 Medium)",
+    year: latest,
+    youth_15_24: youth,
+    secondary_completion_rate: Math.round((upperSec + tertiaryShare) * 10) / 10,
+    tertiary_share: Math.round(tertiaryShare * 10) / 10,
+    below_secondary_share: Math.round(belowSecondary * 10) / 10,
+    youth_summary: wic.youth_summary ?? null,
+    education_trend: wic.education_trend ?? null,
+  };
 }

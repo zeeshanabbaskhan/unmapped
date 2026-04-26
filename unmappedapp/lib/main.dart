@@ -60,24 +60,36 @@ class _AppShellState extends State<AppShell> {
     return Scaffold(
       appBar: AppBar(
         title: const Text('UNMAPPED'),
+        bottom: PreferredSize(
+          preferredSize: const Size.fromHeight(1),
+          child: Container(height: 1, color: AppColors.divider),
+        ),
         actions: [
           if (state.countries.isNotEmpty)
             Padding(
-              padding: const EdgeInsets.only(right: 8),
-              child: DropdownButtonHideUnderline(
-                child: DropdownButton<String>(
-                  value: state.selectedCountry,
-                  icon: const Icon(Icons.public, size: 18),
-                  style: const TextStyle(fontSize: 14, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
-                  items: state.countries.map((c) {
-                    return DropdownMenuItem(
-                      value: c.code,
-                      child: Text('${_flag(c.code)} ${c.code}'),
-                    );
-                  }).toList(),
-                  onChanged: (code) {
-                    if (code != null) state.selectCountry(code);
-                  },
+              padding: const EdgeInsets.only(right: 12),
+              child: Container(
+                padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 4),
+                decoration: BoxDecoration(
+                  color: AppColors.neutralLight,
+                  borderRadius: AppRadius.pill,
+                ),
+                child: DropdownButtonHideUnderline(
+                  child: DropdownButton<String>(
+                    value: state.selectedCountry,
+                    icon: const Icon(Icons.expand_more_rounded, size: 18, color: AppColors.textSecondary),
+                    isDense: true,
+                    style: const TextStyle(fontSize: 13, fontWeight: FontWeight.w600, color: AppColors.textPrimary),
+                    items: state.countries.map((c) {
+                      return DropdownMenuItem(
+                        value: c.code,
+                        child: Text('${_flag(c.code)} ${c.code}'),
+                      );
+                    }).toList(),
+                    onChanged: (code) {
+                      if (code != null) state.selectCountry(code);
+                    },
+                  ),
                 ),
               ),
             ),
@@ -87,16 +99,21 @@ class _AppShellState extends State<AppShell> {
         index: _tabIndex,
         children: screens,
       ),
-      bottomNavigationBar: NavigationBar(
-        selectedIndex: _tabIndex,
-        onDestinationSelected: (i) => setState(() => _tabIndex = i),
-        destinations: const [
-          NavigationDestination(icon: Icon(Icons.home_outlined), selectedIcon: Icon(Icons.home), label: 'Home'),
-          NavigationDestination(icon: Icon(Icons.person_outline), selectedIcon: Icon(Icons.person), label: 'Profile'),
-          NavigationDestination(icon: Icon(Icons.smart_toy_outlined), selectedIcon: Icon(Icons.smart_toy), label: 'Risk'),
-          NavigationDestination(icon: Icon(Icons.work_outline), selectedIcon: Icon(Icons.work), label: 'Jobs'),
-          NavigationDestination(icon: Icon(Icons.analytics_outlined), selectedIcon: Icon(Icons.analytics), label: 'Insights'),
-        ],
+      bottomNavigationBar: Container(
+        decoration: const BoxDecoration(
+          border: Border(top: BorderSide(color: AppColors.divider, width: 1)),
+        ),
+        child: NavigationBar(
+          selectedIndex: _tabIndex,
+          onDestinationSelected: (i) => setState(() => _tabIndex = i),
+          destinations: const [
+            NavigationDestination(icon: Icon(Icons.edit_note_rounded), selectedIcon: Icon(Icons.edit_note_rounded), label: 'Intake'),
+            NavigationDestination(icon: Icon(Icons.person_outline_rounded), selectedIcon: Icon(Icons.person_rounded), label: 'Profile'),
+            NavigationDestination(icon: Icon(Icons.shield_outlined), selectedIcon: Icon(Icons.shield_rounded), label: 'Risk'),
+            NavigationDestination(icon: Icon(Icons.work_outline_rounded), selectedIcon: Icon(Icons.work_rounded), label: 'Jobs'),
+            NavigationDestination(icon: Icon(Icons.bar_chart_rounded), selectedIcon: Icon(Icons.bar_chart_rounded), label: 'Policy'),
+          ],
+        ),
       ),
     );
   }

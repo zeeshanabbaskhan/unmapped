@@ -1,0 +1,5816 @@
+{
+  "version": "wittgenstein-education-v1",
+  "generated_at": "2026-04-26T09:57:48.077Z",
+  "scenario": "SSP2 (Medium)",
+  "source": "Wittgenstein Centre for Demography and Global Human Capital (2023), WCDE v3.0",
+  "source_url": "http://dataexplorer.wittgensteincentre.org/wcde-v3/",
+  "stats": {
+    "countries": 193,
+    "years": [
+      "2020"
+    ],
+    "education_levels": [
+      "bachelor",
+      "incomplete_primary",
+      "lower_secondary",
+      "master_and_higher",
+      "no_education",
+      "post_secondary",
+      "primary",
+      "short_post_secondary",
+      "upper_secondary"
+    ]
+  },
+  "countries": {
+    "AF": {
+      "country_name": "Afghanistan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 39.91,
+            "incomplete_primary": 0,
+            "primary": 40.31,
+            "lower_secondary": 0.73,
+            "upper_secondary": 16.37,
+            "post_secondary": 2.69,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 44.58,
+            "incomplete_primary": 0,
+            "primary": 34.37,
+            "lower_secondary": 0.49,
+            "upper_secondary": 16.38,
+            "post_secondary": 4.18,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "81% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "AL": {
+      "country_name": "Albania",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.44,
+            "incomplete_primary": 0.03,
+            "primary": 2.53,
+            "lower_secondary": 43.07,
+            "upper_secondary": 41.17,
+            "post_secondary": 12.77,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.22,
+            "incomplete_primary": 0.2,
+            "primary": 1.88,
+            "lower_secondary": 38.2,
+            "upper_secondary": 41.08,
+            "post_secondary": 17.42,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "46% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "DZ": {
+      "country_name": "Algeria",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.01,
+            "incomplete_primary": 3.61,
+            "primary": 6.24,
+            "lower_secondary": 30.88,
+            "upper_secondary": 35.1,
+            "post_secondary": 18.17,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 6.32,
+            "incomplete_primary": 3.8,
+            "primary": 6.46,
+            "lower_secondary": 25.72,
+            "upper_secondary": 37.6,
+            "post_secondary": 20.1,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "47% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "AO": {
+      "country_name": "Angola",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 17.84,
+            "incomplete_primary": 5.38,
+            "primary": 50.33,
+            "lower_secondary": 22.39,
+            "upper_secondary": 4.05,
+            "post_secondary": 0.01,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 22.31,
+            "incomplete_primary": 4.25,
+            "primary": 44.43,
+            "lower_secondary": 20.41,
+            "upper_secondary": 8.38,
+            "post_secondary": 0.22,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "96% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "AG": {
+      "country_name": "Antigua and Barbuda",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.96,
+            "incomplete_primary": 1.17,
+            "primary": 25.02,
+            "lower_secondary": 14.81,
+            "upper_secondary": 44.23,
+            "post_secondary": 12.83,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.22,
+            "incomplete_primary": 1.26,
+            "primary": 22.36,
+            "lower_secondary": 11.59,
+            "upper_secondary": 45.25,
+            "post_secondary": 17.33,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "43% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "AR": {
+      "country_name": "Argentina",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.28,
+            "incomplete_primary": 8.97,
+            "primary": 21.91,
+            "lower_secondary": 29.75,
+            "upper_secondary": 24.19,
+            "post_secondary": 14.92,
+            "short_post_secondary": 14.63,
+            "bachelor": 0.85,
+            "master_and_higher": 0.02
+          },
+          "young_adult_15_29": {
+            "no_education": 0.31,
+            "incomplete_primary": 9.25,
+            "primary": 20.21,
+            "lower_secondary": 22.45,
+            "upper_secondary": 29.38,
+            "post_secondary": 18.4,
+            "short_post_secondary": 15.68,
+            "bachelor": 3.45,
+            "master_and_higher": 0.12
+          }
+        }
+      },
+      "youth_summary": "61% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "AM": {
+      "country_name": "Armenia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.28,
+            "incomplete_primary": 0.01,
+            "primary": 1.78,
+            "lower_secondary": 21.31,
+            "upper_secondary": 60.53,
+            "post_secondary": 16.11,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.29,
+            "incomplete_primary": 0.01,
+            "primary": 1.36,
+            "lower_secondary": 15.31,
+            "upper_secondary": 60.29,
+            "post_secondary": 22.74,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "23% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "AW": {
+      "country_name": "Aruba",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.12,
+            "incomplete_primary": 0.3,
+            "primary": 15.86,
+            "lower_secondary": 46.59,
+            "upper_secondary": 31.38,
+            "post_secondary": 4.77,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.27,
+            "incomplete_primary": 0.34,
+            "primary": 16.39,
+            "lower_secondary": 40.12,
+            "upper_secondary": 26.88,
+            "post_secondary": 15.01,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "64% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "AU": {
+      "country_name": "Australia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.1,
+            "incomplete_primary": 0.01,
+            "primary": 1.95,
+            "lower_secondary": 7.58,
+            "upper_secondary": 75.66,
+            "post_secondary": 14.7,
+            "short_post_secondary": 6.22,
+            "bachelor": 7.8,
+            "master_and_higher": 0.69
+          },
+          "young_adult_15_29": {
+            "no_education": 0.11,
+            "incomplete_primary": 0.01,
+            "primary": 1.54,
+            "lower_secondary": 5.44,
+            "upper_secondary": 65.61,
+            "post_secondary": 27.29,
+            "short_post_secondary": 9.1,
+            "bachelor": 15.01,
+            "master_and_higher": 3.18
+          }
+        }
+      },
+      "youth_summary": "10% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "AT": {
+      "country_name": "Austria",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 2.8,
+            "lower_secondary": 39.36,
+            "upper_secondary": 40.83,
+            "post_secondary": 17,
+            "short_post_secondary": 14.12,
+            "bachelor": 2.49,
+            "master_and_higher": 0.4
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 2.45,
+            "lower_secondary": 29.95,
+            "upper_secondary": 42.37,
+            "post_secondary": 25.2,
+            "short_post_secondary": 16.73,
+            "bachelor": 4.09,
+            "master_and_higher": 4.39
+          }
+        }
+      },
+      "youth_summary": "42% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "AZ": {
+      "country_name": "Azerbaijan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.03,
+            "incomplete_primary": 0.03,
+            "primary": 0.89,
+            "lower_secondary": 30.33,
+            "upper_secondary": 62.78,
+            "post_secondary": 5.96,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.03,
+            "incomplete_primary": 0.03,
+            "primary": 0.76,
+            "lower_secondary": 21.73,
+            "upper_secondary": 65.82,
+            "post_secondary": 11.64,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "31% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "BS": {
+      "country_name": "Bahamas",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.28,
+            "incomplete_primary": 0.01,
+            "primary": 0.3,
+            "lower_secondary": 9.53,
+            "upper_secondary": 71.07,
+            "post_secondary": 18.83,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.33,
+            "incomplete_primary": 0.01,
+            "primary": 0.37,
+            "lower_secondary": 7.03,
+            "upper_secondary": 67.57,
+            "post_secondary": 24.69,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "10% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "BH": {
+      "country_name": "Bahrain",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.47,
+            "incomplete_primary": 2.33,
+            "primary": 11.39,
+            "lower_secondary": 35.7,
+            "upper_secondary": 41.91,
+            "post_secondary": 8.22,
+            "short_post_secondary": 4.39,
+            "bachelor": 3.63,
+            "master_and_higher": 0.53
+          },
+          "young_adult_15_29": {
+            "no_education": 0.43,
+            "incomplete_primary": 2.68,
+            "primary": 10.76,
+            "lower_secondary": 28.27,
+            "upper_secondary": 43.18,
+            "post_secondary": 14.68,
+            "short_post_secondary": 6.99,
+            "bachelor": 7.44,
+            "master_and_higher": 1.1
+          }
+        }
+      },
+      "youth_summary": "50% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "BD": {
+      "country_name": "Bangladesh",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 8.6,
+            "incomplete_primary": 6.96,
+            "primary": 19.77,
+            "lower_secondary": 30.03,
+            "upper_secondary": 32.59,
+            "post_secondary": 2.06,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 10.5,
+            "incomplete_primary": 7.85,
+            "primary": 20.92,
+            "lower_secondary": 27.2,
+            "upper_secondary": 29.68,
+            "post_secondary": 3.86,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "65% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "BB": {
+      "country_name": "Barbados",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.96,
+            "incomplete_primary": 1.17,
+            "primary": 25.03,
+            "lower_secondary": 14.81,
+            "upper_secondary": 44.23,
+            "post_secondary": 12.82,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.22,
+            "incomplete_primary": 1.26,
+            "primary": 22.36,
+            "lower_secondary": 11.59,
+            "upper_secondary": 45.25,
+            "post_secondary": 17.33,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "43% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "BY": {
+      "country_name": "Belarus",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.03,
+            "incomplete_primary": 0.01,
+            "primary": 2.28,
+            "lower_secondary": 25.6,
+            "upper_secondary": 65.01,
+            "post_secondary": 7.09,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.03,
+            "incomplete_primary": 0.01,
+            "primary": 1.52,
+            "lower_secondary": 17.29,
+            "upper_secondary": 64.65,
+            "post_secondary": 16.5,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "28% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "BE": {
+      "country_name": "Belgium",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 3.08,
+            "lower_secondary": 42.2,
+            "upper_secondary": 42.76,
+            "post_secondary": 11.94,
+            "short_post_secondary": 6.51,
+            "bachelor": 3.32,
+            "master_and_higher": 2.11
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 3.28,
+            "lower_secondary": 31.75,
+            "upper_secondary": 43.13,
+            "post_secondary": 21.82,
+            "short_post_secondary": 13.25,
+            "bachelor": 2.59,
+            "master_and_higher": 5.98
+          }
+        }
+      },
+      "youth_summary": "45% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "BZ": {
+      "country_name": "Belize",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.61,
+            "incomplete_primary": 11.95,
+            "primary": 27.58,
+            "lower_secondary": 21.67,
+            "upper_secondary": 26.97,
+            "post_secondary": 11.22,
+            "short_post_secondary": 9.81,
+            "bachelor": 1.26,
+            "master_and_higher": 0.14
+          },
+          "young_adult_15_29": {
+            "no_education": 0.7,
+            "incomplete_primary": 13.48,
+            "primary": 25.95,
+            "lower_secondary": 17.8,
+            "upper_secondary": 27.24,
+            "post_secondary": 14.82,
+            "short_post_secondary": 12.05,
+            "bachelor": 2.44,
+            "master_and_higher": 0.34
+          }
+        }
+      },
+      "youth_summary": "62% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "BJ": {
+      "country_name": "Benin",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 17.05,
+            "incomplete_primary": 13.75,
+            "primary": 32.8,
+            "lower_secondary": 23.64,
+            "upper_secondary": 10.8,
+            "post_secondary": 1.96,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 20.48,
+            "incomplete_primary": 14.18,
+            "primary": 28.53,
+            "lower_secondary": 20.09,
+            "upper_secondary": 13.05,
+            "post_secondary": 3.67,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "87% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "BT": {
+      "country_name": "Bhutan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 13.51,
+            "incomplete_primary": 6.61,
+            "primary": 13.25,
+            "lower_secondary": 44.6,
+            "upper_secondary": 14.09,
+            "post_secondary": 7.95,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 16.13,
+            "incomplete_primary": 7.83,
+            "primary": 9.61,
+            "lower_secondary": 41.74,
+            "upper_secondary": 12.79,
+            "post_secondary": 11.89,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "78% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "BO": {
+      "country_name": "Bolivia (Plurinational State of)",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.61,
+            "incomplete_primary": 1.85,
+            "primary": 8.29,
+            "lower_secondary": 44.82,
+            "upper_secondary": 33.34,
+            "post_secondary": 11.09,
+            "short_post_secondary": 2.36,
+            "bachelor": 8.6,
+            "master_and_higher": 0.13
+          },
+          "young_adult_15_29": {
+            "no_education": 0.82,
+            "incomplete_primary": 2.43,
+            "primary": 9.21,
+            "lower_secondary": 35.83,
+            "upper_secondary": 35.38,
+            "post_secondary": 16.32,
+            "short_post_secondary": 3.44,
+            "bachelor": 12.35,
+            "master_and_higher": 0.52
+          }
+        }
+      },
+      "youth_summary": "56% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "BA": {
+      "country_name": "Bosnia and Herzegovina",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.28,
+            "incomplete_primary": 0.01,
+            "primary": 1.1,
+            "lower_secondary": 35.59,
+            "upper_secondary": 55.91,
+            "post_secondary": 7.12,
+            "short_post_secondary": 1.09,
+            "bachelor": 5.35,
+            "master_and_higher": 0.69
+          },
+          "young_adult_15_29": {
+            "no_education": 0.43,
+            "incomplete_primary": 0.03,
+            "primary": 0.84,
+            "lower_secondary": 25.05,
+            "upper_secondary": 60.16,
+            "post_secondary": 13.49,
+            "short_post_secondary": 1.57,
+            "bachelor": 10.09,
+            "master_and_higher": 1.83
+          }
+        }
+      },
+      "youth_summary": "37% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "BW": {
+      "country_name": "Botswana",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.35,
+            "incomplete_primary": 3.94,
+            "primary": 16.06,
+            "lower_secondary": 34.63,
+            "upper_secondary": 32.22,
+            "post_secondary": 11.82,
+            "short_post_secondary": 7.66,
+            "bachelor": 4.06,
+            "master_and_higher": 0.1
+          },
+          "young_adult_15_29": {
+            "no_education": 1.56,
+            "incomplete_primary": 4.27,
+            "primary": 13.07,
+            "lower_secondary": 31.51,
+            "upper_secondary": 33.54,
+            "post_secondary": 16.05,
+            "short_post_secondary": 10.04,
+            "bachelor": 5.75,
+            "master_and_higher": 0.26
+          }
+        }
+      },
+      "youth_summary": "56% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "BR": {
+      "country_name": "Brazil",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.88,
+            "incomplete_primary": 2.05,
+            "primary": 19.61,
+            "lower_secondary": 35.75,
+            "upper_secondary": 36.89,
+            "post_secondary": 3.81,
+            "short_post_secondary": 0,
+            "bachelor": 3.89,
+            "master_and_higher": 0.07
+          },
+          "young_adult_15_29": {
+            "no_education": 2.24,
+            "incomplete_primary": 2.56,
+            "primary": 17.89,
+            "lower_secondary": 28.87,
+            "upper_secondary": 40.74,
+            "post_secondary": 7.7,
+            "short_post_secondary": 0,
+            "bachelor": 7.77,
+            "master_and_higher": 0.25
+          }
+        }
+      },
+      "youth_summary": "59% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "BN": {
+      "country_name": "Brunei Darussalam",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.33,
+            "incomplete_primary": 2.86,
+            "primary": 15.87,
+            "lower_secondary": 37.8,
+            "upper_secondary": 37.88,
+            "post_secondary": 4.27,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.39,
+            "incomplete_primary": 3,
+            "primary": 16.76,
+            "lower_secondary": 30.41,
+            "upper_secondary": 40.18,
+            "post_secondary": 8.27,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "58% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "BG": {
+      "country_name": "Bulgaria",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.93,
+            "incomplete_primary": 1.54,
+            "primary": 5.26,
+            "lower_secondary": 39.99,
+            "upper_secondary": 46.02,
+            "post_secondary": 6.26,
+            "short_post_secondary": 0.44,
+            "bachelor": 4.92,
+            "master_and_higher": 0.89
+          },
+          "young_adult_15_29": {
+            "no_education": 1.04,
+            "incomplete_primary": 1.55,
+            "primary": 4.79,
+            "lower_secondary": 29.4,
+            "upper_secondary": 47.33,
+            "post_secondary": 15.88,
+            "short_post_secondary": 0.64,
+            "bachelor": 9.39,
+            "master_and_higher": 5.84
+          }
+        }
+      },
+      "youth_summary": "48% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "BF": {
+      "country_name": "Burkina Faso",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 52.12,
+            "incomplete_primary": 23.11,
+            "primary": 12.72,
+            "lower_secondary": 9.74,
+            "upper_secondary": 2.17,
+            "post_secondary": 0.15,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 55.35,
+            "incomplete_primary": 22.28,
+            "primary": 10.89,
+            "lower_secondary": 8.26,
+            "upper_secondary": 2.77,
+            "post_secondary": 0.45,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "98% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "BI": {
+      "country_name": "Burundi",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 12.28,
+            "incomplete_primary": 42.92,
+            "primary": 33.04,
+            "lower_secondary": 8.91,
+            "upper_secondary": 2.46,
+            "post_secondary": 0.4,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 14.01,
+            "incomplete_primary": 43.53,
+            "primary": 29.88,
+            "lower_secondary": 7.88,
+            "upper_secondary": 3.53,
+            "post_secondary": 1.16,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "97% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "KH": {
+      "country_name": "Cambodia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 8.67,
+            "incomplete_primary": 21.99,
+            "primary": 29.41,
+            "lower_secondary": 24.59,
+            "upper_secondary": 12.57,
+            "post_secondary": 2.78,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 9.66,
+            "incomplete_primary": 22.61,
+            "primary": 28.25,
+            "lower_secondary": 21.85,
+            "upper_secondary": 14.32,
+            "post_secondary": 3.3,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "85% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "CM": {
+      "country_name": "Cameroon",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 13.64,
+            "incomplete_primary": 5.11,
+            "primary": 35.47,
+            "lower_secondary": 23.75,
+            "upper_secondary": 19.5,
+            "post_secondary": 2.53,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 14.6,
+            "incomplete_primary": 5.33,
+            "primary": 31.9,
+            "lower_secondary": 21.97,
+            "upper_secondary": 19.21,
+            "post_secondary": 6.98,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "78% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "CA": {
+      "country_name": "Canada",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.34,
+            "primary": 2.74,
+            "lower_secondary": 30.64,
+            "upper_secondary": 39.11,
+            "post_secondary": 27.16,
+            "short_post_secondary": 19.04,
+            "bachelor": 7.65,
+            "master_and_higher": 0.47
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.38,
+            "primary": 1.95,
+            "lower_secondary": 22.55,
+            "upper_secondary": 33.57,
+            "post_secondary": 41.55,
+            "short_post_secondary": 25.22,
+            "bachelor": 13.98,
+            "master_and_higher": 2.34
+          }
+        }
+      },
+      "youth_summary": "34% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "CV": {
+      "country_name": "Cape Verde",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.36,
+            "incomplete_primary": 8.96,
+            "primary": 17.09,
+            "lower_secondary": 47.86,
+            "upper_secondary": 23.53,
+            "post_secondary": 2.19,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.47,
+            "incomplete_primary": 11.06,
+            "primary": 17.78,
+            "lower_secondary": 43.03,
+            "upper_secondary": 22.44,
+            "post_secondary": 5.21,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "74% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "CF": {
+      "country_name": "Central African Republic",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 16.84,
+            "incomplete_primary": 41.76,
+            "primary": 29.52,
+            "lower_secondary": 8.82,
+            "upper_secondary": 2.45,
+            "post_secondary": 0.63,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 19.73,
+            "incomplete_primary": 39.57,
+            "primary": 27.55,
+            "lower_secondary": 8.79,
+            "upper_secondary": 3.07,
+            "post_secondary": 1.29,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "97% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "TD": {
+      "country_name": "Chad",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 32.71,
+            "incomplete_primary": 25.24,
+            "primary": 25.88,
+            "lower_secondary": 11.42,
+            "upper_secondary": 4.1,
+            "post_secondary": 0.67,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 35.9,
+            "incomplete_primary": 21.88,
+            "primary": 23.95,
+            "lower_secondary": 10.76,
+            "upper_secondary": 5.86,
+            "post_secondary": 1.66,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "95% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "CL": {
+      "country_name": "Chile",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.37,
+            "incomplete_primary": 1.88,
+            "primary": 2.26,
+            "lower_secondary": 38.26,
+            "upper_secondary": 45.33,
+            "post_secondary": 11.91,
+            "short_post_secondary": 5.65,
+            "bachelor": 6.21,
+            "master_and_higher": 0.05
+          },
+          "young_adult_15_29": {
+            "no_education": 0.43,
+            "incomplete_primary": 1.68,
+            "primary": 2.06,
+            "lower_secondary": 29.39,
+            "upper_secondary": 44.53,
+            "post_secondary": 21.92,
+            "short_post_secondary": 7.78,
+            "bachelor": 13.69,
+            "master_and_higher": 0.45
+          }
+        }
+      },
+      "youth_summary": "43% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "CN": {
+      "country_name": "China",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.29,
+            "incomplete_primary": 0.86,
+            "primary": 2.79,
+            "lower_secondary": 32.38,
+            "upper_secondary": 36.67,
+            "post_secondary": 27.01,
+            "short_post_secondary": 11.91,
+            "bachelor": 9.22,
+            "master_and_higher": 0.38
+          },
+          "young_adult_15_29": {
+            "no_education": 0.35,
+            "incomplete_primary": 1.11,
+            "primary": 2.96,
+            "lower_secondary": 32.81,
+            "upper_secondary": 30.98,
+            "post_secondary": 31.79,
+            "short_post_secondary": 13.13,
+            "bachelor": 10.03,
+            "master_and_higher": 0.83
+          }
+        }
+      },
+      "youth_summary": "36% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "CO": {
+      "country_name": "Colombia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2.01,
+            "incomplete_primary": 4.81,
+            "primary": 17.29,
+            "lower_secondary": 21.73,
+            "upper_secondary": 41.31,
+            "post_secondary": 12.86,
+            "short_post_secondary": 4.64,
+            "bachelor": 7.99,
+            "master_and_higher": 0.19
+          },
+          "young_adult_15_29": {
+            "no_education": 2.19,
+            "incomplete_primary": 5.33,
+            "primary": 15.76,
+            "lower_secondary": 16.28,
+            "upper_secondary": 42.23,
+            "post_secondary": 18.21,
+            "short_post_secondary": 6.12,
+            "bachelor": 11.48,
+            "master_and_higher": 0.87
+          }
+        }
+      },
+      "youth_summary": "46% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "KM": {
+      "country_name": "Comoros",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 5.9,
+            "incomplete_primary": 11.7,
+            "primary": 36.5,
+            "lower_secondary": 27.34,
+            "upper_secondary": 14.45,
+            "post_secondary": 4.09,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 7.95,
+            "incomplete_primary": 12.22,
+            "primary": 32.05,
+            "lower_secondary": 22.43,
+            "upper_secondary": 15.52,
+            "post_secondary": 9.83,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "81% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "CG": {
+      "country_name": "Congo",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2.85,
+            "incomplete_primary": 13.81,
+            "primary": 45.48,
+            "lower_secondary": 26.11,
+            "upper_secondary": 8.86,
+            "post_secondary": 2.91,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.98,
+            "incomplete_primary": 14.39,
+            "primary": 43.36,
+            "lower_secondary": 24.44,
+            "upper_secondary": 10.35,
+            "post_secondary": 4.48,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "88% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "CR": {
+      "country_name": "Costa Rica",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.74,
+            "incomplete_primary": 3.41,
+            "primary": 28.77,
+            "lower_secondary": 24.83,
+            "upper_secondary": 31.55,
+            "post_secondary": 10.7,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.84,
+            "incomplete_primary": 3.98,
+            "primary": 27.79,
+            "lower_secondary": 20.37,
+            "upper_secondary": 30.34,
+            "post_secondary": 16.67,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "58% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "CI": {
+      "country_name": "Cote d'Ivoire",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 25.57,
+            "incomplete_primary": 19.45,
+            "primary": 24.54,
+            "lower_secondary": 20.33,
+            "upper_secondary": 8.77,
+            "post_secondary": 1.35,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 28.3,
+            "incomplete_primary": 19.57,
+            "primary": 21.24,
+            "lower_secondary": 17.25,
+            "upper_secondary": 9.49,
+            "post_secondary": 4.15,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "90% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "HR": {
+      "country_name": "Croatia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.01,
+            "primary": 1.26,
+            "lower_secondary": 39.68,
+            "upper_secondary": 53.78,
+            "post_secondary": 5.26,
+            "short_post_secondary": 1.69,
+            "bachelor": 3.54,
+            "master_and_higher": 0.03
+          },
+          "young_adult_15_29": {
+            "no_education": 0.13,
+            "incomplete_primary": 0.04,
+            "primary": 0.85,
+            "lower_secondary": 27.02,
+            "upper_secondary": 58.21,
+            "post_secondary": 13.76,
+            "short_post_secondary": 4.07,
+            "bachelor": 9.56,
+            "master_and_higher": 0.12
+          }
+        }
+      },
+      "youth_summary": "41% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "CU": {
+      "country_name": "Cuba",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.28,
+            "incomplete_primary": 0.36,
+            "primary": 3.79,
+            "lower_secondary": 38.2,
+            "upper_secondary": 48.08,
+            "post_secondary": 9.3,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.4,
+            "incomplete_primary": 0.36,
+            "primary": 3.24,
+            "lower_secondary": 30.39,
+            "upper_secondary": 48.11,
+            "post_secondary": 17.49,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "43% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "CW": {
+      "country_name": "Curaçao",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.51,
+            "primary": 30.86,
+            "lower_secondary": 42.68,
+            "upper_secondary": 22.73,
+            "post_secondary": 3.22,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.8,
+            "primary": 23.57,
+            "lower_secondary": 36.07,
+            "upper_secondary": 30.71,
+            "post_secondary": 8.83,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "74% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "CY": {
+      "country_name": "Cyprus",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.01,
+            "primary": 2.19,
+            "lower_secondary": 27.58,
+            "upper_secondary": 53.33,
+            "post_secondary": 16.87,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.11,
+            "incomplete_primary": 0.01,
+            "primary": 2.22,
+            "lower_secondary": 19.83,
+            "upper_secondary": 47.18,
+            "post_secondary": 30.65,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "30% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "CZ": {
+      "country_name": "Czech Republic",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.05,
+            "incomplete_primary": 0.01,
+            "primary": 0.46,
+            "lower_secondary": 46.9,
+            "upper_secondary": 45.69,
+            "post_secondary": 6.9,
+            "short_post_secondary": 2.09,
+            "bachelor": 4.3,
+            "master_and_higher": 0.51
+          },
+          "young_adult_15_29": {
+            "no_education": 0.15,
+            "incomplete_primary": 0.01,
+            "primary": 0.35,
+            "lower_secondary": 32.72,
+            "upper_secondary": 51.3,
+            "post_secondary": 15.47,
+            "short_post_secondary": 3.58,
+            "bachelor": 5.59,
+            "master_and_higher": 6.31
+          }
+        }
+      },
+      "youth_summary": "47% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "KP": {
+      "country_name": "Democratic People's Republic of Korea",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 20.36,
+            "lower_secondary": 0.01,
+            "upper_secondary": 71.13,
+            "post_secondary": 8.49,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 13.57,
+            "lower_secondary": 0.01,
+            "upper_secondary": 73.23,
+            "post_secondary": 13.17,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "20% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "CD": {
+      "country_name": "Democratic Republic of the Congo",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 4.86,
+            "incomplete_primary": 22.32,
+            "primary": 19.41,
+            "lower_secondary": 37.6,
+            "upper_secondary": 13.98,
+            "post_secondary": 1.85,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 5.34,
+            "incomplete_primary": 20.72,
+            "primary": 18.07,
+            "lower_secondary": 33.56,
+            "upper_secondary": 18.63,
+            "post_secondary": 3.68,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "84% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "DK": {
+      "country_name": "Denmark",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 0.13,
+            "lower_secondary": 61.76,
+            "upper_secondary": 34.5,
+            "post_secondary": 3.6,
+            "short_post_secondary": 1.02,
+            "bachelor": 2.52,
+            "master_and_higher": 0.06
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 0.09,
+            "lower_secondary": 45.79,
+            "upper_secondary": 38.75,
+            "post_secondary": 15.35,
+            "short_post_secondary": 2.73,
+            "bachelor": 9.63,
+            "master_and_higher": 2.98
+          }
+        }
+      },
+      "youth_summary": "62% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "DJ": {
+      "country_name": "Djibouti",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 29.6,
+            "incomplete_primary": 30.85,
+            "primary": 14.07,
+            "lower_secondary": 13.46,
+            "upper_secondary": 9.71,
+            "post_secondary": 2.32,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 32.59,
+            "incomplete_primary": 30.31,
+            "primary": 11.92,
+            "lower_secondary": 11.18,
+            "upper_secondary": 10.57,
+            "post_secondary": 3.42,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "88% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "DO": {
+      "country_name": "Dominican Republic",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2.99,
+            "incomplete_primary": 6.85,
+            "primary": 8.66,
+            "lower_secondary": 40.28,
+            "upper_secondary": 30.05,
+            "post_secondary": 11.2,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 3.59,
+            "incomplete_primary": 7.81,
+            "primary": 8.13,
+            "lower_secondary": 32.57,
+            "upper_secondary": 31.32,
+            "post_secondary": 16.59,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "59% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "EC": {
+      "country_name": "Ecuador",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2.09,
+            "incomplete_primary": 6.37,
+            "primary": 15.65,
+            "lower_secondary": 33.66,
+            "upper_secondary": 30.01,
+            "post_secondary": 12.24,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.27,
+            "incomplete_primary": 6.86,
+            "primary": 16.24,
+            "lower_secondary": 28.01,
+            "upper_secondary": 30.25,
+            "post_secondary": 16.37,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "58% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "EG": {
+      "country_name": "Egypt",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.19,
+            "incomplete_primary": 6.86,
+            "primary": 10.34,
+            "lower_secondary": 25.58,
+            "upper_secondary": 39.23,
+            "post_secondary": 11.81,
+            "short_post_secondary": 2.72,
+            "bachelor": 9.03,
+            "master_and_higher": 0.06
+          },
+          "young_adult_15_29": {
+            "no_education": 8.69,
+            "incomplete_primary": 6.64,
+            "primary": 8.09,
+            "lower_secondary": 18.21,
+            "upper_secondary": 40.41,
+            "post_secondary": 17.96,
+            "short_post_secondary": 3.49,
+            "bachelor": 14.29,
+            "master_and_higher": 0.18
+          }
+        }
+      },
+      "youth_summary": "49% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "SV": {
+      "country_name": "El Salvador",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 3.27,
+            "incomplete_primary": 12.29,
+            "primary": 20.82,
+            "lower_secondary": 37.12,
+            "upper_secondary": 20.24,
+            "post_secondary": 6.26,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 3.89,
+            "incomplete_primary": 13.23,
+            "primary": 18.75,
+            "lower_secondary": 31.64,
+            "upper_secondary": 22.99,
+            "post_secondary": 9.51,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "74% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "GQ": {
+      "country_name": "Equatorial Guinea",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2.26,
+            "incomplete_primary": 15.73,
+            "primary": 52.48,
+            "lower_secondary": 22.94,
+            "upper_secondary": 5.09,
+            "post_secondary": 1.51,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.48,
+            "incomplete_primary": 16.52,
+            "primary": 49.05,
+            "lower_secondary": 22.55,
+            "upper_secondary": 6.82,
+            "post_secondary": 2.57,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "93% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "ER": {
+      "country_name": "Eritrea",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 29.6,
+            "incomplete_primary": 30.85,
+            "primary": 14.07,
+            "lower_secondary": 13.46,
+            "upper_secondary": 9.71,
+            "post_secondary": 2.32,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 32.58,
+            "incomplete_primary": 30.31,
+            "primary": 11.92,
+            "lower_secondary": 11.18,
+            "upper_secondary": 10.57,
+            "post_secondary": 3.42,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "88% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "EE": {
+      "country_name": "Estonia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.15,
+            "incomplete_primary": 0.01,
+            "primary": 12.6,
+            "lower_secondary": 38.93,
+            "upper_secondary": 37.12,
+            "post_secondary": 11.2,
+            "short_post_secondary": 4.04,
+            "bachelor": 6.28,
+            "master_and_higher": 0.88
+          },
+          "young_adult_15_29": {
+            "no_education": 0.16,
+            "incomplete_primary": 0.01,
+            "primary": 8.89,
+            "lower_secondary": 29.69,
+            "upper_secondary": 36.75,
+            "post_secondary": 24.5,
+            "short_post_secondary": 7.38,
+            "bachelor": 10.16,
+            "master_and_higher": 6.96
+          }
+        }
+      },
+      "youth_summary": "52% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "ET": {
+      "country_name": "Ethiopia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 31.82,
+            "incomplete_primary": 28.01,
+            "primary": 26.46,
+            "lower_secondary": 7.85,
+            "upper_secondary": 4.93,
+            "post_secondary": 0.95,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 35.26,
+            "incomplete_primary": 27.6,
+            "primary": 22.92,
+            "lower_secondary": 6.51,
+            "upper_secondary": 6.39,
+            "post_secondary": 1.31,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "94% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "FJ": {
+      "country_name": "Fiji",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.57,
+            "primary": 12.13,
+            "lower_secondary": 41.52,
+            "upper_secondary": 28.4,
+            "post_secondary": 17.36,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.65,
+            "primary": 11.77,
+            "lower_secondary": 32.82,
+            "upper_secondary": 31.98,
+            "post_secondary": 22.77,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "54% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "FI": {
+      "country_name": "Finland",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 10.34,
+            "lower_secondary": 42.68,
+            "upper_secondary": 44.75,
+            "post_secondary": 2.21,
+            "short_post_secondary": 0.11,
+            "bachelor": 2.03,
+            "master_and_higher": 0.08
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 7.07,
+            "lower_secondary": 30.86,
+            "upper_secondary": 48.14,
+            "post_secondary": 13.91,
+            "short_post_secondary": 0.28,
+            "bachelor": 10.13,
+            "master_and_higher": 3.51
+          }
+        }
+      },
+      "youth_summary": "53% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "FR": {
+      "country_name": "France",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.3,
+            "incomplete_primary": 0.01,
+            "primary": 6.67,
+            "lower_secondary": 31.03,
+            "upper_secondary": 44.21,
+            "post_secondary": 17.78,
+            "short_post_secondary": 10.61,
+            "bachelor": 3.33,
+            "master_and_higher": 3.84
+          },
+          "young_adult_15_29": {
+            "no_education": 0.34,
+            "incomplete_primary": 0.01,
+            "primary": 5.88,
+            "lower_secondary": 22.46,
+            "upper_secondary": 42.84,
+            "post_secondary": 28.47,
+            "short_post_secondary": 14.68,
+            "bachelor": 6.26,
+            "master_and_higher": 7.52
+          }
+        }
+      },
+      "youth_summary": "38% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "GF": {
+      "country_name": "French Guiana",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 10,
+            "incomplete_primary": 0.49,
+            "primary": 27.46,
+            "lower_secondary": 26.49,
+            "upper_secondary": 30.52,
+            "post_secondary": 5.06,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 10.68,
+            "incomplete_primary": 0.56,
+            "primary": 25.76,
+            "lower_secondary": 21.88,
+            "upper_secondary": 31.12,
+            "post_secondary": 10.01,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "64% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "PF": {
+      "country_name": "French Polynesia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.43,
+            "incomplete_primary": 0.06,
+            "primary": 2.45,
+            "lower_secondary": 16.65,
+            "upper_secondary": 63.43,
+            "post_secondary": 16.99,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.48,
+            "incomplete_primary": 0.07,
+            "primary": 2.66,
+            "lower_secondary": 14.77,
+            "upper_secondary": 61.2,
+            "post_secondary": 20.82,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "20% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "GA": {
+      "country_name": "Gabon",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.86,
+            "incomplete_primary": 13.93,
+            "primary": 50.42,
+            "lower_secondary": 25.68,
+            "upper_secondary": 6.44,
+            "post_secondary": 1.68,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.14,
+            "incomplete_primary": 12.82,
+            "primary": 46.47,
+            "lower_secondary": 24.48,
+            "upper_secondary": 8.88,
+            "post_secondary": 5.21,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "92% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "GM": {
+      "country_name": "Gambia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 17.92,
+            "incomplete_primary": 13.98,
+            "primary": 25.05,
+            "lower_secondary": 26.42,
+            "upper_secondary": 14.25,
+            "post_secondary": 2.38,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 20.34,
+            "incomplete_primary": 12.06,
+            "primary": 21.07,
+            "lower_secondary": 23.61,
+            "upper_secondary": 18.64,
+            "post_secondary": 4.28,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "83% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "GE": {
+      "country_name": "Georgia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.24,
+            "incomplete_primary": 0.15,
+            "primary": 3.72,
+            "lower_secondary": 30.97,
+            "upper_secondary": 49.45,
+            "post_secondary": 15.49,
+            "short_post_secondary": 4.16,
+            "bachelor": 9.71,
+            "master_and_higher": 1.62
+          },
+          "young_adult_15_29": {
+            "no_education": 0.26,
+            "incomplete_primary": 0.16,
+            "primary": 2.79,
+            "lower_secondary": 21.84,
+            "upper_secondary": 47.25,
+            "post_secondary": 27.69,
+            "short_post_secondary": 6.08,
+            "bachelor": 16.77,
+            "master_and_higher": 4.84
+          }
+        }
+      },
+      "youth_summary": "35% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "DE": {
+      "country_name": "Germany",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.02,
+            "primary": 20.21,
+            "lower_secondary": 34.56,
+            "upper_secondary": 36.69,
+            "post_secondary": 8.53,
+            "short_post_secondary": 5.44,
+            "bachelor": 2.74,
+            "master_and_higher": 0.36
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 13.85,
+            "lower_secondary": 25.61,
+            "upper_secondary": 39.73,
+            "post_secondary": 20.79,
+            "short_post_secondary": 9.62,
+            "bachelor": 6.88,
+            "master_and_higher": 4.28
+          }
+        }
+      },
+      "youth_summary": "55% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "GH": {
+      "country_name": "Ghana",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.72,
+            "incomplete_primary": 13.7,
+            "primary": 25.6,
+            "lower_secondary": 35.44,
+            "upper_secondary": 16.7,
+            "post_secondary": 1.87,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 8.17,
+            "incomplete_primary": 14.48,
+            "primary": 21.06,
+            "lower_secondary": 33.19,
+            "upper_secondary": 19.4,
+            "post_secondary": 3.7,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "81% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "GR": {
+      "country_name": "Greece",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.84,
+            "incomplete_primary": 0.46,
+            "primary": 8.99,
+            "lower_secondary": 30.08,
+            "upper_secondary": 45.7,
+            "post_secondary": 13.95,
+            "short_post_secondary": 8.91,
+            "bachelor": 4.87,
+            "master_and_higher": 0.17
+          },
+          "young_adult_15_29": {
+            "no_education": 0.91,
+            "incomplete_primary": 0.52,
+            "primary": 7.71,
+            "lower_secondary": 21.83,
+            "upper_secondary": 42.68,
+            "post_secondary": 26.35,
+            "short_post_secondary": 15.14,
+            "bachelor": 9.61,
+            "master_and_higher": 1.6
+          }
+        }
+      },
+      "youth_summary": "40% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "GD": {
+      "country_name": "Grenada",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.96,
+            "incomplete_primary": 1.16,
+            "primary": 24.99,
+            "lower_secondary": 14.81,
+            "upper_secondary": 44.24,
+            "post_secondary": 12.84,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.22,
+            "incomplete_primary": 1.25,
+            "primary": 22.31,
+            "lower_secondary": 11.58,
+            "upper_secondary": 45.26,
+            "post_secondary": 17.38,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "43% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "GP": {
+      "country_name": "Guadeloupe",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.12,
+            "incomplete_primary": 0.38,
+            "primary": 16.38,
+            "lower_secondary": 24.49,
+            "upper_secondary": 49.5,
+            "post_secondary": 8.13,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.16,
+            "incomplete_primary": 0.42,
+            "primary": 14.3,
+            "lower_secondary": 18.39,
+            "upper_secondary": 50.65,
+            "post_secondary": 15.08,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "42% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "GU": {
+      "country_name": "Guam",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.57,
+            "primary": 12.17,
+            "lower_secondary": 41.54,
+            "upper_secondary": 28.38,
+            "post_secondary": 17.34,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.65,
+            "primary": 11.81,
+            "lower_secondary": 32.84,
+            "upper_secondary": 31.98,
+            "post_secondary": 22.72,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "54% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "GT": {
+      "country_name": "Guatemala",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 4.47,
+            "incomplete_primary": 16.35,
+            "primary": 34.73,
+            "lower_secondary": 28.91,
+            "upper_secondary": 14.15,
+            "post_secondary": 1.41,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 5.75,
+            "incomplete_primary": 16.77,
+            "primary": 31.56,
+            "lower_secondary": 26.28,
+            "upper_secondary": 16.53,
+            "post_secondary": 3.12,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "84% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "GN": {
+      "country_name": "Guinea",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 40.04,
+            "incomplete_primary": 12.71,
+            "primary": 22.96,
+            "lower_secondary": 15.73,
+            "upper_secondary": 5.85,
+            "post_secondary": 2.72,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 42.97,
+            "incomplete_primary": 10.76,
+            "primary": 19.86,
+            "lower_secondary": 13.86,
+            "upper_secondary": 6.33,
+            "post_secondary": 6.22,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "91% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "GW": {
+      "country_name": "Guinea-Bissau",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 10.4,
+            "incomplete_primary": 42.19,
+            "primary": 28.02,
+            "lower_secondary": 12.03,
+            "upper_secondary": 7.2,
+            "post_secondary": 0.18,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 13.15,
+            "incomplete_primary": 37.47,
+            "primary": 26.72,
+            "lower_secondary": 11.56,
+            "upper_secondary": 10.74,
+            "post_secondary": 0.35,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "93% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "GY": {
+      "country_name": "Guyana",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.64,
+            "incomplete_primary": 2.04,
+            "primary": 13.51,
+            "lower_secondary": 38.31,
+            "upper_secondary": 39.66,
+            "post_secondary": 5.86,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.72,
+            "incomplete_primary": 2.2,
+            "primary": 10.87,
+            "lower_secondary": 32.13,
+            "upper_secondary": 45.23,
+            "post_secondary": 8.87,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "55% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "HT": {
+      "country_name": "Haiti",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.35,
+            "incomplete_primary": 28.31,
+            "primary": 24.48,
+            "lower_secondary": 25.62,
+            "upper_secondary": 15.09,
+            "post_secondary": 0.17,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 7.78,
+            "incomplete_primary": 29.54,
+            "primary": 20.27,
+            "lower_secondary": 21.51,
+            "upper_secondary": 20.37,
+            "post_secondary": 0.54,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "85% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "HN": {
+      "country_name": "Honduras",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.05,
+            "incomplete_primary": 18.19,
+            "primary": 31.53,
+            "lower_secondary": 24.86,
+            "upper_secondary": 16.77,
+            "post_secondary": 2.61,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 6.58,
+            "incomplete_primary": 18.11,
+            "primary": 31.2,
+            "lower_secondary": 21.44,
+            "upper_secondary": 18.36,
+            "post_secondary": 4.31,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "81% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "HU": {
+      "country_name": "Hungary",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.06,
+            "incomplete_primary": 0.01,
+            "primary": 1.89,
+            "lower_secondary": 43.92,
+            "upper_secondary": 37.88,
+            "post_secondary": 16.24,
+            "short_post_secondary": 11.08,
+            "bachelor": 4.38,
+            "master_and_higher": 0.79
+          },
+          "young_adult_15_29": {
+            "no_education": 0.14,
+            "incomplete_primary": 0.01,
+            "primary": 1.35,
+            "lower_secondary": 31.71,
+            "upper_secondary": 41.44,
+            "post_secondary": 25.35,
+            "short_post_secondary": 12.54,
+            "bachelor": 8.45,
+            "master_and_higher": 4.36
+          }
+        }
+      },
+      "youth_summary": "46% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "IS": {
+      "country_name": "Iceland",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 9.54,
+            "lower_secondary": 54.52,
+            "upper_secondary": 31.72,
+            "post_secondary": 4.21,
+            "short_post_secondary": 0.7,
+            "bachelor": 2.68,
+            "master_and_higher": 0.83
+          },
+          "young_adult_15_29": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.01,
+            "primary": 6.36,
+            "lower_secondary": 44.3,
+            "upper_secondary": 34.65,
+            "post_secondary": 14.66,
+            "short_post_secondary": 2.62,
+            "bachelor": 7.75,
+            "master_and_higher": 4.28
+          }
+        }
+      },
+      "youth_summary": "64% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "IN": {
+      "country_name": "India",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 8.85,
+            "incomplete_primary": 3.38,
+            "primary": 11.33,
+            "lower_secondary": 20.76,
+            "upper_secondary": 45.58,
+            "post_secondary": 10.12,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 10.9,
+            "incomplete_primary": 3.82,
+            "primary": 11.89,
+            "lower_secondary": 18.72,
+            "upper_secondary": 40.95,
+            "post_secondary": 13.72,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "44% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "ID": {
+      "country_name": "Indonesia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.06,
+            "incomplete_primary": 2.68,
+            "primary": 16,
+            "lower_secondary": 37.96,
+            "upper_secondary": 38.25,
+            "post_secondary": 4.06,
+            "short_post_secondary": 2.24,
+            "bachelor": 2,
+            "master_and_higher": 0.03
+          },
+          "young_adult_15_29": {
+            "no_education": 1.21,
+            "incomplete_primary": 2.9,
+            "primary": 16.83,
+            "lower_secondary": 30.49,
+            "upper_secondary": 40.86,
+            "post_secondary": 7.71,
+            "short_post_secondary": 3.52,
+            "bachelor": 4.61,
+            "master_and_higher": 0.12
+          }
+        }
+      },
+      "youth_summary": "58% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "IR": {
+      "country_name": "Iran (Islamic Republic of)",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2.78,
+            "incomplete_primary": 2.22,
+            "primary": 7.44,
+            "lower_secondary": 43.34,
+            "upper_secondary": 32.72,
+            "post_secondary": 11.51,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 3.01,
+            "incomplete_primary": 2.45,
+            "primary": 8.7,
+            "lower_secondary": 35.16,
+            "upper_secondary": 35.24,
+            "post_secondary": 15.45,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "56% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "IQ": {
+      "country_name": "Iraq",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 7.05,
+            "incomplete_primary": 22.51,
+            "primary": 24.88,
+            "lower_secondary": 25.1,
+            "upper_secondary": 14.66,
+            "post_secondary": 5.8,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 8.19,
+            "incomplete_primary": 22.72,
+            "primary": 23.95,
+            "lower_secondary": 20.25,
+            "upper_secondary": 13.6,
+            "post_secondary": 11.29,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "80% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "IE": {
+      "country_name": "Ireland",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.08,
+            "primary": 12.84,
+            "lower_secondary": 29.1,
+            "upper_secondary": 38.63,
+            "post_secondary": 19.36,
+            "short_post_secondary": 8.61,
+            "bachelor": 9.7,
+            "master_and_higher": 1.05
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.18,
+            "primary": 8.8,
+            "lower_secondary": 20.79,
+            "upper_secondary": 34.95,
+            "post_secondary": 35.26,
+            "short_post_secondary": 14.33,
+            "bachelor": 16.96,
+            "master_and_higher": 3.97
+          }
+        }
+      },
+      "youth_summary": "42% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "IL": {
+      "country_name": "Israel",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.34,
+            "incomplete_primary": 2.83,
+            "primary": 31.86,
+            "lower_secondary": 11.83,
+            "upper_secondary": 46.21,
+            "post_secondary": 6.95,
+            "short_post_secondary": 4.23,
+            "bachelor": 2.61,
+            "master_and_higher": 0.11
+          },
+          "young_adult_15_29": {
+            "no_education": 0.37,
+            "incomplete_primary": 2.9,
+            "primary": 23.36,
+            "lower_secondary": 11.04,
+            "upper_secondary": 43.17,
+            "post_secondary": 19.16,
+            "short_post_secondary": 7.25,
+            "bachelor": 10.58,
+            "master_and_higher": 1.32
+          }
+        }
+      },
+      "youth_summary": "47% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "IT": {
+      "country_name": "Italy",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.02,
+            "primary": 0.85,
+            "lower_secondary": 44.63,
+            "upper_secondary": 49.57,
+            "post_secondary": 4.92,
+            "short_post_secondary": 0.17,
+            "bachelor": 3.94,
+            "master_and_higher": 0.81
+          },
+          "young_adult_15_29": {
+            "no_education": 0.04,
+            "incomplete_primary": 0.12,
+            "primary": 0.59,
+            "lower_secondary": 34.57,
+            "upper_secondary": 50.98,
+            "post_secondary": 13.7,
+            "short_post_secondary": 0.28,
+            "bachelor": 7.44,
+            "master_and_higher": 5.97
+          }
+        }
+      },
+      "youth_summary": "46% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "JM": {
+      "country_name": "Jamaica",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.19,
+            "incomplete_primary": 0.33,
+            "primary": 3.36,
+            "lower_secondary": 58.91,
+            "upper_secondary": 17.75,
+            "post_secondary": 19.45,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.2,
+            "incomplete_primary": 0.36,
+            "primary": 3.59,
+            "lower_secondary": 53.19,
+            "upper_secondary": 20.75,
+            "post_secondary": 21.89,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "63% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "JP": {
+      "country_name": "Japan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.08,
+            "incomplete_primary": 0.01,
+            "primary": 5.16,
+            "lower_secondary": 33.73,
+            "upper_secondary": 44.77,
+            "post_secondary": 16.25,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.09,
+            "incomplete_primary": 0.01,
+            "primary": 3.44,
+            "lower_secondary": 23.74,
+            "upper_secondary": 41.98,
+            "post_secondary": 30.74,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "39% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "JO": {
+      "country_name": "Jordan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 3.18,
+            "incomplete_primary": 3.69,
+            "primary": 16.38,
+            "lower_secondary": 31.8,
+            "upper_secondary": 35.74,
+            "post_secondary": 9.23,
+            "short_post_secondary": 3.67,
+            "bachelor": 5.78,
+            "master_and_higher": 0.06
+          },
+          "young_adult_15_29": {
+            "no_education": 3.91,
+            "incomplete_primary": 4.52,
+            "primary": 14.89,
+            "lower_secondary": 26.38,
+            "upper_secondary": 33.88,
+            "post_secondary": 16.42,
+            "short_post_secondary": 5.74,
+            "bachelor": 11,
+            "master_and_higher": 0.43
+          }
+        }
+      },
+      "youth_summary": "55% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "KZ": {
+      "country_name": "Kazakhstan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.21,
+            "incomplete_primary": 0.36,
+            "primary": 6.11,
+            "lower_secondary": 20.41,
+            "upper_secondary": 61.36,
+            "post_secondary": 11.55,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.22,
+            "incomplete_primary": 0.36,
+            "primary": 4.21,
+            "lower_secondary": 14.84,
+            "upper_secondary": 61.57,
+            "post_secondary": 18.8,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "27% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "KE": {
+      "country_name": "Kenya",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 8.95,
+            "incomplete_primary": 15.11,
+            "primary": 19.73,
+            "lower_secondary": 35.91,
+            "upper_secondary": 17.35,
+            "post_secondary": 2.97,
+            "short_post_secondary": 1.97,
+            "bachelor": 1,
+            "master_and_higher": 0.01
+          },
+          "young_adult_15_29": {
+            "no_education": 9.41,
+            "incomplete_primary": 15.11,
+            "primary": 17.2,
+            "lower_secondary": 32.58,
+            "upper_secondary": 20.33,
+            "post_secondary": 5.37,
+            "short_post_secondary": 3.48,
+            "bachelor": 1.83,
+            "master_and_higher": 0.06
+          }
+        }
+      },
+      "youth_summary": "80% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "KI": {
+      "country_name": "Kiribati",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2.96,
+            "incomplete_primary": 4.37,
+            "primary": 4.76,
+            "lower_secondary": 29.7,
+            "upper_secondary": 57.56,
+            "post_secondary": 0.66,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 3.65,
+            "incomplete_primary": 5.09,
+            "primary": 5.12,
+            "lower_secondary": 24.13,
+            "upper_secondary": 60.29,
+            "post_secondary": 1.73,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "42% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "KW": {
+      "country_name": "Kuwait",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.12,
+            "incomplete_primary": 2.56,
+            "primary": 23.25,
+            "lower_secondary": 49.34,
+            "upper_secondary": 20.65,
+            "post_secondary": 4.08,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.12,
+            "incomplete_primary": 2.54,
+            "primary": 18.77,
+            "lower_secondary": 44.4,
+            "upper_secondary": 24.46,
+            "post_secondary": 9.7,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "75% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "KG": {
+      "country_name": "Kyrgyzstan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.2,
+            "incomplete_primary": 0.23,
+            "primary": 12.24,
+            "lower_secondary": 20.02,
+            "upper_secondary": 63.25,
+            "post_secondary": 4.05,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.21,
+            "incomplete_primary": 0.36,
+            "primary": 8.41,
+            "lower_secondary": 15.37,
+            "upper_secondary": 66.74,
+            "post_secondary": 8.9,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "33% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "LA": {
+      "country_name": "Lao People's Democratic Republic",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 5.51,
+            "incomplete_primary": 10.7,
+            "primary": 38.39,
+            "lower_secondary": 24.42,
+            "upper_secondary": 15.86,
+            "post_secondary": 5.14,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 6.33,
+            "incomplete_primary": 10.83,
+            "primary": 38.67,
+            "lower_secondary": 21.11,
+            "upper_secondary": 14.84,
+            "post_secondary": 8.23,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "79% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "LV": {
+      "country_name": "Latvia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.15,
+            "incomplete_primary": 0.51,
+            "primary": 12.03,
+            "lower_secondary": 37.05,
+            "upper_secondary": 41.27,
+            "post_secondary": 9.01,
+            "short_post_secondary": 2.24,
+            "bachelor": 5.19,
+            "master_and_higher": 1.6
+          },
+          "young_adult_15_29": {
+            "no_education": 0.15,
+            "incomplete_primary": 0.61,
+            "primary": 8.43,
+            "lower_secondary": 29.05,
+            "upper_secondary": 42.66,
+            "post_secondary": 19.09,
+            "short_post_secondary": 4.76,
+            "bachelor": 10.25,
+            "master_and_higher": 4.08
+          }
+        }
+      },
+      "youth_summary": "50% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "LB": {
+      "country_name": "Lebanon",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.15,
+            "incomplete_primary": 0.89,
+            "primary": 17.72,
+            "lower_secondary": 34.22,
+            "upper_secondary": 27.21,
+            "post_secondary": 18.81,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.23,
+            "incomplete_primary": 0.89,
+            "primary": 15.91,
+            "lower_secondary": 28.75,
+            "upper_secondary": 28.3,
+            "post_secondary": 24.92,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "54% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "LS": {
+      "country_name": "Lesotho",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2,
+            "incomplete_primary": 20.22,
+            "primary": 42.11,
+            "lower_secondary": 19.08,
+            "upper_secondary": 13.22,
+            "post_secondary": 3.37,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.38,
+            "incomplete_primary": 20.27,
+            "primary": 38.82,
+            "lower_secondary": 16.49,
+            "upper_secondary": 15.32,
+            "post_secondary": 6.7,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "83% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "LR": {
+      "country_name": "Liberia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 18.87,
+            "incomplete_primary": 24.45,
+            "primary": 32.08,
+            "lower_secondary": 17.59,
+            "upper_secondary": 6.88,
+            "post_secondary": 0.15,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 21.28,
+            "incomplete_primary": 24.28,
+            "primary": 27.94,
+            "lower_secondary": 15.72,
+            "upper_secondary": 10.43,
+            "post_secondary": 0.36,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "93% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "LT": {
+      "country_name": "Lithuania",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.09,
+            "incomplete_primary": 0.21,
+            "primary": 17.18,
+            "lower_secondary": 27.67,
+            "upper_secondary": 41.55,
+            "post_secondary": 13.32,
+            "short_post_secondary": 1.76,
+            "bachelor": 8.69,
+            "master_and_higher": 2.87
+          },
+          "young_adult_15_29": {
+            "no_education": 0.11,
+            "incomplete_primary": 0.54,
+            "primary": 11.58,
+            "lower_secondary": 21.07,
+            "upper_secondary": 36.98,
+            "post_secondary": 29.73,
+            "short_post_secondary": 3.86,
+            "bachelor": 18.52,
+            "master_and_higher": 7.34
+          }
+        }
+      },
+      "youth_summary": "45% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "LU": {
+      "country_name": "Luxembourg",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.01,
+            "primary": 11.11,
+            "lower_secondary": 26.82,
+            "upper_secondary": 51.71,
+            "post_secondary": 10.35,
+            "short_post_secondary": 3.13,
+            "bachelor": 4.51,
+            "master_and_higher": 2.71
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 8,
+            "lower_secondary": 20.65,
+            "upper_secondary": 48.92,
+            "post_secondary": 22.42,
+            "short_post_secondary": 4.25,
+            "bachelor": 7.19,
+            "master_and_higher": 10.97
+          }
+        }
+      },
+      "youth_summary": "38% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "MG": {
+      "country_name": "Madagascar",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 11.71,
+            "incomplete_primary": 33.8,
+            "primary": 31.54,
+            "lower_secondary": 15.41,
+            "upper_secondary": 6.11,
+            "post_secondary": 1.44,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 12.46,
+            "incomplete_primary": 35.35,
+            "primary": 29.19,
+            "lower_secondary": 13.92,
+            "upper_secondary": 6.94,
+            "post_secondary": 2.14,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "92% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "MW": {
+      "country_name": "Malawi",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.44,
+            "incomplete_primary": 16.67,
+            "primary": 22.5,
+            "lower_secondary": 38.44,
+            "upper_secondary": 15.06,
+            "post_secondary": 0.9,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 7.58,
+            "incomplete_primary": 17.89,
+            "primary": 20.16,
+            "lower_secondary": 35.34,
+            "upper_secondary": 17.72,
+            "post_secondary": 1.31,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "84% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "MY": {
+      "country_name": "Malaysia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.27,
+            "incomplete_primary": 0.6,
+            "primary": 0.87,
+            "lower_secondary": 12.35,
+            "upper_secondary": 62.78,
+            "post_secondary": 22.15,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.35,
+            "incomplete_primary": 0.69,
+            "primary": 1.03,
+            "lower_secondary": 10.59,
+            "upper_secondary": 61.76,
+            "post_secondary": 24.58,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "15% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "MV": {
+      "country_name": "Maldives",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.46,
+            "incomplete_primary": 1.3,
+            "primary": 20.11,
+            "lower_secondary": 50.89,
+            "upper_secondary": 18.98,
+            "post_secondary": 8.28,
+            "short_post_secondary": 3.73,
+            "bachelor": 0.16,
+            "master_and_higher": 4.39
+          },
+          "young_adult_15_29": {
+            "no_education": 0.59,
+            "incomplete_primary": 1.33,
+            "primary": 16.99,
+            "lower_secondary": 51.45,
+            "upper_secondary": 18.22,
+            "post_secondary": 11.43,
+            "short_post_secondary": 4.68,
+            "bachelor": 0.42,
+            "master_and_higher": 6.32
+          }
+        }
+      },
+      "youth_summary": "73% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "ML": {
+      "country_name": "Mali",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 40.51,
+            "incomplete_primary": 15.96,
+            "primary": 17.8,
+            "lower_secondary": 16.01,
+            "upper_secondary": 6.77,
+            "post_secondary": 2.96,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 44.41,
+            "incomplete_primary": 15.68,
+            "primary": 14.77,
+            "lower_secondary": 13.3,
+            "upper_secondary": 7.79,
+            "post_secondary": 4.05,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "90% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "MT": {
+      "country_name": "Malta",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 0.19,
+            "lower_secondary": 26.47,
+            "upper_secondary": 53.98,
+            "post_secondary": 19.36,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 0.16,
+            "lower_secondary": 25.37,
+            "upper_secondary": 46.11,
+            "post_secondary": 28.34,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "27% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "MQ": {
+      "country_name": "Martinique",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.16,
+            "incomplete_primary": 0.18,
+            "primary": 14.46,
+            "lower_secondary": 27.13,
+            "upper_secondary": 50.06,
+            "post_secondary": 8.03,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.2,
+            "incomplete_primary": 0.23,
+            "primary": 12.39,
+            "lower_secondary": 20.03,
+            "upper_secondary": 50.98,
+            "post_secondary": 16.17,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "42% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "MR": {
+      "country_name": "Mauritania",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 39.78,
+            "incomplete_primary": 9.13,
+            "primary": 25.09,
+            "lower_secondary": 19,
+            "upper_secondary": 5.25,
+            "post_secondary": 1.76,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 42.91,
+            "incomplete_primary": 8.93,
+            "primary": 21.81,
+            "lower_secondary": 15.92,
+            "upper_secondary": 6.41,
+            "post_secondary": 4.02,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "93% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "MU": {
+      "country_name": "Mauritius",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.17,
+            "incomplete_primary": 2,
+            "primary": 13.17,
+            "lower_secondary": 25.47,
+            "upper_secondary": 55.7,
+            "post_secondary": 3.51,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.2,
+            "incomplete_primary": 2.71,
+            "primary": 13.82,
+            "lower_secondary": 21.34,
+            "upper_secondary": 53.88,
+            "post_secondary": 8.06,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "41% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "YT": {
+      "country_name": "Mayotte",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.53,
+            "incomplete_primary": 0.32,
+            "primary": 14.48,
+            "lower_secondary": 29.87,
+            "upper_secondary": 47.23,
+            "post_secondary": 7.58,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.58,
+            "incomplete_primary": 0.38,
+            "primary": 12.82,
+            "lower_secondary": 23.38,
+            "upper_secondary": 48.45,
+            "post_secondary": 14.38,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "45% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "MX": {
+      "country_name": "Mexico",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.95,
+            "incomplete_primary": 1.72,
+            "primary": 11.87,
+            "lower_secondary": 45.66,
+            "upper_secondary": 33.46,
+            "post_secondary": 6.36,
+            "short_post_secondary": 0.8,
+            "bachelor": 5.45,
+            "master_and_higher": 0.12
+          },
+          "young_adult_15_29": {
+            "no_education": 1.07,
+            "incomplete_primary": 1.95,
+            "primary": 11.31,
+            "lower_secondary": 40.83,
+            "upper_secondary": 32.55,
+            "post_secondary": 12.3,
+            "short_post_secondary": 0.99,
+            "bachelor": 10.72,
+            "master_and_higher": 0.59
+          }
+        }
+      },
+      "youth_summary": "60% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "FM": {
+      "country_name": "Micronesia (Federated States of)",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 3.82,
+            "incomplete_primary": 0.76,
+            "primary": 14.61,
+            "lower_secondary": 48.48,
+            "upper_secondary": 26.26,
+            "post_secondary": 6.08,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 4.03,
+            "incomplete_primary": 0.84,
+            "primary": 14.17,
+            "lower_secondary": 39.29,
+            "upper_secondary": 33.8,
+            "post_secondary": 7.87,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "68% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "MN": {
+      "country_name": "Mongolia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.92,
+            "incomplete_primary": 1.01,
+            "primary": 8.51,
+            "lower_secondary": 23.11,
+            "upper_secondary": 51,
+            "post_secondary": 14.44,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.02,
+            "incomplete_primary": 1.07,
+            "primary": 7.67,
+            "lower_secondary": 17.66,
+            "upper_secondary": 48.97,
+            "post_secondary": 22.61,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "35% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "ME": {
+      "country_name": "Montenegro",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.67,
+            "incomplete_primary": 0.13,
+            "primary": 2.04,
+            "lower_secondary": 40.95,
+            "upper_secondary": 49.43,
+            "post_secondary": 6.79,
+            "short_post_secondary": 0.48,
+            "bachelor": 5.34,
+            "master_and_higher": 0.98
+          },
+          "young_adult_15_29": {
+            "no_education": 0.9,
+            "incomplete_primary": 0.45,
+            "primary": 1.71,
+            "lower_secondary": 29.07,
+            "upper_secondary": 53.26,
+            "post_secondary": 14.6,
+            "short_post_secondary": 1.81,
+            "bachelor": 11.1,
+            "master_and_higher": 1.69
+          }
+        }
+      },
+      "youth_summary": "44% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "MA": {
+      "country_name": "Morocco",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 3.47,
+            "incomplete_primary": 12.23,
+            "primary": 20.05,
+            "lower_secondary": 32.77,
+            "upper_secondary": 21.12,
+            "post_secondary": 10.37,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 6.47,
+            "incomplete_primary": 13.41,
+            "primary": 20,
+            "lower_secondary": 27.36,
+            "upper_secondary": 20.74,
+            "post_secondary": 12.02,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "69% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "MZ": {
+      "country_name": "Mozambique",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 34.72,
+            "incomplete_primary": 22.69,
+            "primary": 22.33,
+            "lower_secondary": 12.58,
+            "upper_secondary": 7.12,
+            "post_secondary": 0.57,
+            "short_post_secondary": 0.16,
+            "bachelor": 0.41,
+            "master_and_higher": 0.01
+          },
+          "young_adult_15_29": {
+            "no_education": 35.64,
+            "incomplete_primary": 21.27,
+            "primary": 21.05,
+            "lower_secondary": 12.08,
+            "upper_secondary": 8.84,
+            "post_secondary": 1.12,
+            "short_post_secondary": 0.28,
+            "bachelor": 0.81,
+            "master_and_higher": 0.03
+          }
+        }
+      },
+      "youth_summary": "92% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "MM": {
+      "country_name": "Myanmar",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 5.77,
+            "incomplete_primary": 12.55,
+            "primary": 31.86,
+            "lower_secondary": 22.23,
+            "upper_secondary": 21.1,
+            "post_secondary": 6.51,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 6.22,
+            "incomplete_primary": 13.33,
+            "primary": 32.69,
+            "lower_secondary": 19.16,
+            "upper_secondary": 19.67,
+            "post_secondary": 8.92,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "72% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "NA": {
+      "country_name": "Namibia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2.09,
+            "incomplete_primary": 14.66,
+            "primary": 40.91,
+            "lower_secondary": 18.59,
+            "upper_secondary": 21.37,
+            "post_secondary": 2.4,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.69,
+            "incomplete_primary": 13.59,
+            "primary": 35.52,
+            "lower_secondary": 19.95,
+            "upper_secondary": 23.63,
+            "post_secondary": 4.63,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "76% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "NP": {
+      "country_name": "Nepal",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.94,
+            "incomplete_primary": 6.98,
+            "primary": 19.02,
+            "lower_secondary": 20.2,
+            "upper_secondary": 45.55,
+            "post_secondary": 1.31,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 8.97,
+            "incomplete_primary": 7.39,
+            "primary": 17.18,
+            "lower_secondary": 17.54,
+            "upper_secondary": 45.64,
+            "post_secondary": 3.27,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "53% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "NL": {
+      "country_name": "Netherlands",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.33,
+            "primary": 15.22,
+            "lower_secondary": 33.65,
+            "upper_secondary": 40.17,
+            "post_secondary": 10.63,
+            "short_post_secondary": 0.27,
+            "bachelor": 8.79,
+            "master_and_higher": 1.48
+          },
+          "young_adult_15_29": {
+            "no_education": 0,
+            "incomplete_primary": 0.34,
+            "primary": 11.64,
+            "lower_secondary": 24.99,
+            "upper_secondary": 40.84,
+            "post_secondary": 22.17,
+            "short_post_secondary": 0.6,
+            "bachelor": 15.14,
+            "master_and_higher": 6.14
+          }
+        }
+      },
+      "youth_summary": "49% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "NC": {
+      "country_name": "New Caledonia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.79,
+            "incomplete_primary": 0.01,
+            "primary": 0.32,
+            "lower_secondary": 18.44,
+            "upper_secondary": 59.61,
+            "post_secondary": 20.84,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.87,
+            "incomplete_primary": 0.01,
+            "primary": 0.38,
+            "lower_secondary": 15.17,
+            "upper_secondary": 56.54,
+            "post_secondary": 27.03,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "20% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "NZ": {
+      "country_name": "New Zealand",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.14,
+            "incomplete_primary": 0.02,
+            "primary": 3.4,
+            "lower_secondary": 11.48,
+            "upper_secondary": 65.58,
+            "post_secondary": 19.41,
+            "short_post_secondary": 9.68,
+            "bachelor": 8.21,
+            "master_and_higher": 1.54
+          },
+          "young_adult_15_29": {
+            "no_education": 0.28,
+            "incomplete_primary": 0.01,
+            "primary": 3.25,
+            "lower_secondary": 9.34,
+            "upper_secondary": 55.81,
+            "post_secondary": 31.32,
+            "short_post_secondary": 13.4,
+            "bachelor": 13.99,
+            "master_and_higher": 3.93
+          }
+        }
+      },
+      "youth_summary": "15% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "NI": {
+      "country_name": "Nicaragua",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.95,
+            "incomplete_primary": 16.02,
+            "primary": 26.7,
+            "lower_secondary": 19.55,
+            "upper_secondary": 23.61,
+            "post_secondary": 7.19,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 7.7,
+            "incomplete_primary": 17.17,
+            "primary": 25.14,
+            "lower_secondary": 16.37,
+            "upper_secondary": 23.61,
+            "post_secondary": 10.02,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "69% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "NE": {
+      "country_name": "Niger",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 44.72,
+            "incomplete_primary": 18.34,
+            "primary": 28,
+            "lower_secondary": 7.06,
+            "upper_secondary": 1.28,
+            "post_secondary": 0.63,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 48.96,
+            "incomplete_primary": 17.67,
+            "primary": 24.28,
+            "lower_secondary": 6.05,
+            "upper_secondary": 1.91,
+            "post_secondary": 1.15,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "98% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "NG": {
+      "country_name": "Nigeria",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 20.34,
+            "incomplete_primary": 6.47,
+            "primary": 18.39,
+            "lower_secondary": 23.51,
+            "upper_secondary": 27.23,
+            "post_secondary": 4.08,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 21.66,
+            "incomplete_primary": 5.42,
+            "primary": 16.13,
+            "lower_secondary": 18.08,
+            "upper_secondary": 30.19,
+            "post_secondary": 8.53,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "69% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "NO": {
+      "country_name": "Norway",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 0.06,
+            "lower_secondary": 56.01,
+            "upper_secondary": 32.09,
+            "post_secondary": 11.84,
+            "short_post_secondary": 7.65,
+            "bachelor": 3.8,
+            "master_and_higher": 0.38
+          },
+          "young_adult_15_29": {
+            "no_education": 0.03,
+            "incomplete_primary": 0.01,
+            "primary": 0.06,
+            "lower_secondary": 43.12,
+            "upper_secondary": 31.93,
+            "post_secondary": 24.84,
+            "short_post_secondary": 10.64,
+            "bachelor": 9.86,
+            "master_and_higher": 4.34
+          }
+        }
+      },
+      "youth_summary": "56% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "OM": {
+      "country_name": "Oman",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.69,
+            "incomplete_primary": 1.53,
+            "primary": 15,
+            "lower_secondary": 34.65,
+            "upper_secondary": 41.69,
+            "post_secondary": 6.45,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.8,
+            "incomplete_primary": 1.89,
+            "primary": 14.89,
+            "lower_secondary": 26.65,
+            "upper_secondary": 42.08,
+            "post_secondary": 13.69,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "52% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "PK": {
+      "country_name": "Pakistan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 29.66,
+            "incomplete_primary": 4.63,
+            "primary": 12.55,
+            "lower_secondary": 17.98,
+            "upper_secondary": 29.67,
+            "post_secondary": 5.52,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 32.08,
+            "incomplete_primary": 4.53,
+            "primary": 12.19,
+            "lower_secondary": 15.8,
+            "upper_secondary": 28.37,
+            "post_secondary": 7.02,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "65% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "PA": {
+      "country_name": "Panama",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.25,
+            "incomplete_primary": 3.72,
+            "primary": 17.96,
+            "lower_secondary": 32.92,
+            "upper_secondary": 35.15,
+            "post_secondary": 8.99,
+            "short_post_secondary": 1.36,
+            "bachelor": 7.48,
+            "master_and_higher": 0.23
+          },
+          "young_adult_15_29": {
+            "no_education": 1.44,
+            "incomplete_primary": 4.06,
+            "primary": 17.48,
+            "lower_secondary": 25.61,
+            "upper_secondary": 35.99,
+            "post_secondary": 15.42,
+            "short_post_secondary": 1.56,
+            "bachelor": 12.91,
+            "master_and_higher": 1.04
+          }
+        }
+      },
+      "youth_summary": "56% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "PG": {
+      "country_name": "Papua New Guinea",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.29,
+            "incomplete_primary": 24.72,
+            "primary": 29.69,
+            "lower_secondary": 18.72,
+            "upper_secondary": 16.82,
+            "post_secondary": 3.77,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 6.85,
+            "incomplete_primary": 24.81,
+            "primary": 25.57,
+            "lower_secondary": 17.65,
+            "upper_secondary": 19.9,
+            "post_secondary": 5.23,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "79% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "PY": {
+      "country_name": "Paraguay",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.77,
+            "incomplete_primary": 10.68,
+            "primary": 28.62,
+            "lower_secondary": 25.88,
+            "upper_secondary": 24.08,
+            "post_secondary": 9.98,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.87,
+            "incomplete_primary": 11.46,
+            "primary": 26.35,
+            "lower_secondary": 21.63,
+            "upper_secondary": 24.41,
+            "post_secondary": 15.28,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "66% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "PE": {
+      "country_name": "Peru",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.71,
+            "incomplete_primary": 2.8,
+            "primary": 9.62,
+            "lower_secondary": 19.77,
+            "upper_secondary": 57.97,
+            "post_secondary": 9.14,
+            "short_post_secondary": 5.02,
+            "bachelor": 4.08,
+            "master_and_higher": 0.04
+          },
+          "young_adult_15_29": {
+            "no_education": 0.83,
+            "incomplete_primary": 3.09,
+            "primary": 9.27,
+            "lower_secondary": 15.27,
+            "upper_secondary": 54.6,
+            "post_secondary": 16.95,
+            "short_post_secondary": 7.76,
+            "bachelor": 8.87,
+            "master_and_higher": 0.32
+          }
+        }
+      },
+      "youth_summary": "33% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "PH": {
+      "country_name": "Philippines",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.9,
+            "incomplete_primary": 8.7,
+            "primary": 17.11,
+            "lower_secondary": 10.67,
+            "upper_secondary": 49.57,
+            "post_secondary": 13.07,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1,
+            "incomplete_primary": 9.08,
+            "primary": 15.94,
+            "lower_secondary": 8.02,
+            "upper_secondary": 47.31,
+            "post_secondary": 18.65,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "37% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "PL": {
+      "country_name": "Poland",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.01,
+            "primary": 13.66,
+            "lower_secondary": 33.94,
+            "upper_secondary": 42.87,
+            "post_secondary": 9.52,
+            "short_post_secondary": 1.44,
+            "bachelor": 6.36,
+            "master_and_higher": 1.72
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 9.4,
+            "lower_secondary": 23.75,
+            "upper_secondary": 45.12,
+            "post_secondary": 21.7,
+            "short_post_secondary": 2.19,
+            "bachelor": 8.62,
+            "master_and_higher": 10.89
+          }
+        }
+      },
+      "youth_summary": "48% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "PT": {
+      "country_name": "Portugal",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.69,
+            "incomplete_primary": 2.01,
+            "primary": 12.17,
+            "lower_secondary": 40.71,
+            "upper_secondary": 34.17,
+            "post_secondary": 10.25,
+            "short_post_secondary": 9.4,
+            "bachelor": 0,
+            "master_and_higher": 0.84
+          },
+          "young_adult_15_29": {
+            "no_education": 0.8,
+            "incomplete_primary": 2.09,
+            "primary": 10.09,
+            "lower_secondary": 33,
+            "upper_secondary": 34.01,
+            "post_secondary": 20,
+            "short_post_secondary": 17.15,
+            "bachelor": 0.52,
+            "master_and_higher": 2.32
+          }
+        }
+      },
+      "youth_summary": "56% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "PR": {
+      "country_name": "Puerto Rico",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.39,
+            "incomplete_primary": 0.14,
+            "primary": 4.82,
+            "lower_secondary": 31.45,
+            "upper_secondary": 52.66,
+            "post_secondary": 10.56,
+            "short_post_secondary": 5.61,
+            "bachelor": 4.72,
+            "master_and_higher": 0.25
+          },
+          "young_adult_15_29": {
+            "no_education": 0.43,
+            "incomplete_primary": 0.18,
+            "primary": 4.05,
+            "lower_secondary": 22.3,
+            "upper_secondary": 52.49,
+            "post_secondary": 20.55,
+            "short_post_secondary": 8.12,
+            "bachelor": 10.19,
+            "master_and_higher": 1.87
+          }
+        }
+      },
+      "youth_summary": "37% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "QA": {
+      "country_name": "Qatar",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2.52,
+            "incomplete_primary": 17.61,
+            "primary": 16.48,
+            "lower_secondary": 19.71,
+            "upper_secondary": 31.92,
+            "post_secondary": 11.76,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.72,
+            "incomplete_primary": 19.18,
+            "primary": 17.47,
+            "lower_secondary": 17.03,
+            "upper_secondary": 30.47,
+            "post_secondary": 13.13,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "56% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "KR": {
+      "country_name": "Republic of Korea",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.04,
+            "incomplete_primary": 0.01,
+            "primary": 6.9,
+            "lower_secondary": 30.84,
+            "upper_secondary": 48.87,
+            "post_secondary": 13.36,
+            "short_post_secondary": 7.74,
+            "bachelor": 6.04,
+            "master_and_higher": 0.11
+          },
+          "young_adult_15_29": {
+            "no_education": 0.04,
+            "incomplete_primary": 0.01,
+            "primary": 4.62,
+            "lower_secondary": 20.56,
+            "upper_secondary": 43.26,
+            "post_secondary": 31.51,
+            "short_post_secondary": 13.43,
+            "bachelor": 17.72,
+            "master_and_higher": 0.98
+          }
+        }
+      },
+      "youth_summary": "38% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "MD": {
+      "country_name": "Republic of Moldova",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.11,
+            "incomplete_primary": 0.01,
+            "primary": 5.28,
+            "lower_secondary": 39.91,
+            "upper_secondary": 48.33,
+            "post_secondary": 6.37,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.11,
+            "incomplete_primary": 0.02,
+            "primary": 4.17,
+            "lower_secondary": 31.61,
+            "upper_secondary": 53.8,
+            "post_secondary": 10.29,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "45% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "RO": {
+      "country_name": "Romania",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.71,
+            "incomplete_primary": 0.01,
+            "primary": 3.22,
+            "lower_secondary": 45.63,
+            "upper_secondary": 40.36,
+            "post_secondary": 10.09,
+            "short_post_secondary": 0.58,
+            "bachelor": 8.87,
+            "master_and_higher": 0.64
+          },
+          "young_adult_15_29": {
+            "no_education": 0.82,
+            "incomplete_primary": 0.01,
+            "primary": 2.56,
+            "lower_secondary": 34.64,
+            "upper_secondary": 42.3,
+            "post_secondary": 19.67,
+            "short_post_secondary": 1.18,
+            "bachelor": 15.83,
+            "master_and_higher": 2.66
+          }
+        }
+      },
+      "youth_summary": "50% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "RU": {
+      "country_name": "Russian Federation",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.24,
+            "incomplete_primary": 0.17,
+            "primary": 4.25,
+            "lower_secondary": 22.25,
+            "upper_secondary": 62.33,
+            "post_secondary": 10.77,
+            "short_post_secondary": 0,
+            "bachelor": 1.5,
+            "master_and_higher": 9.67
+          },
+          "young_adult_15_29": {
+            "no_education": 0.25,
+            "incomplete_primary": 0.17,
+            "primary": 3.16,
+            "lower_secondary": 15.91,
+            "upper_secondary": 60.21,
+            "post_secondary": 20.29,
+            "short_post_secondary": 0,
+            "bachelor": 2.14,
+            "master_and_higher": 18.92
+          }
+        }
+      },
+      "youth_summary": "27% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "RW": {
+      "country_name": "Rwanda",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 4.18,
+            "incomplete_primary": 43.01,
+            "primary": 27.98,
+            "lower_secondary": 13.27,
+            "upper_secondary": 9.68,
+            "post_secondary": 1.88,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 5.39,
+            "incomplete_primary": 44.35,
+            "primary": 25.98,
+            "lower_secondary": 11.26,
+            "upper_secondary": 10.73,
+            "post_secondary": 2.3,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "88% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "LC": {
+      "country_name": "Saint Lucia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.96,
+            "incomplete_primary": 0.42,
+            "primary": 22.41,
+            "lower_secondary": 14.7,
+            "upper_secondary": 46.89,
+            "post_secondary": 13.62,
+            "short_post_secondary": 11.8,
+            "bachelor": 0.99,
+            "master_and_higher": 0.05
+          },
+          "young_adult_15_29": {
+            "no_education": 2.23,
+            "incomplete_primary": 0.76,
+            "primary": 19.19,
+            "lower_secondary": 11.68,
+            "upper_secondary": 47.94,
+            "post_secondary": 18.2,
+            "short_post_secondary": 14.49,
+            "bachelor": 2.64,
+            "master_and_higher": 0.26
+          }
+        }
+      },
+      "youth_summary": "39% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "VC": {
+      "country_name": "Saint Vincent and the Grenadines",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.03,
+            "incomplete_primary": 0.32,
+            "primary": 20.83,
+            "lower_secondary": 26.26,
+            "upper_secondary": 37.94,
+            "post_secondary": 14.65,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.04,
+            "incomplete_primary": 0.4,
+            "primary": 22.6,
+            "lower_secondary": 21.46,
+            "upper_secondary": 39.94,
+            "post_secondary": 15.55,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "47% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "WS": {
+      "country_name": "Samoa",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.26,
+            "primary": 24.8,
+            "lower_secondary": 42.41,
+            "upper_secondary": 22.54,
+            "post_secondary": 9.98,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.04,
+            "incomplete_primary": 0.31,
+            "primary": 17.93,
+            "lower_secondary": 38.99,
+            "upper_secondary": 27.04,
+            "post_secondary": 15.69,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "67% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "ST": {
+      "country_name": "Sao Tome and Principe",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.77,
+            "incomplete_primary": 22.47,
+            "primary": 37.27,
+            "lower_secondary": 25.53,
+            "upper_secondary": 12.75,
+            "post_secondary": 0.21,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.89,
+            "incomplete_primary": 25,
+            "primary": 34.42,
+            "lower_secondary": 24.02,
+            "upper_secondary": 14.14,
+            "post_secondary": 0.53,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "87% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "SA": {
+      "country_name": "Saudi Arabia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1,
+            "incomplete_primary": 2.5,
+            "primary": 11.38,
+            "lower_secondary": 37.32,
+            "upper_secondary": 41.34,
+            "post_secondary": 6.47,
+            "short_post_secondary": 3.03,
+            "bachelor": 3.41,
+            "master_and_higher": 0.03
+          },
+          "young_adult_15_29": {
+            "no_education": 1.27,
+            "incomplete_primary": 2.8,
+            "primary": 9.79,
+            "lower_secondary": 28.86,
+            "upper_secondary": 42.02,
+            "post_secondary": 15.26,
+            "short_post_secondary": 4.52,
+            "bachelor": 10.5,
+            "master_and_higher": 0.24
+          }
+        }
+      },
+      "youth_summary": "52% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "SN": {
+      "country_name": "Senegal",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 39.75,
+            "incomplete_primary": 9.13,
+            "primary": 25.05,
+            "lower_secondary": 19.03,
+            "upper_secondary": 5.27,
+            "post_secondary": 1.76,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 42.88,
+            "incomplete_primary": 8.92,
+            "primary": 21.78,
+            "lower_secondary": 15.95,
+            "upper_secondary": 6.43,
+            "post_secondary": 4.04,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "93% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "RS": {
+      "country_name": "Serbia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.41,
+            "incomplete_primary": 0.13,
+            "primary": 0.91,
+            "lower_secondary": 38.78,
+            "upper_secondary": 54.91,
+            "post_secondary": 4.87,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.85,
+            "incomplete_primary": 0.2,
+            "primary": 0.61,
+            "lower_secondary": 27.79,
+            "upper_secondary": 57.63,
+            "post_secondary": 12.93,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "40% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "SC": {
+      "country_name": "Seychelles",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.53,
+            "incomplete_primary": 0.36,
+            "primary": 14.99,
+            "lower_secondary": 29.78,
+            "upper_secondary": 47.29,
+            "post_secondary": 7.06,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.58,
+            "incomplete_primary": 0.42,
+            "primary": 13.41,
+            "lower_secondary": 23.39,
+            "upper_secondary": 48.56,
+            "post_secondary": 13.63,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "46% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "SL": {
+      "country_name": "Sierra Leone",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 12.58,
+            "incomplete_primary": 8.48,
+            "primary": 35.92,
+            "lower_secondary": 31.27,
+            "upper_secondary": 10.56,
+            "post_secondary": 1.19,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 17.02,
+            "incomplete_primary": 8.79,
+            "primary": 29.49,
+            "lower_secondary": 27.75,
+            "upper_secondary": 13.73,
+            "post_secondary": 3.22,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "88% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "SG": {
+      "country_name": "Singapore",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.03,
+            "incomplete_primary": 0.2,
+            "primary": 0.15,
+            "lower_secondary": 20.8,
+            "upper_secondary": 36.33,
+            "post_secondary": 42.48,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.04,
+            "incomplete_primary": 0.28,
+            "primary": 0.21,
+            "lower_secondary": 14.08,
+            "upper_secondary": 28.24,
+            "post_secondary": 57.13,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "21% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "SK": {
+      "country_name": "Slovakia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.94,
+            "incomplete_primary": 0.01,
+            "primary": 1.69,
+            "lower_secondary": 37.7,
+            "upper_secondary": 51.01,
+            "post_secondary": 8.66,
+            "short_post_secondary": 0.43,
+            "bachelor": 6.63,
+            "master_and_higher": 1.6
+          },
+          "young_adult_15_29": {
+            "no_education": 1.11,
+            "incomplete_primary": 0.01,
+            "primary": 1.13,
+            "lower_secondary": 26.56,
+            "upper_secondary": 53.93,
+            "post_secondary": 17.25,
+            "short_post_secondary": 0.82,
+            "bachelor": 6.63,
+            "master_and_higher": 9.8
+          }
+        }
+      },
+      "youth_summary": "40% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "SI": {
+      "country_name": "Slovenia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.01,
+            "primary": 0.48,
+            "lower_secondary": 45.84,
+            "upper_secondary": 47.18,
+            "post_secondary": 6.48,
+            "short_post_secondary": 5.99,
+            "bachelor": 0.49,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.06,
+            "incomplete_primary": 0.01,
+            "primary": 0.37,
+            "lower_secondary": 32.38,
+            "upper_secondary": 51.22,
+            "post_secondary": 15.96,
+            "short_post_secondary": 10.08,
+            "bachelor": 5.7,
+            "master_and_higher": 0.18
+          }
+        }
+      },
+      "youth_summary": "46% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "SB": {
+      "country_name": "Solomon Islands",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.3,
+            "incomplete_primary": 24.68,
+            "primary": 29.71,
+            "lower_secondary": 18.73,
+            "upper_secondary": 16.83,
+            "post_secondary": 3.77,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 6.86,
+            "incomplete_primary": 24.75,
+            "primary": 25.6,
+            "lower_secondary": 17.67,
+            "upper_secondary": 19.89,
+            "post_secondary": 5.23,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "79% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "SO": {
+      "country_name": "Somalia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 30.43,
+            "incomplete_primary": 35.33,
+            "primary": 9.57,
+            "lower_secondary": 16.04,
+            "upper_secondary": 7.01,
+            "post_secondary": 1.62,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 33.96,
+            "incomplete_primary": 34.61,
+            "primary": 8.33,
+            "lower_secondary": 14.03,
+            "upper_secondary": 7.23,
+            "post_secondary": 1.84,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "91% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "ZA": {
+      "country_name": "South Africa",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.77,
+            "incomplete_primary": 2.13,
+            "primary": 14.43,
+            "lower_secondary": 43.83,
+            "upper_secondary": 35.86,
+            "post_secondary": 2.98,
+            "short_post_secondary": 1.36,
+            "bachelor": 1.27,
+            "master_and_higher": 0.35
+          },
+          "young_adult_15_29": {
+            "no_education": 0.94,
+            "incomplete_primary": 3.31,
+            "primary": 11.66,
+            "lower_secondary": 36.76,
+            "upper_secondary": 42.37,
+            "post_secondary": 4.97,
+            "short_post_secondary": 2.12,
+            "bachelor": 2.02,
+            "master_and_higher": 0.83
+          }
+        }
+      },
+      "youth_summary": "61% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "SS": {
+      "country_name": "South Sudan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 51.62,
+            "incomplete_primary": 0.07,
+            "primary": 29.17,
+            "lower_secondary": 0.94,
+            "upper_secondary": 17.08,
+            "post_secondary": 1.12,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 54.22,
+            "incomplete_primary": 0.05,
+            "primary": 25.92,
+            "lower_secondary": 0.62,
+            "upper_secondary": 17.32,
+            "post_secondary": 1.87,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "82% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "ES": {
+      "country_name": "Spain",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.42,
+            "incomplete_primary": 1.72,
+            "primary": 10.18,
+            "lower_secondary": 32.17,
+            "upper_secondary": 39.89,
+            "post_secondary": 15.61,
+            "short_post_secondary": 6.22,
+            "bachelor": 5.82,
+            "master_and_higher": 3.57
+          },
+          "young_adult_15_29": {
+            "no_education": 0.45,
+            "incomplete_primary": 1.72,
+            "primary": 9.63,
+            "lower_secondary": 26.86,
+            "upper_secondary": 35.86,
+            "post_secondary": 25.48,
+            "short_post_secondary": 8.05,
+            "bachelor": 8.8,
+            "master_and_higher": 8.63
+          }
+        }
+      },
+      "youth_summary": "44% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "LK": {
+      "country_name": "Sri Lanka",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.91,
+            "incomplete_primary": 0.73,
+            "primary": 5.48,
+            "lower_secondary": 31.99,
+            "upper_secondary": 39.74,
+            "post_secondary": 20.16,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.33,
+            "incomplete_primary": 0.83,
+            "primary": 5.33,
+            "lower_secondary": 26.71,
+            "upper_secondary": 39.58,
+            "post_secondary": 25.21,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "40% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "SD": {
+      "country_name": "Sudan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 26.52,
+            "incomplete_primary": 29.21,
+            "primary": 6.2,
+            "lower_secondary": 16.5,
+            "upper_secondary": 17.2,
+            "post_secondary": 4.38,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 28.5,
+            "incomplete_primary": 28.72,
+            "primary": 4.54,
+            "lower_secondary": 13.01,
+            "upper_secondary": 18.1,
+            "post_secondary": 7.12,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "78% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "SR": {
+      "country_name": "Suriname",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.53,
+            "incomplete_primary": 0.01,
+            "primary": 17.89,
+            "lower_secondary": 49.49,
+            "upper_secondary": 26.77,
+            "post_secondary": 5.32,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.22,
+            "incomplete_primary": 0.01,
+            "primary": 16.95,
+            "lower_secondary": 44.69,
+            "upper_secondary": 29.64,
+            "post_secondary": 7.49,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "68% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "SZ": {
+      "country_name": "Swaziland",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 2.09,
+            "incomplete_primary": 23.46,
+            "primary": 38.55,
+            "lower_secondary": 18.16,
+            "upper_secondary": 15.41,
+            "post_secondary": 2.34,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.37,
+            "incomplete_primary": 24.01,
+            "primary": 34.35,
+            "lower_secondary": 14.63,
+            "upper_secondary": 20.12,
+            "post_secondary": 4.52,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "82% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "SE": {
+      "country_name": "Sweden",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 0.3,
+            "lower_secondary": 45.16,
+            "upper_secondary": 40.28,
+            "post_secondary": 14.24,
+            "short_post_secondary": 10.93,
+            "bachelor": 3.06,
+            "master_and_higher": 0.25
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 0.44,
+            "lower_secondary": 33.43,
+            "upper_secondary": 40.53,
+            "post_secondary": 25.58,
+            "short_post_secondary": 13.8,
+            "bachelor": 8.56,
+            "master_and_higher": 3.21
+          }
+        }
+      },
+      "youth_summary": "45% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "CH": {
+      "country_name": "Switzerland",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.88,
+            "incomplete_primary": 0.03,
+            "primary": 8.19,
+            "lower_secondary": 38.59,
+            "upper_secondary": 45.25,
+            "post_secondary": 7.06,
+            "short_post_secondary": 1.91,
+            "bachelor": 4.47,
+            "master_and_higher": 0.7
+          },
+          "young_adult_15_29": {
+            "no_education": 0.83,
+            "incomplete_primary": 0.02,
+            "primary": 5.93,
+            "lower_secondary": 28,
+            "upper_secondary": 45.84,
+            "post_secondary": 19.38,
+            "short_post_secondary": 4.89,
+            "bachelor": 8.91,
+            "master_and_higher": 5.58
+          }
+        }
+      },
+      "youth_summary": "48% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "SY": {
+      "country_name": "Syrian Arab Republic",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 4.67,
+            "incomplete_primary": 24.88,
+            "primary": 17.81,
+            "lower_secondary": 28.93,
+            "upper_secondary": 19.27,
+            "post_secondary": 4.43,
+            "short_post_secondary": 3.65,
+            "bachelor": 0.79,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 5,
+            "incomplete_primary": 26.07,
+            "primary": 18.32,
+            "lower_secondary": 23.09,
+            "upper_secondary": 19.04,
+            "post_secondary": 8.48,
+            "short_post_secondary": 5.62,
+            "bachelor": 2.82,
+            "master_and_higher": 0.04
+          }
+        }
+      },
+      "youth_summary": "76% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "TJ": {
+      "country_name": "Tajikistan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 9.37,
+            "lower_secondary": 29.18,
+            "upper_secondary": 46.31,
+            "post_secondary": 15.12,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.02,
+            "incomplete_primary": 0.01,
+            "primary": 6.63,
+            "lower_secondary": 22.97,
+            "upper_secondary": 50.19,
+            "post_secondary": 19.17,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "39% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "TH": {
+      "country_name": "Thailand",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.17,
+            "incomplete_primary": 0.66,
+            "primary": 11.7,
+            "lower_secondary": 39.39,
+            "upper_secondary": 34.89,
+            "post_secondary": 12.2,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.28,
+            "incomplete_primary": 0.83,
+            "primary": 10.41,
+            "lower_secondary": 29.96,
+            "upper_secondary": 37.66,
+            "post_secondary": 19.87,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "53% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "TL": {
+      "country_name": "Timor-Leste",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 12.29,
+            "incomplete_primary": 6.43,
+            "primary": 8.7,
+            "lower_secondary": 24.76,
+            "upper_secondary": 39.62,
+            "post_secondary": 8.22,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 13.62,
+            "incomplete_primary": 7.37,
+            "primary": 7.69,
+            "lower_secondary": 19.39,
+            "upper_secondary": 40.37,
+            "post_secondary": 11.57,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "52% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "TG": {
+      "country_name": "Togo",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.75,
+            "incomplete_primary": 18.52,
+            "primary": 45.85,
+            "lower_secondary": 12,
+            "upper_secondary": 14.23,
+            "post_secondary": 2.67,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 8.38,
+            "incomplete_primary": 18.81,
+            "primary": 41.59,
+            "lower_secondary": 11.66,
+            "upper_secondary": 15,
+            "post_secondary": 4.57,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "83% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "TO": {
+      "country_name": "Tonga",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.14,
+            "incomplete_primary": 0.14,
+            "primary": 13.45,
+            "lower_secondary": 54.73,
+            "upper_secondary": 21.9,
+            "post_secondary": 9.66,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.18,
+            "incomplete_primary": 0.16,
+            "primary": 10.35,
+            "lower_secondary": 50.03,
+            "upper_secondary": 25.57,
+            "post_secondary": 13.72,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "68% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "TT": {
+      "country_name": "Trinidad and Tobago",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.16,
+            "incomplete_primary": 0.03,
+            "primary": 3.52,
+            "lower_secondary": 31.18,
+            "upper_secondary": 37.5,
+            "post_secondary": 27.62,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.36,
+            "incomplete_primary": 0.1,
+            "primary": 2.84,
+            "lower_secondary": 26.65,
+            "upper_secondary": 39.11,
+            "post_secondary": 30.94,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "35% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "TN": {
+      "country_name": "Tunisia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.07,
+            "incomplete_primary": 0.12,
+            "primary": 6.83,
+            "lower_secondary": 58.97,
+            "upper_secondary": 23.48,
+            "post_secondary": 9.55,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.43,
+            "incomplete_primary": 0.12,
+            "primary": 5.89,
+            "lower_secondary": 48.73,
+            "upper_secondary": 24.66,
+            "post_secondary": 19.16,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "67% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "TR": {
+      "country_name": "Turkey",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.16,
+            "incomplete_primary": 3.4,
+            "primary": 1.55,
+            "lower_secondary": 51.57,
+            "upper_secondary": 32.82,
+            "post_secondary": 10.51,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.41,
+            "incomplete_primary": 4.19,
+            "primary": 1.22,
+            "lower_secondary": 41.65,
+            "upper_secondary": 33.37,
+            "post_secondary": 19.17,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "57% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "TM": {
+      "country_name": "Turkmenistan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.01,
+            "primary": 2.22,
+            "lower_secondary": 24.65,
+            "upper_secondary": 70.65,
+            "post_secondary": 2.48,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.01,
+            "primary": 1.48,
+            "lower_secondary": 16.96,
+            "upper_secondary": 75.62,
+            "post_secondary": 5.91,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "27% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "UG": {
+      "country_name": "Uganda",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 4.24,
+            "incomplete_primary": 34.88,
+            "primary": 37.66,
+            "lower_secondary": 12.2,
+            "upper_secondary": 7.12,
+            "post_secondary": 3.92,
+            "short_post_secondary": 2.78,
+            "bachelor": 1.11,
+            "master_and_higher": 0.03
+          },
+          "young_adult_15_29": {
+            "no_education": 5.11,
+            "incomplete_primary": 34.13,
+            "primary": 34.2,
+            "lower_secondary": 11.98,
+            "upper_secondary": 7.32,
+            "post_secondary": 7.26,
+            "short_post_secondary": 4.75,
+            "bachelor": 2.41,
+            "master_and_higher": 0.1
+          }
+        }
+      },
+      "youth_summary": "89% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "UA": {
+      "country_name": "Ukraine",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 0.46,
+            "lower_secondary": 31.04,
+            "upper_secondary": 61.8,
+            "post_secondary": 6.69,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.02,
+            "incomplete_primary": 0.02,
+            "primary": 0.31,
+            "lower_secondary": 20.99,
+            "upper_secondary": 65.99,
+            "post_secondary": 12.67,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "32% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "AE": {
+      "country_name": "United Arab Emirates",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1,
+            "incomplete_primary": 1.69,
+            "primary": 5.76,
+            "lower_secondary": 30.55,
+            "upper_secondary": 52.35,
+            "post_secondary": 8.65,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.28,
+            "incomplete_primary": 2.14,
+            "primary": 6.31,
+            "lower_secondary": 25.65,
+            "upper_secondary": 49.5,
+            "post_secondary": 15.11,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "39% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "GB": {
+      "country_name": "United Kingdom of Great Britain and Northern Ireland",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 0.01,
+            "lower_secondary": 23.17,
+            "upper_secondary": 60.8,
+            "post_secondary": 16,
+            "short_post_secondary": 5.06,
+            "bachelor": 7.85,
+            "master_and_higher": 3.09
+          },
+          "young_adult_15_29": {
+            "no_education": 0.01,
+            "incomplete_primary": 0.01,
+            "primary": 0.01,
+            "lower_secondary": 20.11,
+            "upper_secondary": 52.85,
+            "post_secondary": 27.01,
+            "short_post_secondary": 9.11,
+            "bachelor": 11.99,
+            "master_and_higher": 5.91
+          }
+        }
+      },
+      "youth_summary": "23% of youth (15-24) have lower-secondary education or below — relatively well-educated youth cohort"
+    },
+    "TZ": {
+      "country_name": "United Republic of Tanzania",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 8.79,
+            "incomplete_primary": 11.47,
+            "primary": 55.19,
+            "lower_secondary": 17.95,
+            "upper_secondary": 3.8,
+            "post_secondary": 2.81,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 9.75,
+            "incomplete_primary": 11.22,
+            "primary": 52.65,
+            "lower_secondary": 17.28,
+            "upper_secondary": 4.65,
+            "post_secondary": 4.46,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "93% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "VI": {
+      "country_name": "United States Virgin Islands",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.96,
+            "incomplete_primary": 1.17,
+            "primary": 25.03,
+            "lower_secondary": 14.81,
+            "upper_secondary": 44.24,
+            "post_secondary": 12.81,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 2.23,
+            "incomplete_primary": 1.26,
+            "primary": 22.44,
+            "lower_secondary": 11.59,
+            "upper_secondary": 45.24,
+            "post_secondary": 17.24,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "43% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "US": {
+      "country_name": "United States of America",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.21,
+            "incomplete_primary": 0.08,
+            "primary": 4.47,
+            "lower_secondary": 32.76,
+            "upper_secondary": 51.38,
+            "post_secondary": 11.1,
+            "short_post_secondary": 3.69,
+            "bachelor": 6.91,
+            "master_and_higher": 0.48
+          },
+          "young_adult_15_29": {
+            "no_education": 0.22,
+            "incomplete_primary": 0.09,
+            "primary": 3.54,
+            "lower_secondary": 23.19,
+            "upper_secondary": 51.57,
+            "post_secondary": 21.4,
+            "short_post_secondary": 5.37,
+            "bachelor": 13.03,
+            "master_and_higher": 2.9
+          }
+        }
+      },
+      "youth_summary": "38% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "UY": {
+      "country_name": "Uruguay",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.02,
+            "incomplete_primary": 1.37,
+            "primary": 32.39,
+            "lower_secondary": 40.46,
+            "upper_secondary": 24.36,
+            "post_secondary": 1.4,
+            "short_post_secondary": 0.93,
+            "bachelor": 0.46,
+            "master_and_higher": 0.02
+          },
+          "young_adult_15_29": {
+            "no_education": 0.07,
+            "incomplete_primary": 1.51,
+            "primary": 30.1,
+            "lower_secondary": 35.93,
+            "upper_secondary": 27.34,
+            "post_secondary": 5.06,
+            "short_post_secondary": 2.28,
+            "bachelor": 2.64,
+            "master_and_higher": 0.13
+          }
+        }
+      },
+      "youth_summary": "74% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "UZ": {
+      "country_name": "Uzbekistan",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 0.14,
+            "incomplete_primary": 0.2,
+            "primary": 9.24,
+            "lower_secondary": 23.2,
+            "upper_secondary": 56.94,
+            "post_secondary": 10.27,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 0.48,
+            "incomplete_primary": 0.25,
+            "primary": 6.42,
+            "lower_secondary": 17.72,
+            "upper_secondary": 59.46,
+            "post_secondary": 15.66,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "33% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "VU": {
+      "country_name": "Vanuatu",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 8.75,
+            "incomplete_primary": 19.44,
+            "primary": 19.92,
+            "lower_secondary": 26.85,
+            "upper_secondary": 22.91,
+            "post_secondary": 2.14,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 9.25,
+            "incomplete_primary": 20.1,
+            "primary": 20.01,
+            "lower_secondary": 24.38,
+            "upper_secondary": 23.25,
+            "post_secondary": 3,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "75% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "VE": {
+      "country_name": "Venezuela (Bolivarian Republic of)",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.5,
+            "incomplete_primary": 4.49,
+            "primary": 4.43,
+            "lower_secondary": 31.5,
+            "upper_secondary": 35.02,
+            "post_secondary": 23.07,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 1.67,
+            "incomplete_primary": 4.6,
+            "primary": 4.87,
+            "lower_secondary": 27.15,
+            "upper_secondary": 36.04,
+            "post_secondary": 25.67,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "42% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "VN": {
+      "country_name": "Viet Nam",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 1.3,
+            "incomplete_primary": 2.4,
+            "primary": 9.33,
+            "lower_secondary": 44.41,
+            "upper_secondary": 36.17,
+            "post_secondary": 6.41,
+            "short_post_secondary": 2.57,
+            "bachelor": 3.82,
+            "master_and_higher": 0.02
+          },
+          "young_adult_15_29": {
+            "no_education": 1.51,
+            "incomplete_primary": 2.91,
+            "primary": 10.66,
+            "lower_secondary": 39.54,
+            "upper_secondary": 33.96,
+            "post_secondary": 11.42,
+            "short_post_secondary": 4.2,
+            "bachelor": 7.04,
+            "master_and_higher": 0.18
+          }
+        }
+      },
+      "youth_summary": "57% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "EH": {
+      "country_name": "Western Sahara",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 39.7,
+            "incomplete_primary": 9.14,
+            "primary": 24.99,
+            "lower_secondary": 19.1,
+            "upper_secondary": 5.31,
+            "post_secondary": 1.77,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 42.79,
+            "incomplete_primary": 8.9,
+            "primary": 21.7,
+            "lower_secondary": 16.02,
+            "upper_secondary": 6.48,
+            "post_secondary": 4.1,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "93% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "YE": {
+      "country_name": "Yemen",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 25.12,
+            "incomplete_primary": 0.18,
+            "primary": 17.77,
+            "lower_secondary": 2.53,
+            "upper_secondary": 54.41,
+            "post_secondary": 0,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 34.39,
+            "incomplete_primary": 0.12,
+            "primary": 11.92,
+            "lower_secondary": 1.69,
+            "upper_secondary": 49.95,
+            "post_secondary": 1.93,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "46% of youth (15-24) have lower-secondary education or below — moderate upskilling gap"
+    },
+    "ZM": {
+      "country_name": "Zambia",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 6.83,
+            "incomplete_primary": 24.42,
+            "primary": 24.99,
+            "lower_secondary": 26.91,
+            "upper_secondary": 13.54,
+            "post_secondary": 3.32,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 7.4,
+            "incomplete_primary": 25.35,
+            "primary": 22.8,
+            "lower_secondary": 23.46,
+            "upper_secondary": 14.9,
+            "post_secondary": 6.08,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "83% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    },
+    "ZW": {
+      "country_name": "Zimbabwe",
+      "years": {
+        "2020": {
+          "youth_15_24": {
+            "no_education": 7.76,
+            "incomplete_primary": 7.19,
+            "primary": 17.26,
+            "lower_secondary": 36.56,
+            "upper_secondary": 28.77,
+            "post_secondary": 2.48,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          },
+          "young_adult_15_29": {
+            "no_education": 7.58,
+            "incomplete_primary": 7.16,
+            "primary": 16.25,
+            "lower_secondary": 26.94,
+            "upper_secondary": 37.12,
+            "post_secondary": 4.94,
+            "short_post_secondary": 0,
+            "bachelor": 0,
+            "master_and_higher": 0
+          }
+        }
+      },
+      "youth_summary": "69% of youth (15-24) have lower-secondary education or below — significant upskilling needed"
+    }
+  }
+}

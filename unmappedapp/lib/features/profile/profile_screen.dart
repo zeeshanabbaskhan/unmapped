@@ -24,8 +24,8 @@ class ProfileScreen extends StatelessWidget {
     if (profile == null) {
       return const Scaffold(
         body: EmptyState(
-          message: 'Go to Home and fill in your work experience to generate a skills profile.',
-          icon: Icons.person_outline,
+          message: 'Fill in your work experience on the Intake tab to generate a portable skills profile.',
+          icon: Icons.person_outline_rounded,
         ),
       );
     }
@@ -33,7 +33,7 @@ class ProfileScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+          padding: AppSpacing.screenAll,
           children: [
             OccupationCard(
               occupation: profile.primaryOccupation,
@@ -41,23 +41,23 @@ class ProfileScreen extends StatelessWidget {
             ),
 
             if (profile.confidence.caveat != null) ...[
-              const SizedBox(height: 8),
+              const SizedBox(height: 10),
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: Colors.orange.withValues(alpha: 0.08),
-                  borderRadius: BorderRadius.circular(8),
-                  border: Border.all(color: Colors.orange.withValues(alpha: 0.2)),
+                  color: AppColors.riskMediumLight,
+                  borderRadius: AppRadius.sm,
+                  border: Border.all(color: AppColors.riskMedium.withValues(alpha: 0.2)),
                 ),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Icon(Icons.info_outline, size: 16, color: Colors.orange),
+                    Icon(Icons.info_outline_rounded, size: 16, color: AppColors.riskMedium.withValues(alpha: 0.8)),
                     const SizedBox(width: 8),
                     Expanded(
                       child: Text(
                         profile.confidence.caveat!,
-                        style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
+                        style: const TextStyle(fontSize: 12, color: AppColors.textSecondary, height: 1.4),
                       ),
                     ),
                   ],
@@ -68,24 +68,31 @@ class ProfileScreen extends StatelessWidget {
             if (profile.mappedSkills.isNotEmpty) ...[
               const SectionHeader(title: 'Matched Skills'),
               Wrap(
-                spacing: 6,
-                runSpacing: 6,
+                spacing: 8,
+                runSpacing: 8,
                 children: profile.mappedSkills.map((s) => SkillChip(skill: s)).toList(),
               ),
             ],
 
             if (profile.unmappedSkills.isNotEmpty) ...[
-              const SectionHeader(title: 'Local / Informal Skills', subtitle: 'Not in ESCO taxonomy'),
+              const SectionHeader(
+                title: 'Local Skills',
+                subtitle: 'Not yet in the ESCO taxonomy',
+              ),
               Wrap(
                 spacing: 6,
                 runSpacing: 6,
-                children: profile.unmappedSkills
-                    .map((s) => Chip(
-                          label: Text(s),
-                          backgroundColor: AppColors.neutralLight,
-                          visualDensity: VisualDensity.compact,
-                        ))
-                    .toList(),
+                children: profile.unmappedSkills.map((s) => Container(
+                  padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 6),
+                  decoration: BoxDecoration(
+                    color: AppColors.neutralLight,
+                    borderRadius: AppRadius.pill,
+                  ),
+                  child: Text(
+                    s,
+                    style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.textSecondary),
+                  ),
+                )).toList(),
               ),
             ],
 
@@ -99,22 +106,31 @@ class ProfileScreen extends StatelessWidget {
 
             if (profile.summary != null) ...[
               const SectionHeader(title: 'Explanation'),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(14),
-                  child: Text(
-                    profile.summary!,
-                    style: const TextStyle(fontSize: 13, color: AppColors.textSecondary, height: 1.5),
-                  ),
+              Container(
+                padding: const EdgeInsets.all(14),
+                decoration: BoxDecoration(
+                  color: AppColors.surface,
+                  borderRadius: AppRadius.md,
+                  border: Border.all(color: AppColors.divider),
+                ),
+                child: Text(
+                  profile.summary!,
+                  style: const TextStyle(fontSize: 13, color: AppColors.textSecondary, height: 1.5),
                 ),
               ),
             ],
 
             if (profile.confidence.extractionMethod != null) ...[
-              const SizedBox(height: 12),
-              Text(
-                'Extraction method: ${profile.confidence.extractionMethod}',
-                style: const TextStyle(fontSize: 11, color: AppColors.textSecondary),
+              const SizedBox(height: 16),
+              Row(
+                children: [
+                  Icon(Icons.memory_rounded, size: 14, color: AppColors.textTertiary),
+                  const SizedBox(width: 6),
+                  Text(
+                    'Extraction: ${profile.confidence.extractionMethod}',
+                    style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
+                  ),
+                ],
               ),
             ],
           ],

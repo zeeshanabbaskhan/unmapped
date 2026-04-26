@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../shared/widgets/status_states.dart';
 import '../../shared/widgets/opportunity_card.dart';
+import '../../shared/widgets/economic_signal_card.dart';
 import '../../shared/widgets/section_header.dart';
 import '../../state/app_state.dart';
 import '../../models/opportunity.dart';
@@ -35,7 +36,7 @@ class _OpportunitiesScreenState extends State<OpportunitiesScreen> {
       return const Scaffold(
         body: EmptyState(
           message: 'Generate a skills profile first to see matching opportunities.',
-          icon: Icons.work_outline,
+          icon: Icons.work_outline_rounded,
         ),
       );
     }
@@ -54,7 +55,7 @@ class _OpportunitiesScreenState extends State<OpportunitiesScreen> {
     if (result == null) {
       return Scaffold(
         body: Center(
-          child: FilledButton.tonal(
+          child: FilledButton(
             onPressed: () => state.fetchOpportunities(),
             child: const Text('Load Opportunities'),
           ),
@@ -67,21 +68,32 @@ class _OpportunitiesScreenState extends State<OpportunitiesScreen> {
     return Scaffold(
       body: SafeArea(
         child: ListView(
-          padding: const EdgeInsets.fromLTRB(20, 16, 20, 32),
+          padding: AppSpacing.screenAll,
           children: [
-            if (result.occupationTitle != null)
+            if (result.occupationTitle != null) ...[
               Text(
-                'Opportunities for: ${result.occupationTitle}',
-                style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w700),
+                result.occupationTitle!,
+                style: const TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: AppColors.textPrimary,
+                  letterSpacing: -0.3,
+                ),
               ),
-
-            if (result.country != null || result.informalityLevel != null) ...[
               const SizedBox(height: 4),
-              Text(
-                '${result.country ?? ''} | Formality: ${result.informalityLevel ?? 'unknown'}',
-                style: const TextStyle(fontSize: 12, color: AppColors.textSecondary),
-              ),
             ],
+
+            if (result.country != null || result.informalityLevel != null)
+              Wrap(
+                spacing: 8,
+                runSpacing: 6,
+                children: [
+                  if (result.country != null)
+                    _contextPill(Icons.public_rounded, result.country!),
+                  if (result.informalityLevel != null)
+                    _contextPill(Icons.storefront_rounded, result.informalityLevel!),
+                ],
+              ),
 
             if (result.directJobs.isNotEmpty) ...[
               const SectionHeader(
@@ -105,37 +117,38 @@ class _OpportunitiesScreenState extends State<OpportunitiesScreen> {
               const SectionHeader(
                 title: 'Micro-enterprise',
                 subtitle: 'Self-employment and informal sector paths',
-                color: Colors.orange,
+                color: AppColors.riskMedium,
               ),
               ..._buildCards(result.microEnterprise),
             ],
 
             if (signalEntries.isNotEmpty) ...[
               const SectionHeader(title: 'Economic Signals'),
-              Card(
-                child: Padding(
-                  padding: const EdgeInsets.all(12),
-                  child: Column(
-                    children: signalEntries.map((e) => Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 4),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Expanded(
-                            child: Text(e.key, style: const TextStyle(fontSize: 13, color: AppColors.textSecondary)),
-                          ),
-                          Flexible(
-                            child: Text(e.value, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600), textAlign: TextAlign.end),
-                          ),
-                        ],
-                      ),
-                    )).toList(),
-                  ),
-                ),
-              ),
+              ...signalEntries.map((e) => Padding(
+                padding: const EdgeInsets.only(bottom: 6),
+                child: EconomicSignalCard(label: e.key, value: e.value),
+              )),
             ],
           ],
         ),
+      ),
+    );
+  }
+
+  Widget _contextPill(IconData icon, String text) {
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+      decoration: BoxDecoration(
+        color: AppColors.neutralLight,
+        borderRadius: AppRadius.pill,
+      ),
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: [
+          Icon(icon, size: 13, color: AppColors.textSecondary),
+          const SizedBox(width: 5),
+          Text(text, style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w500, color: AppColors.textSecondary)),
+        ],
       ),
     );
   }

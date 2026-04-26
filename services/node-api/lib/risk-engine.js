@@ -131,7 +131,7 @@ const ISCO_TEMPLATE_TASKS = {
   "9": { high: ["Perform routine cleaning or sorting tasks", "Follow simple sequential instructions"], low: ["Navigate changing physical environments", "Interact directly with the public"] },
 };
 
-function buildTemplateFallback(occupation, skills, automation) {
+function buildTemplateFallback(occupation, skills, automation, laborStats) {
   const prob = automation.adjusted;
   const riskLevel = prob >= 0.7 ? "very high" : prob >= 0.5 ? "high" : prob >= 0.3 ? "medium" : "low";
   const iscoMajor = String(occupation.isco_code ?? "7")[0];
@@ -148,6 +148,31 @@ function buildTemplateFallback(occupation, skills, automation) {
   const lowRisk  = lowRiskSource.map((t) => ({ task: t, risk_score: Number((prob * 0.35).toFixed(2)) }));
 
   const half = Math.ceil(skills.length / 2);
+
+  const wic = laborStats?.wittgenstein_projections;
+  let educationProjection = "Education projection data not available.";
+  let laborShiftTrend = "Labor shift trend data not available.";
+
+  if (wic) {
+    const belowSec = wic.below_secondary_share;
+    const tertiary = wic.tertiary_share;
+    const secCompletion = wic.secondary_completion_rate;
+    educationProjection = wic.youth_summary
+      ? `${wic.youth_summary} (Wittgenstein Centre ${wic.year}, SSP2).`
+      : `${belowSec}% of youth (15-24) have below-secondary education; ${secCompletion}% have upper-secondary or above (Wittgenstein WCDE ${wic.year}).`;
+    if (wic.education_trend) {
+      educationProjection += ` Trend: ${wic.education_trend}.`;
+    }
+  }
+
+  if (laborStats?.employment_by_sector) {
+    const agr = laborStats.employment_by_sector.agriculture_share;
+    const svc = laborStats.employment_by_sector.services_share;
+    if (agr != null && svc != null) {
+      laborShiftTrend = `Agriculture employs ${(agr * 100).toFixed(0)}% of workers while services account for ${(svc * 100).toFixed(0)}% (ILOSTAT ${laborStats.year}).`;
+    }
+  }
+
   return {
     task_breakdown: { high_risk_tasks: highRisk, low_risk_tasks: lowRisk },
     skill_resilience_analysis: {
@@ -156,20 +181,20 @@ function buildTemplateFallback(occupation, skills, automation) {
       adjacent_skills: [],
     },
     macro_signals: {
-      education_projection: "LLM unavailable — education projection analysis requires OpenRouter API access.",
-      labor_shift_trend: "LLM unavailable — labor shift trend analysis requires OpenRouter API access.",
+      education_projection: educationProjection,
+      labor_shift_trend: laborShiftTrend,
     },
     final_readiness_profile: {
       risk_level: riskLevel,
       resilience_level: prob >= 0.6 ? "low" : "medium",
       opportunity_type: prob >= 0.65 ? "upskilling_required" : "stable",
-      summary: `Template fallback. Adjusted automation probability ${prob} implies ${riskLevel} risk.`,
+      summary: `Adjusted automation probability ${prob} implies ${riskLevel} risk. ${educationProjection}`,
     },
     explainability: {
       key_drivers: [
-        `Adjusted automation probability ${prob} (base x LMIC factor ${automation.adjustment_factor}).`,
+        `Adjusted automation probability ${prob} (base × LMIC factor ${automation.adjustment_factor}).`,
         `ISCO group ${iscoMajor} task structure.`,
-        "LMIC context reduces near-term automation risk vs OECD baseline.",
+        wic ? `Wittgenstein data: ${wic.below_secondary_share}% of youth below secondary education.` : "LMIC context reduces near-term automation risk vs OECD baseline.",
       ],
     },
     _provider: "template_fallback",
@@ -178,7 +203,7 @@ function buildTemplateFallback(occupation, skills, automation) {
 
 async function runLLMAnalysis(occupation, skills, country, automation, laborStats) {
   if (!process.env.OPENROUTER_API_KEY) {
-    return buildTemplateFallback(occupation, skills, automation);
+    return buildTemplateFallback(occupation, skills, automation, laborStats);
   }
 
   try {
@@ -213,7 +238,7 @@ async function runLLMAnalysis(occupation, skills, country, automation, laborStat
     return { ...parsed, _provider: `openrouter/${OPENROUTER_MODEL}` };
   } catch (err) {
     console.warn(`[risk-engine] LLM failed (${err.message}) — using template fallback`);
-    return buildTemplateFallback(occupation, skills, automation);
+    return buildTemplateFallback(occupation, skills, automation, laborStats);
   }
 }
 

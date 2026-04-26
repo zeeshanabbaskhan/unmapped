@@ -1,3 +1,4 @@
+import "dotenv/config";
 import http from "node:http";
 import {
   getConfigStats,
@@ -19,14 +20,36 @@ import { matchOpportunities } from "./lib/opportunity-engine.js";
 const PORT = Number(process.env.PORT || 4000);
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:3000";
 
-function sendJson(response, statusCode, payload) {
+function resolveCorsOrigin(request) {
+  const requestOrigin = request.headers.origin;
+  if (!requestOrigin) return CLIENT_ORIGIN;
+
+  // Allow any localhost/127.0.0.1 dev port (Flutter web, Next.js, etc.)
+  if (/^https?:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/i.test(requestOrigin)) {
+    return requestOrigin;
+  }
+
+  // Allow explicit origin from env for non-local clients
+  if (requestOrigin === CLIENT_ORIGIN) return requestOrigin;
+
+  return CLIENT_ORIGIN;
+}
+
+function sendJson(request, response, statusCode, payload) {
+  const allowOrigin = resolveCorsOrigin(request);
   response.writeHead(statusCode, {
     "content-type": "application/json",
-    "access-control-allow-origin": CLIENT_ORIGIN,
+    "access-control-allow-origin": allowOrigin,
     "access-control-allow-methods": "GET,POST,OPTIONS",
-    "access-control-allow-headers": "content-type",
+    "access-control-allow-headers": "content-type,authorization",
+    "access-control-allow-credentials": "true",
+    "vary": "origin",
   });
-  response.end(JSON.stringify(payload));
+  if (statusCode === 204) {
+    response.end();
+    return;
+  }
+  response.end(JSON.stringify(payload ?? {}));
 }
 
 async function readBody(request) {
@@ -42,6 +65,53 @@ function validateAnswers(answers) {
   if (!answers.country_code) missing.push("country_code");
   if (!answers.sector) missing.push("sector");
   if (missing.length) return `Missing required fields: ${missing.join(", ")}`;
+
+  const workDescriptionError = validateWorkDescriptionQuality(answers.work_description);
+  if (workDescriptionError) return workDescriptionError;
+  return null;
+}
+
+function validateWorkDescriptionQuality(rawText) {
+  const text = String(rawText ?? "").trim();
+  if (!text) {
+    return "Please describe your work in 1-2 sentences.";
+  }
+
+  const lower = text.toLowerCase();
+  const placeholders = new Set([
+    "n/a",
+    "na",
+    "none",
+    "nothing",
+    "no",
+    "no experience",
+    "no exp",
+    "idk",
+    "unknown",
+    "test",
+    "asdf",
+    "...",
+    "-",
+    ".",
+  ]);
+  if (placeholders.has(lower)) {
+    return "Work description is too vague. Please describe real tasks you perform.";
+  }
+
+  const words = lower.match(/[a-z][a-z'-]*/g) ?? [];
+  const uniqueWords = new Set(words);
+  const letterCount = (text.match(/[a-z]/gi) ?? []).length;
+
+  if (text.length < 20 || words.length < 4 || uniqueWords.size < 3 || letterCount < 12) {
+    return "Work description is too short. Please add at least 1-2 sentences with specific tasks (for example: tools used, tasks done, customers served).";
+  }
+
+  // Reject symbol-heavy gibberish while still allowing normal punctuation.
+  const symbolCount = (text.match(/[^a-z0-9\s.,'()/%-]/gi) ?? []).length;
+  if (symbolCount > text.length * 0.2) {
+    return "Work description appears invalid. Please use clear text describing your actual work.";
+  }
+
   return null;
 }
 
@@ -52,7 +122,7 @@ async function createModule1Profile(request, response) {
   const answers = body.answers ?? body;
   const validationError = validateAnswers(answers);
   if (validationError) {
-    sendJson(response, 400, { error: validationError });
+    sendJson(request, response, 400, { error: validationError });
     return;
   }
 
@@ -72,7 +142,7 @@ async function createModule1Profile(request, response) {
 
   const profile = buildProfile({ answers, country, scoring, signals, aiSummary: summary });
 
-  sendJson(response, 200, {
+  sendJson(request, response, 200, {
     profile,
     debug: {
       extraction: {
@@ -97,20 +167,20 @@ async function createModule2RiskAnalysis(request, response) {
   const countryCode = body.country_code ?? profile?.country_context?.country_code;
 
   if (!profile || !profile.primary_occupation) {
-    sendJson(response, 400, {
+    sendJson(request, response, 400, {
       error: "Missing or invalid profile. Provide a Module 1 profile with primary_occupation.",
     });
     return;
   }
   if (!countryCode) {
-    sendJson(response, 400, { error: "Missing country_code" });
+    sendJson(request, response, 400, { error: "Missing country_code" });
     return;
   }
 
   const country = getCountry(countryCode);
   const analysis = await analyseRisk({ profile, country });
 
-  sendJson(response, 200, { analysis });
+  sendJson(request, response, 200, { analysis });
 }
 
 // ── Module 3 — takes Module 1 profile + optional Module 2 output ────────────
@@ -122,20 +192,20 @@ async function createModule3Opportunities(request, response) {
   const countryCode = body.country_code ?? profile?.country_context?.country_code;
 
   if (!profile || !profile.primary_occupation) {
-    sendJson(response, 400, {
+    sendJson(request, response, 400, {
       error: "Missing or invalid profile. Provide a Module 1 profile with primary_occupation.",
     });
     return;
   }
   if (!countryCode) {
-    sendJson(response, 400, { error: "Missing country_code" });
+    sendJson(request, response, 400, { error: "Missing country_code" });
     return;
   }
 
   const country = getCountry(countryCode);
   const opportunities = await matchOpportunities({ profile, module2, country });
 
-  sendJson(response, 200, { opportunities });
+  sendJson(request, response, 200, { opportunities });
 }
 
 // ── Router ──────────────────────────────────────────────────────────────────
@@ -145,12 +215,12 @@ const server = http.createServer(async (request, response) => {
     const url = new URL(request.url, `http://${request.headers.host}`);
 
     if (request.method === "OPTIONS") {
-      sendJson(response, 204, {});
+      sendJson(request, response, 204, {});
       return;
     }
 
     if (request.method === "GET" && url.pathname === "/health") {
-      sendJson(response, 200, {
+      sendJson(request, response, 200, {
         ok: true,
         service: "unmapped-node-api",
         extraction_mode: process.env.OPENROUTER_API_KEY ? "llm" : "heuristic",
@@ -160,17 +230,17 @@ const server = http.createServer(async (request, response) => {
 
     if (request.method === "GET" && url.pathname === "/api/i18n") {
       const locale = url.searchParams.get("locale") ?? "en";
-      sendJson(response, 200, getI18nStrings(locale));
+      sendJson(request, response, 200, getI18nStrings(locale));
       return;
     }
 
     if (request.method === "GET" && url.pathname === "/api/countries") {
-      sendJson(response, 200, { countries: getSupportedCountries() });
+      sendJson(request, response, 200, { countries: getSupportedCountries() });
       return;
     }
 
     if (request.method === "GET" && url.pathname === "/api/config/stats") {
-      sendJson(response, 200, getConfigStats());
+      sendJson(request, response, 200, getConfigStats());
       return;
     }
 
@@ -179,20 +249,20 @@ const server = http.createServer(async (request, response) => {
       const countryCode = configMatch[1].toUpperCase();
       const config = getFullConfig(countryCode);
       if (!config || !config.country_code) {
-        sendJson(response, 404, { error: `No config found for country: ${countryCode}` });
+        sendJson(request, response, 404, { error: `No config found for country: ${countryCode}` });
         return;
       }
-      sendJson(response, 200, config);
+      sendJson(request, response, 200, config);
       return;
     }
 
     if (request.method === "GET" && url.pathname === "/api/module1/metadata") {
-      sendJson(response, 200, getModule1Metadata());
+      sendJson(request, response, 200, getModule1Metadata());
       return;
     }
 
     if (request.method === "GET" && url.pathname === "/api/module1/intake-options") {
-      sendJson(response, 200, getIntakeOptions({
+      sendJson(request, response, 200, getIntakeOptions({
         sector: url.searchParams.get("sector"),
         limit: url.searchParams.get("limit") ?? "all",
       }));
@@ -214,9 +284,9 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
-    sendJson(response, 404, { error: "Not found" });
+    sendJson(request, response, 404, { error: "Not found" });
   } catch (error) {
-    sendJson(response, 500, {
+    sendJson(request, response, 500, {
       error: "Internal server error",
       detail: process.env.NODE_ENV === "production" ? undefined : error.message,
     });
