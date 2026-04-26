@@ -1,0 +1,41 @@
+{
+  "country_code": "MY",
+  "base_dataset": "frey_osborne",
+  "base_dataset_source": "Frey & Osborne (2013). The Future of Employment. University of Oxford.",
+  "infrastructure_level": "high",
+  "calibration": {
+    "multipliers": {
+      "physical_manual": 0.72,
+      "routine_cognitive": 0.9,
+      "non_routine_cognitive": 1,
+      "social_interactive": 0.82
+    },
+    "rationale": "Calibrated for Malaysia using World Bank income classification (UMC) and ITU digital infrastructure level (high). Physical-manual task multiplier reflects local capital intensity relative to the US Frey-Osborne baseline. Non-routine cognitive tasks carry full (1.0×) risk since AI disruption is not infrastructure-bound."
+  },
+  "time_horizon_years": 10,
+  "uncertainty_band": 0.12,
+  "risk_thresholds": {
+    "low": 0.3,
+    "medium": 0.6,
+    "high": 1
+  },
+  "scenario_toggles": [
+    {
+      "id": "high_infra",
+      "label": "If technology investment grows fast",
+      "multiplier_adjustment": 0.15
+    },
+    {
+      "id": "current",
+      "label": "Current infrastructure levels",
+      "multiplier_adjustment": 0
+    },
+    {
+      "id": "low_infra",
+      "label": "If technology stays at current levels",
+      "multiplier_adjustment": -0.1
+    }
+  ],
+  "source_label": "Frey and Osborne (2013), calibrated for Malaysia",
+  "source_url": "https://www.oxfordmartin.ox.ac.uk/downloads/academic/future-of-employment.pdf"
+}

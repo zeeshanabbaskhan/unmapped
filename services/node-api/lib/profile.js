@@ -27,7 +27,66 @@ function templateSummary(answers, primary, confidence) {
   return `You are a ${employment}${occupation} with ${experience} of hands-on experience. This match is ${confidence} confidence and is based on your work description, selected skills, tools, and country context.`;
 }
 
-export function buildProfile({ answers, country, scoring, aiSummary }) {
+/**
+ * Generate a human-readable explanation of why this occupation was matched.
+ *
+ * Reads from the evidence object produced by scorer.js and produces a concise
+ * traceable sentence. All numeric values come from deterministic scoring — this
+ * function is purely formatting.
+ *
+ * @param {object} evidence - primary.evidence from scoreProfile output
+ * @returns {string}
+ */
+function buildMatchReason(evidence) {
+  if (!evidence) return "Matched by general text and skill similarity.";
+
+  const parts = [];
+
+  const essentialMatches = (evidence.matched_skills ?? []).filter(
+    (s) => s.relation === "essential"
+  );
+  if (essentialMatches.length > 0) {
+    parts.push(
+      `${essentialMatches.length} essential ESCO skill match${essentialMatches.length !== 1 ? "es" : ""} (score ${evidence.essential_skill_score})`
+    );
+  }
+
+  if (evidence.sector_score > 0) {
+    parts.push(`sector aligned (score ${evidence.sector_score})`);
+  }
+
+  if (evidence.text_score > 0) {
+    parts.push(`text similarity ${evidence.text_score}`);
+  }
+
+  if (evidence.onet_score > 0) {
+    parts.push(`O*NET task evidence ${evidence.onet_score}`);
+  }
+
+  if (evidence.country_priority_score > 0) {
+    parts.push("country-priority ISCO group");
+  }
+
+  return parts.length
+    ? `Matched via: ${parts.join("; ")}.`
+    : "Matched by general text and skill similarity.";
+}
+
+/**
+ * Assemble the final Module 1 profile object.
+ *
+ * Backward compatible with all fields consumed by client/lib/api.ts.
+ * New fields (match_reason, match_score, reason, extraction_method,
+ * country_adjustment) are additive and do not break existing consumers.
+ *
+ * @param {object} params
+ * @param {object} params.answers
+ * @param {object} params.country
+ * @param {object} params.scoring   - output of scoreProfile()
+ * @param {object} params.signals   - output of applyCountryAdjustments()
+ * @param {object} params.aiSummary - output of summarizeProfile()
+ */
+export function buildProfile({ answers, country, scoring, signals = {}, aiSummary }) {
   const primary = scoring.primary;
   const occupation = primary?.occupation;
   const mappedSkills = primary?.evidence.matched_skills ?? [];
@@ -69,6 +128,8 @@ export function buildProfile({ answers, country, scoring, aiSummary }) {
           sectors: occupation.sectors,
           confidence: scoring.confidence,
           score: primary.score,
+          // Traceable explanation of why this occupation was selected.
+          match_reason: buildMatchReason(primary.evidence),
         }
       : null,
     alternative_occupations: scoring.alternatives.map(({ occupation: alternative, score }) => ({
@@ -84,13 +145,29 @@ export function buildProfile({ answers, country, scoring, aiSummary }) {
         label: skill.label,
         plain_label: skill.plain_label,
         evidence_type: skill.relation === "essential" ? "demonstrated_or_core" : "supporting",
+        // Added for explainability — not present in the original contract
+        // but additive and safe for existing consumers.
+        match_score: skill.match_score,
+        reason:
+          skill.relation === "essential"
+            ? `Essential ESCO skill — token overlap score ${skill.match_score}.`
+            : `Supporting ESCO skill — token overlap score ${skill.match_score}.`,
       })),
       local_unmapped: scoring.local_skills,
     },
     confidence: {
       level: scoring.confidence,
       caveat: buildCaveat(scoring.confidence),
+      // Surface which extraction path was used (LLM or heuristic).
+      extraction_method: signals.provider ?? "heuristic",
+      extraction_provider:
+        signals.provider === "openai"
+          ? `openai/${signals.model ?? "unknown"}`
+          : signals.provider ?? "heuristic",
       evidence: primary?.evidence,
+      // Country adjustment reasons for full traceability.
+      country_adjustments:
+        signals.country_context?.adjustment_reasons ?? [],
     },
     task_enrichment: {
       source: "O*NET 30.2",

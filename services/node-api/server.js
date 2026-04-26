@@ -1,12 +1,20 @@
 import http from "node:http";
+import { existsSync, readFileSync } from "node:fs";
+import { dirname, join, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import { getConfigStats, getCountry, getFullConfig, getIntakeOptions, getModule1Metadata, getSupportedCountries } from "./lib/dataStore.js";
-import { extractSignals, summarizeProfile } from "./lib/nlp.js";
+import { calculateAutomationRisk } from "./lib/automationRiskEngine.js";
+import { applyCountryAdjustments } from "./lib/country-adjuster.js";
+import { extractSkills } from "./lib/llm-extractor.js";
+import { summarizeProfile } from "./lib/nlp.js";
 import { generateModule3Opportunities } from "./lib/opportunityEngine.js";
 import { buildProfile } from "./lib/profile.js";
 import { scoreProfile } from "./lib/scorer.js";
 
 const PORT = Number(process.env.PORT || 4000);
 const CLIENT_ORIGIN = process.env.CLIENT_ORIGIN || "http://localhost:3000";
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = resolve(__dirname, "..", "..");
 
 function sendJson(response, statusCode, payload) {
   response.writeHead(statusCode, {
@@ -36,6 +44,27 @@ function validateAnswers(answers) {
   return null;
 }
 
+function readJsonIfExists(path) {
+  if (!existsSync(path)) return null;
+  try {
+    return JSON.parse(readFileSync(path, "utf-8"));
+  } catch {
+    return null;
+  }
+}
+
+function resolveCountryConfig(countryCode = "GH") {
+  const code = String(countryCode).toUpperCase().trim().slice(0, 2) || "GH";
+  const resolved = getFullConfig(code) ?? getCountry(code) ?? {};
+
+  // Fallback to generated per-country config if consolidated data/processed assets are missing.
+  if (!resolved?.automation) {
+    const generated = readJsonIfExists(join(ROOT, "config", "generated", "countries", `${code}.json`));
+    if (generated) return generated;
+  }
+  return resolved;
+}
+
 async function createModule1Profile(request, response) {
   const body = await readBody(request);
   const answers = body.answers ?? body;
@@ -45,10 +74,17 @@ async function createModule1Profile(request, response) {
     return;
   }
 
+  // Step 1 — LLM Skill Extractor
   const country = getCountry(answers.country_code);
-  const aiSignals = extractSignals(answers);
+  const rawSignals = await extractSkills(answers);
 
-  const scoring = scoreProfile(answers, country, aiSignals);
+  // Step 2 — Country Adjustment Layer
+  const signals = applyCountryAdjustments(rawSignals, answers, country);
+
+  // Step 3 — ISCO Matching (deterministic scorer)
+  const scoring = scoreProfile(answers, country, signals);
+
+  // Step 4 — Profile Builder
   const summary = summarizeProfile({
     answers,
     country,
@@ -56,19 +92,28 @@ async function createModule1Profile(request, response) {
     confidence: scoring.confidence,
     mappedSkills: scoring.primary?.evidence.matched_skills ?? [],
     localSkills: scoring.local_skills,
+    extractionMethod: signals.provider,
   });
 
   const profile = buildProfile({
     answers,
     country,
     scoring,
+    signals,
     aiSummary: summary,
   });
 
   sendJson(response, 200, {
     profile,
     debug: {
-      ai_signals: aiSignals,
+      extraction: {
+        provider: signals.provider,
+        model: signals.model ?? null,
+        notes: signals.notes,
+        skill_count: signals.extracted_skills?.length ?? 0,
+        task_count: signals.extracted_tasks?.length ?? 0,
+      },
+      country_adjustments: signals.country_context?.adjustment_reasons ?? [],
       candidate_count: 1 + scoring.alternatives.length,
       deterministic_scoring: true,
     },
@@ -85,7 +130,11 @@ const server = http.createServer(async (request, response) => {
     }
 
     if (request.method === "GET" && url.pathname === "/health") {
-      sendJson(response, 200, { ok: true, service: "unmapped-node-api" });
+      sendJson(response, 200, {
+        ok: true,
+        service: "unmapped-node-api",
+        extraction_mode: process.env.OPENROUTER_API_KEY ? "llm" : "heuristic",
+      });
       return;
     }
 
@@ -162,6 +211,32 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    if (request.method === "POST" && url.pathname === "/api/module2/automation-risk") {
+      const body = await readBody(request);
+      const countryCode = body.country_code ?? body.country ?? "GH";
+      const countryConfig = resolveCountryConfig(countryCode);
+
+      if (!countryConfig || !countryConfig.country_code) {
+        sendJson(response, 404, { error: `No country config found for: ${countryCode}` });
+        return;
+      }
+      if (!countryConfig.automation) {
+        sendJson(response, 400, { error: `No automation calibration found for: ${countryConfig.country_code}` });
+        return;
+      }
+
+      const result = calculateAutomationRisk({
+        countryConfig,
+        baseRisk: body.base_risk,
+        occupation: body.occupation ?? body.final_selection ?? body.profile?.primary_occupation,
+        scenarioId: body.scenario ?? body.scenario_id,
+        taskProfile: body.task_profile,
+      });
+
+      sendJson(response, 200, result);
+      return;
+    }
+
     sendJson(response, 404, { error: "Not found" });
   } catch (error) {
     sendJson(response, 500, {
@@ -172,5 +247,7 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(PORT, () => {
+  const mode = process.env.OPENROUTER_API_KEY ? "llm (OpenRouter)" : "heuristic (no key)";
   console.log(`Module 1 Node API listening on http://localhost:${PORT}`);
+  console.log(`Extraction mode: ${mode}`);
 });

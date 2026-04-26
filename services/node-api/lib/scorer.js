@@ -9,8 +9,12 @@ function buildUserText(answers, aiSignals) {
       answers.sector,
       ...(answers.tools ?? []),
       ...(answers.selected_skills ?? []),
+      // Flat skill/tool labels from both heuristic and LLM paths
       ...(aiSignals?.skills ?? []),
       ...(aiSignals?.tools ?? []),
+      // LLM-extracted task phrases — broaden token coverage without changing
+      // scoring weights; purely additive so determinism is preserved.
+      ...(aiSignals?.extracted_tasks ?? []),
     ].join(" ")
   );
 }
@@ -154,8 +158,24 @@ export function scoreProfile(answers, country, aiSignals = {}) {
   const taxonomy = getTaxonomyIndex();
   const userText = buildUserText(answers, aiSignals);
   const userTokens = tokenSet(userText);
-  const priorityIsco = new Set(country.priority_isco_groups ?? []);
-  const preferredSector = answers.sector;
+
+  // Priority ISCO groups: prefer pre-resolved set from country-adjuster if
+  // present (placed in aiSignals.country_context), else read from country config
+  // directly. Both paths are equivalent — the adjuster just makes it explicit.
+  const priorityIsco = new Set(
+    aiSignals.country_context?.priority_isco_groups ??
+      country.priority_isco_groups ??
+      []
+  );
+
+  // Preferred sector: use the country-adjuster's resolved sector if available
+  // (it may have applied a country sector_map), then the LLM inferred sector,
+  // then the raw user-provided sector. Never null — defaults to empty string.
+  const preferredSector =
+    aiSignals.country_context?.resolved_sector ??
+    aiSignals.likely_sector ??
+    answers.sector ??
+    "";
 
   const scored = Object.values(taxonomy.occupations)
     .map((occupation) => {

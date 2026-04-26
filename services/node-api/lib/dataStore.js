@@ -1,4 +1,4 @@
-import { readFileSync } from "node:fs";
+import { existsSync, readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 import {
@@ -10,14 +10,36 @@ import {
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..", "..", "..");
 
-function readJson(relativePath) {
-  return JSON.parse(readFileSync(join(root, relativePath), "utf-8"));
+function readJson(relativePath, fallback = {}) {
+  const absolutePath = join(root, relativePath);
+  if (!existsSync(absolutePath)) return fallback;
+  try {
+    return JSON.parse(readFileSync(absolutePath, "utf-8"));
+  } catch {
+    return fallback;
+  }
 }
 
-const taxonomyIndex = readJson("data/processed/module1_taxonomy_index.json");
-const localInformalSkills = readJson("config/local_informal_skills.json");
-const sourceRegistry = readJson("data/processed/source_registry.generated.json");
-const countryRegistry = readJson("data/processed/country_registry.generated.json");
+const taxonomyIndex = readJson("data/processed/module1_taxonomy_index.json", {
+  version: "missing",
+  generated_at: null,
+  stats: {},
+  onet_stats: {},
+  note: "Taxonomy index not found. Rebuild generated data files.",
+  by_sector: {},
+  occupations: {},
+});
+const localInformalSkills = readJson("config/local_informal_skills.json", { skills: [] });
+const sourceRegistry = readJson("data/processed/source_registry.generated.json", { sources: [] });
+const countryRegistry = readJson("data/processed/country_registry.generated.json", {
+  version: "missing",
+  generated_at: null,
+  stats: {},
+  sources: [],
+  countries: [],
+  by_iso2: {},
+  by_iso3: {},
+});
 
 const sectorLabels = {
   technical_services: "Technical services",
@@ -46,7 +68,8 @@ export function getCountry(countryCode = "GH") {
   return (
     countryRegistry.by_iso2[countryCode] ??
     countryRegistry.by_iso3[countryCode] ??
-    countryRegistry.by_iso2.GH
+    countryRegistry.by_iso2.GH ??
+    { country_code: "GH", country_name: "Ghana", default_city: "Accra", education_levels: [] }
   );
 }
 

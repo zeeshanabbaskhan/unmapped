@@ -673,17 +673,48 @@ function build() {
   const outputPath = join(OUTPUT_DIR, "all_country_configs.generated.json");
   writeFileSync(outputPath, JSON.stringify(payload, null, 2), "utf-8");
 
-  // Write individual per-country files to config/generated/countries/{CC}.json
-  // so each country's config is browsable, diffable, and editable
+  // Write individual per-country files so all countries are directly visible.
+  // Keep manual override folders (config/automation, config/opportunities) small;
+  // generated snapshots go under config/generated/*.
   const perCountryDir = join(ROOT, "config", "generated", "countries");
+  const perAutomationDir = join(ROOT, "config", "generated", "automation");
+  const perOpportunitiesDir = join(ROOT, "config", "generated", "opportunities");
   mkdirSync(perCountryDir, { recursive: true });
+  mkdirSync(perAutomationDir, { recursive: true });
+  mkdirSync(perOpportunitiesDir, { recursive: true });
   for (const [cc, cfg] of Object.entries(configs)) {
     writeFileSync(join(perCountryDir, `${cc}.json`), JSON.stringify(cfg, null, 2), "utf-8");
+    writeFileSync(
+      join(perAutomationDir, `${cc}.json`),
+      JSON.stringify(
+        {
+          country_code: cc,
+          ...(cfg.automation ?? {}),
+        },
+        null,
+        2
+      ),
+      "utf-8"
+    );
+    writeFileSync(
+      join(perOpportunitiesDir, `${cc}.json`),
+      JSON.stringify(
+        {
+          country_code: cc,
+          ...(cfg.opportunities ?? {}),
+        },
+        null,
+        2
+      ),
+      "utf-8"
+    );
   }
 
   console.log(`\nGenerated configs for ${generated} countries`);
   console.log(`  Combined file     : ${outputPath}`);
   console.log(`  Per-country files : config/generated/countries/ (${generated} files)`);
+  console.log(`  Automation files  : config/generated/automation/ (${generated} files)`);
+  console.log(`  Opportunity files : config/generated/opportunities/ (${generated} files)`);
   console.log(`  ${withItu} with real ITU digital data`);
   console.log(`  ${withIlostat} with real ILOSTAT sector shares`);
   console.log(`  ${Object.keys(wdi).length} with WDI indicator data`);

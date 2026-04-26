@@ -1,0 +1,56 @@
+{
+  "country_code": "VU",
+  "currency": "USD",
+  "currency_symbol": "$",
+  "min_wage_monthly": 150,
+  "min_wage_note": "Estimated from World Bank income group (LMC) median data",
+  "types": [
+    {
+      "id": "formal_employment",
+      "label": "Formal job with contract",
+      "label_short": "Formal job",
+      "icon": "briefcase",
+      "enabled": true,
+      "weight": 0.17,
+      "requires_credential": false
+    },
+    {
+      "id": "self_employment",
+      "label": "Run your own business",
+      "label_short": "Self-employed",
+      "icon": "store",
+      "enabled": true,
+      "weight": 0.23,
+      "requires_credential": false
+    },
+    {
+      "id": "gig_platform",
+      "label": "Gig and platform work",
+      "label_short": "Gig work",
+      "icon": "phone",
+      "enabled": true,
+      "weight": 0.19,
+      "requires_credential": false
+    },
+    {
+      "id": "vocational_training",
+      "label": "Short course or certification",
+      "label_short": "Training",
+      "icon": "graduation-cap",
+      "enabled": true,
+      "weight": 0.14,
+      "requires_credential": false,
+      "max_cost_months_income": 1,
+      "providers": []
+    },
+    {
+      "id": "agricultural_cooperative",
+      "label": "Farming or agricultural cooperative",
+      "label_short": "Agriculture",
+      "icon": "leaf",
+      "enabled": true,
+      "weight": 0.27,
+      "requires_credential": false
+    }
+  ]
+}
