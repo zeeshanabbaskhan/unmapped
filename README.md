@@ -7,7 +7,9 @@ Production-oriented Module 1 implementation for a portable Skills Signal Engine.
 - `client/` - Next.js frontend intake and profile UI
 - `services/node-api/` - Node.js orchestration API, deterministic NLP, and scoring engine
 - `scripts/build-module1-index.mjs` - generates runtime indexes from the complete source datasets
+- `scripts/build-country-registry.mjs` - merges REST Countries and World Bank metadata into a global country registry
 - `data/processed/module1_taxonomy_index.json` - generated occupation/skill index, not hand-authored
+- `data/processed/country_registry.generated.json` - generated country config registry
 - `data/processed/source_registry.generated.json` - generated source manifest with file hashes
 - `config/` - small authored product config only: country labels and local informal-skill supplement
 
@@ -17,6 +19,7 @@ From the repository root:
 
 ```bash
 node scripts/build-module1-index.mjs
+node scripts/build-country-registry.mjs
 ```
 
 Terminal 1:

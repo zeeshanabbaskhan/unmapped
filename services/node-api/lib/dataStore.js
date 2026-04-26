@@ -12,10 +12,7 @@ function readJson(relativePath) {
 const taxonomyIndex = readJson("data/processed/module1_taxonomy_index.json");
 const localInformalSkills = readJson("config/local_informal_skills.json");
 const sourceRegistry = readJson("data/processed/source_registry.generated.json");
-const countries = {
-  GH: readJson("config/countries/GH.json"),
-  BD: readJson("config/countries/BD.json"),
-};
+const countryRegistry = readJson("data/processed/country_registry.generated.json");
 
 const sectorLabels = {
   technical_services: "Technical services",
@@ -32,11 +29,27 @@ const sectorLabels = {
 let cachedIntakeOptions;
 
 export function getCountry(countryCode = "GH") {
-  return countries[countryCode] ?? countries.GH;
+  return (
+    countryRegistry.by_iso2[countryCode] ??
+    countryRegistry.by_iso3[countryCode] ??
+    countryRegistry.by_iso2.GH
+  );
 }
 
 export function getSupportedCountries() {
-  return Object.values(countries);
+  return countryRegistry.countries.map((country) => ({
+    country_code: country.country_code,
+    iso2: country.iso2,
+    iso3: country.iso3,
+    country_name: country.country_name,
+    default_city: country.default_city,
+    currency: country.currency,
+    supported_languages: country.supported_languages,
+    language: country.language,
+    geography: country.geography,
+    world_bank: country.world_bank,
+    data_adapters: country.data_adapters,
+  }));
 }
 
 export function getTaxonomyIndex() {
@@ -57,6 +70,12 @@ export function getModule1Metadata() {
     generated_at: taxonomyIndex.generated_at,
     stats: taxonomyIndex.stats,
     onet_stats: taxonomyIndex.onet_stats,
+    country_registry: {
+      version: countryRegistry.version,
+      generated_at: countryRegistry.generated_at,
+      stats: countryRegistry.stats,
+      sources: countryRegistry.sources,
+    },
     sources: sourceRegistry.sources,
     note: taxonomyIndex.note,
   };
