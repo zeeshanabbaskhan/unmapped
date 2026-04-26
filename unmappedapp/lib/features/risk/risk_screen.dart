@@ -205,19 +205,6 @@ class _RiskScreenState extends State<RiskScreen> {
               ),
             ],
 
-            if (risk.analysisProvider != null) ...[
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Icon(Icons.memory_rounded, size: 14, color: AppColors.textTertiary),
-                  const SizedBox(width: 6),
-                  Text(
-                    'Analysis: ${risk.analysisProvider}',
-                    style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
-                  ),
-                ],
-              ),
-            ],
           ],
         ),
       ),

@@ -4,6 +4,7 @@ export const env = {
   port: Number(process.env.PORT || 4000),
   nodeEnv: process.env.NODE_ENV || "development",
   clientOrigin: process.env.CLIENT_ORIGIN || "http://localhost:3000",
+  hasGeminiKey: Boolean(process.env.GEMINI_API_KEY),
   hasOpenRouterKey: Boolean(process.env.OPENROUTER_API_KEY),
 };
 

@@ -1,10 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:pdf/pdf.dart';
+import 'package:pdf/widgets.dart' as pw;
+import 'package:printing/printing.dart';
 import 'package:provider/provider.dart';
 import '../../core/theme/app_theme.dart';
 import '../../shared/widgets/status_states.dart';
 import '../../shared/widgets/skill_chip.dart';
 import '../../shared/widgets/occupation_card.dart';
 import '../../shared/widgets/section_header.dart';
+import '../../models/skill_profile.dart';
 import '../../state/app_state.dart';
 
 class ProfileScreen extends StatelessWidget {
@@ -38,6 +42,15 @@ class ProfileScreen extends StatelessWidget {
             OccupationCard(
               occupation: profile.primaryOccupation,
               confidenceLevel: profile.confidence.level,
+            ),
+            const SizedBox(height: 10),
+            Align(
+              alignment: Alignment.centerLeft,
+              child: OutlinedButton.icon(
+                onPressed: () => _exportProfilePdf(context, profile),
+                icon: const Icon(Icons.picture_as_pdf_outlined, size: 18),
+                label: const Text('Export profile PDF'),
+              ),
             ),
 
             if (profile.confidence.caveat != null) ...[
@@ -120,22 +133,73 @@ class ProfileScreen extends StatelessWidget {
               ),
             ],
 
-            if (profile.confidence.extractionMethod != null) ...[
-              const SizedBox(height: 16),
-              Row(
-                children: [
-                  Icon(Icons.memory_rounded, size: 14, color: AppColors.textTertiary),
-                  const SizedBox(width: 6),
-                  Text(
-                    'Extraction: ${profile.confidence.extractionMethod}',
-                    style: const TextStyle(fontSize: 11, color: AppColors.textTertiary),
-                  ),
-                ],
-              ),
-            ],
           ],
         ),
       ),
     );
+  }
+
+  Future<void> _exportProfilePdf(BuildContext context, SkillProfile profile) async {
+    try {
+      final doc = pw.Document();
+      final generatedAt = DateTime.now().toIso8601String().replaceFirst('T', ' ').split('.').first;
+
+      doc.addPage(
+        pw.MultiPage(
+          pageTheme: const pw.PageTheme(
+            margin: pw.EdgeInsets.all(28),
+            pageFormat: PdfPageFormat.a4,
+          ),
+          build: (_) => [
+            pw.Text('Vectra - Profile Report', style: pw.TextStyle(fontSize: 20, fontWeight: pw.FontWeight.bold)),
+            pw.SizedBox(height: 4),
+            pw.Text('Generated: $generatedAt', style: const pw.TextStyle(fontSize: 10, color: PdfColors.grey700)),
+            pw.SizedBox(height: 16),
+            pw.Text('Primary Occupation', style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold)),
+            pw.SizedBox(height: 6),
+            pw.Text(profile.primaryOccupation.title),
+            if (profile.primaryOccupation.iscoCode != null) pw.Text('ISCO: ${profile.primaryOccupation.iscoCode}'),
+            pw.Text('Confidence: ${profile.confidence.level}'),
+            if (profile.summary != null) ...[
+              pw.SizedBox(height: 14),
+              pw.Text('Summary', style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 4),
+              pw.Text(profile.summary!),
+            ],
+            if (profile.mappedSkills.isNotEmpty) ...[
+              pw.SizedBox(height: 14),
+              pw.Text('Mapped Skills', style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 4),
+              ...profile.mappedSkills.take(40).map<pw.Widget>((s) => pw.Bullet(text: s.label)),
+            ],
+            if (profile.unmappedSkills.isNotEmpty) ...[
+              pw.SizedBox(height: 14),
+              pw.Text('Local Skills (Unmapped)', style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 4),
+              ...profile.unmappedSkills.take(40).map<pw.Widget>((s) => pw.Bullet(text: s)),
+            ],
+            if (profile.alternativeOccupations.isNotEmpty) ...[
+              pw.SizedBox(height: 14),
+              pw.Text('Alternative Occupations', style: pw.TextStyle(fontSize: 13, fontWeight: pw.FontWeight.bold)),
+              pw.SizedBox(height: 4),
+              ...profile.alternativeOccupations.take(20).map<pw.Widget>((o) {
+                final isco = o.iscoCode != null ? ' (ISCO ${o.iscoCode})' : '';
+                return pw.Bullet(text: '${o.title}$isco');
+              }),
+            ],
+          ],
+        ),
+      );
+
+      await Printing.layoutPdf(
+        name: 'vectra_profile_report.pdf',
+        onLayout: (_) async => doc.save(),
+      );
+    } catch (_) {
+      if (!context.mounted) return;
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(content: Text('Could not export PDF. Please try again.')),
+      );
+    }
   }
 }

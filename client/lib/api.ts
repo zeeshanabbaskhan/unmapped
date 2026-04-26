@@ -1,5 +1,5 @@
 export type Module1Answers = {
-  country_code: "GH" | "BD";
+  country_code: string;
   city: string;
   education: string;
   work_description: string;
@@ -11,6 +11,14 @@ export type Module1Answers = {
   languages: string[];
   aspiration: string;
   extra_skills: string;
+};
+
+export type SupportedCountry = {
+  country_code: string;
+  country_name: string;
+  default_city?: string;
+  language?: string;
+  supported_languages?: string[];
 };
 
 export type Module1Profile = {
@@ -264,6 +272,15 @@ export type Module3Analysis = {
 };
 
 const NODE_API = process.env.NEXT_PUBLIC_NODE_API ?? "http://localhost:4000";
+
+export async function getSupportedCountries(): Promise<SupportedCountry[]> {
+  const response = await fetch(`${NODE_API}/api/countries`);
+  if (!response.ok) {
+    throw new Error("Could not load supported countries");
+  }
+  const body = (await response.json()) as { countries?: SupportedCountry[] };
+  return body.countries ?? [];
+}
 
 export async function createModule1Profile(answers: Module1Answers): Promise<Module1Profile> {
   const response = await fetch(`${NODE_API}/api/module1/profile`, {

@@ -1,5 +1,5 @@
 /**
- * LLM-based skill extractor — powered by OpenRouter.
+ * LLM-based skill extractor — Gemini first, OpenRouter fallback.
  *
  * Uses the @openrouter/sdk to call any model available on OpenRouter.
  * Falls back to deterministic heuristic extraction when OPENROUTER_API_KEY
@@ -15,10 +15,12 @@
  */
 
 import { OpenRouter } from "@openrouter/sdk";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { normalizeText } from "./text.js";
 
 const OPENROUTER_MODEL =
   process.env.OPENROUTER_MODEL ?? "openai/gpt-oss-120b:free";
+const GEMINI_MODEL = process.env.GEMINI_MODEL ?? "gemini-1.5-flash";
 // Reasoning models can take 10-20s on free tier — give them enough headroom.
 const LLM_TIMEOUT_MS = Number(process.env.LLM_TIMEOUT_MS ?? 20000);
 
@@ -195,6 +197,7 @@ function stripCodeFences(raw) {
 }
 
 let _openRouterClient = null;
+let _geminiClient = null;
 function getClient() {
   if (!_openRouterClient) {
     _openRouterClient = new OpenRouter({
@@ -202,6 +205,13 @@ function getClient() {
     });
   }
   return _openRouterClient;
+}
+
+function getGeminiClient() {
+  if (!_geminiClient) {
+    _geminiClient = new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+  }
+  return _geminiClient;
 }
 
 /**
@@ -222,6 +232,48 @@ function withTimeout(promise, ms) {
 }
 
 async function callLLM(answers) {
+  if (process.env.GEMINI_API_KEY) {
+    const model = getGeminiClient().getGenerativeModel({ model: GEMINI_MODEL });
+    const result = await model.generateContent(
+      `${SYSTEM_PROMPT}\n\n${buildUserPrompt(answers)}`
+    );
+    const raw = result.response?.text?.() ?? "";
+    if (!raw.trim()) throw new Error("Gemini returned an empty response");
+    const parsed = JSON.parse(stripCodeFences(raw));
+    const extractedSkills = (parsed.extracted_skills ?? [])
+      .filter((s) => s && typeof s.label === "string" && s.label.trim())
+      .slice(0, 8)
+      .map((s) => ({
+        label: s.label.trim().toLowerCase(),
+        confidence: Math.min(1, Math.max(0, Number(s.confidence) || 0.7)),
+        esco_hint: typeof s.esco_hint === "string" ? s.esco_hint : null,
+        source: "llm",
+      }));
+
+    const extractedTasks = (parsed.extracted_tasks ?? [])
+      .filter((t) => typeof t === "string" && t.trim())
+      .slice(0, 6)
+      .map((t) => t.trim().toLowerCase());
+
+    const likelySector =
+      typeof parsed.likely_sector === "string" && parsed.likely_sector.trim()
+        ? parsed.likely_sector.trim()
+        : answers.sector ?? null;
+
+    const modelSlug = GEMINI_MODEL.replace(/[^a-z0-9]/gi, "_");
+    return {
+      skills: extractedSkills.map((s) => s.label),
+      tools: answers.tools ?? [],
+      extracted_skills: extractedSkills,
+      extracted_tasks: extractedTasks,
+      likely_sector: likelySector,
+      confidence: "llm",
+      notes: [`llm_gemini_${modelSlug}`],
+      provider: "gemini",
+      model: GEMINI_MODEL,
+    };
+  }
+
   const client = getClient();
 
   // Non-streaming call — structured JSON extraction doesn't benefit from
@@ -302,7 +354,7 @@ async function callLLM(answers) {
  * @returns {Promise<object>}
  */
 export async function extractSkills(answers) {
-  if (!process.env.OPENROUTER_API_KEY) {
+  if (!process.env.GEMINI_API_KEY && !process.env.OPENROUTER_API_KEY) {
     return heuristicExtract(answers);
   }
 
@@ -310,7 +362,7 @@ export async function extractSkills(answers) {
     return await withTimeout(callLLM(answers), LLM_TIMEOUT_MS);
   } catch (err) {
     console.warn(
-      `[llm-extractor] OpenRouter call failed — using heuristic fallback. Reason: ${err.message}`
+      `[llm-extractor] LLM call failed — using heuristic fallback. Reason: ${err.message}`
     );
     const fallback = heuristicExtract(answers);
     return {

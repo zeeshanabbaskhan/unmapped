@@ -15,16 +15,23 @@
  */
 
 import { OpenRouter } from "@openrouter/sdk";
+import { GoogleGenerativeAI } from "@google/generative-ai";
 import { getCountryLaborStats } from "./lmic-calibrator.js";
 import { getOpportunitiesConfig, getGeneratedCountryConfig } from "./dataStore.js";
 
 const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? "openai/gpt-oss-120b:free";
+const GEMINI_MODEL = process.env.GEMINI_MODEL ?? "gemini-1.5-flash";
 const LLM_TIMEOUT_MS   = Number(process.env.LLM_TIMEOUT_MS ?? 20000);
 
 let _client = null;
+let _geminiClient = null;
 function getClient() {
   _client ??= new OpenRouter({ apiKey: process.env.OPENROUTER_API_KEY });
   return _client;
+}
+function getGeminiClient() {
+  _geminiClient ??= new GoogleGenerativeAI(process.env.GEMINI_API_KEY);
+  return _geminiClient;
 }
 
 function withTimeout(promise, ms) {
@@ -198,29 +205,41 @@ function buildOpportunityFallback(profile, module2, country, anchor, signals, op
 }
 
 async function runLLMOpportunityAnalysis(profile, module2, country, laborStats, anchor, signals, oppConfig) {
-  if (!process.env.OPENROUTER_API_KEY) {
+  if (!process.env.GEMINI_API_KEY && !process.env.OPENROUTER_API_KEY) {
     return buildOpportunityFallback(profile, module2, country, anchor, signals, oppConfig);
   }
 
   try {
-    const client = getClient();
-    const result = await withTimeout(
-      client.chat.send({
-        chatRequest: {
-          model: OPENROUTER_MODEL,
-          maxTokens: 1500,
-          responseFormat: { type: "json_object" },
-          stream: false,
-          messages: [
-            { role: "system", content: SYSTEM_PROMPT },
-            { role: "user", content: buildOpportunityPrompt(profile, module2, country, laborStats, anchor, signals, oppConfig) },
-          ],
-        },
-      }),
-      LLM_TIMEOUT_MS
-    );
+    let raw = "";
+    if (process.env.GEMINI_API_KEY) {
+      const model = getGeminiClient().getGenerativeModel({ model: GEMINI_MODEL });
+      const result = await withTimeout(
+        model.generateContent(
+          `${SYSTEM_PROMPT}\n\n${buildOpportunityPrompt(profile, module2, country, laborStats, anchor, signals, oppConfig)}`
+        ),
+        LLM_TIMEOUT_MS
+      );
+      raw = result.response?.text?.() ?? "";
+    } else {
+      const client = getClient();
+      const result = await withTimeout(
+        client.chat.send({
+          chatRequest: {
+            model: OPENROUTER_MODEL,
+            maxTokens: 1500,
+            responseFormat: { type: "json_object" },
+            stream: false,
+            messages: [
+              { role: "system", content: SYSTEM_PROMPT },
+              { role: "user", content: buildOpportunityPrompt(profile, module2, country, laborStats, anchor, signals, oppConfig) },
+            ],
+          },
+        }),
+        LLM_TIMEOUT_MS
+      );
+      raw = result.choices?.[0]?.message?.content ?? "";
+    }
 
-    const raw = result.choices?.[0]?.message?.content ?? "";
     if (!raw.trim()) throw new Error("Empty LLM response");
 
     const parsed = JSON.parse(
@@ -231,7 +250,10 @@ async function runLLMOpportunityAnalysis(profile, module2, country, laborStats, 
     for (const key of required) {
       if (!parsed[key]) throw new Error(`LLM response missing key: ${key}`);
     }
-    return { ...parsed, _provider: `openrouter/${OPENROUTER_MODEL}` };
+    return {
+      ...parsed,
+      _provider: process.env.GEMINI_API_KEY ? `gemini/${GEMINI_MODEL}` : `openrouter/${OPENROUTER_MODEL}`,
+    };
   } catch (err) {
     console.warn(`[opportunity-engine] LLM failed (${err.message}) — using template fallback`);
     return buildOpportunityFallback(profile, module2, country, anchor, signals, oppConfig);
