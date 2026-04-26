@@ -146,6 +146,125 @@ export type Module1IntakeOptions = {
   total_tools_for_sector: number;
 };
 
+export type Module3Module1Output = {
+  input_summary?: {
+    original_text?: string;
+    detected_language?: string;
+  };
+  skills?: Array<{
+    name: string;
+    confidence?: number;
+    source?: string;
+  }>;
+  occupation_candidates?: Array<{
+    isco_code?: string;
+    title?: string;
+    confidence?: number;
+    matched_skills?: string[];
+    reason?: string;
+  }>;
+  final_selection?: {
+    isco_code?: string;
+    title?: string;
+    confidence?: number;
+    reason?: string;
+  };
+  country_context?: {
+    country?: string;
+    country_code?: string;
+    labor_structure?: string;
+  };
+  adjusted_readiness?: {
+    automation_risk_base?: number;
+    automation_risk_adjusted?: number;
+    interpretation?: string;
+  };
+};
+
+export type EconometricSignal = {
+  id: string;
+  label: string;
+  value: number | null;
+  unit: string;
+  year: number | null;
+  trend: string;
+  delta: number | null;
+  source: string;
+  source_indicator: string;
+};
+
+export type Module3Opportunity = {
+  id: string;
+  type: string;
+  title: string;
+  match_score: number;
+  confidence: string;
+  rationale: string[];
+  estimated_income?: {
+    min?: number;
+    max?: number;
+    currency?: string | null;
+    period?: string;
+  };
+  requirements?: string[];
+  missing_skills?: string[];
+  providers?: Array<{ name: string; url?: string; note?: string }>;
+  next_actions: string[];
+  econometric_context?: string[];
+  source_tags: string[];
+};
+
+export type Module3Response = {
+  opportunities: Module3Opportunity[];
+  econometric_dashboard: {
+    youth_view: {
+      headline: string;
+      visible_signals: EconometricSignal[];
+      all_signals: EconometricSignal[];
+      signal_note: string;
+    };
+    policymaker_view: {
+      country: {
+        code: string | null;
+        name: string | null;
+        income_level: string | null;
+        region: string | null;
+      };
+      opportunity_mix_top3: Array<{ type: string; label: string; score: number }>;
+      priorities: {
+        priority_sectors: string[];
+        priority_isco_groups: string[];
+      };
+      diagnostics: {
+        total_econometric_signals: number;
+        visible_to_youth_count: number;
+        infrastructure_level: string | null;
+        data_vintage: number | null;
+      };
+      labor_market_snapshot: {
+        sector_shares: { source?: string; AGR?: number; IND?: number; SER?: number } | null;
+        uncertainty_note: string | null;
+      };
+    };
+  };
+  metadata: {
+    country_code: string;
+    country_name: string;
+    input_language: string;
+    top_occupation: {
+      isco_code: string | null;
+      title: string | null;
+      confidence: number;
+    } | null;
+    skills_detected: number;
+    average_skill_confidence: number;
+    readiness_signal: string;
+    econometric_signal_count: number;
+    generated_at: string;
+    version: string;
+  };
+};
+
 const NODE_API = process.env.NEXT_PUBLIC_NODE_API ?? "http://localhost:4000";
 
 export async function createModule1Profile(answers: Module1Answers): Promise<Module1Profile> {
@@ -180,6 +299,36 @@ export async function getModule1IntakeOptions(sector: string): Promise<Module1In
 
   if (!response.ok) {
     throw new Error("Could not load intake options");
+  }
+
+  return response.json();
+}
+
+export async function getModule3Opportunities({
+  module1Output,
+  countryCode,
+  limit = 8,
+  includeTypes,
+}: {
+  module1Output: Module3Module1Output;
+  countryCode?: string;
+  limit?: number;
+  includeTypes?: string[];
+}): Promise<Module3Response> {
+  const response = await fetch(`${NODE_API}/api/module3/opportunities`, {
+    method: "POST",
+    headers: { "content-type": "application/json" },
+    body: JSON.stringify({
+      module1_output: module1Output,
+      country_code: countryCode,
+      limit,
+      include_types: includeTypes,
+    }),
+  });
+
+  if (!response.ok) {
+    const body = await response.json().catch(() => ({}));
+    throw new Error(body.error ?? "Could not generate Module 3 opportunities");
   }
 
   return response.json();

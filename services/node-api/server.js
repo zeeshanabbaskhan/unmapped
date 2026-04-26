@@ -1,6 +1,7 @@
 import http from "node:http";
-import { getCountry, getIntakeOptions, getModule1Metadata, getSupportedCountries } from "./lib/dataStore.js";
+import { getConfigStats, getCountry, getFullConfig, getIntakeOptions, getModule1Metadata, getSupportedCountries } from "./lib/dataStore.js";
 import { extractSignals, summarizeProfile } from "./lib/nlp.js";
+import { generateModule3Opportunities } from "./lib/opportunityEngine.js";
 import { buildProfile } from "./lib/profile.js";
 import { scoreProfile } from "./lib/scorer.js";
 
@@ -93,6 +94,24 @@ const server = http.createServer(async (request, response) => {
       return;
     }
 
+    if (request.method === "GET" && url.pathname === "/api/config/stats") {
+      sendJson(response, 200, getConfigStats());
+      return;
+    }
+
+    // /api/config/:country — full resolved config for a country (ISO-2 or ISO-3)
+    const configMatch = url.pathname.match(/^\/api\/config\/([A-Za-z]{2,3})$/);
+    if (request.method === "GET" && configMatch) {
+      const countryCode = configMatch[1].toUpperCase();
+      const config = getFullConfig(countryCode);
+      if (!config || !config.country_code) {
+        sendJson(response, 404, { error: `No config found for country: ${countryCode}` });
+        return;
+      }
+      sendJson(response, 200, config);
+      return;
+    }
+
     if (request.method === "GET" && url.pathname === "/api/module1/metadata") {
       sendJson(response, 200, getModule1Metadata());
       return;
@@ -112,6 +131,34 @@ const server = http.createServer(async (request, response) => {
 
     if (request.method === "POST" && url.pathname === "/api/module1/profile") {
       await createModule1Profile(request, response);
+      return;
+    }
+
+    if (request.method === "POST" && url.pathname === "/api/module3/opportunities") {
+      const body = await readBody(request);
+      const module1Output = body.module1_output ?? body.profile ?? body.module1Output;
+      if (!module1Output || typeof module1Output !== "object") {
+        sendJson(response, 400, {
+          error: "Missing module1 output. Provide `module1_output` in request body.",
+        });
+        return;
+      }
+
+      const requestCountry = body.country_code ?? module1Output?.country_context?.country_code ?? module1Output?.country_context?.country ?? "GH";
+      const country = getCountry(requestCountry);
+
+      const includeTypes = Array.isArray(body.include_types)
+        ? body.include_types.map((type) => String(type))
+        : undefined;
+      const limit = body.limit ?? 8;
+
+      const result = generateModule3Opportunities({
+        module1Output,
+        countryConfig: country,
+        limit,
+        includeTypes,
+      });
+      sendJson(response, 200, result);
       return;
     }
 

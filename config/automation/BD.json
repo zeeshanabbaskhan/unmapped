@@ -1,0 +1,50 @@
+{
+  "country_code": "BD",
+  "base_dataset": "frey_osborne",
+  "base_dataset_source": "Frey & Osborne (2013). The Future of Employment. University of Oxford.",
+  "base_dataset_file": "data/jobautomationprobability/job-automation-probability.csv",
+  "infrastructure_level": "low_medium",
+
+  "calibration": {
+    "multipliers": {
+      "physical_manual": 0.60,
+      "routine_cognitive": 0.90,
+      "non_routine_cognitive": 1.0,
+      "social_interactive": 0.75
+    },
+    "rationale": "Bangladesh national mobile broadband is approximately 70 per 100 but rural penetration is closer to 39 percent (ITU 2024). The garment sector receives above-average international capital investment in robotics and automation, making routine manufacturing tasks face higher-than-average risk relative to other LMIC contexts. Agricultural and rural service work faces lower risk due to infrastructure constraints outside Dhaka and major cities."
+  },
+
+  "time_horizon_years": 10,
+  "uncertainty_band": 0.20,
+
+  "risk_thresholds": {
+    "low": 0.30,
+    "medium": 0.60,
+    "high": 1.0
+  },
+
+  "scenario_toggles": [
+    {
+      "id": "garment_robotics",
+      "label": "If garment factory robotics investment continues",
+      "multiplier_adjustment": 0.20,
+      "note": "Applies if international garment brands continue automation investment in Bangladesh factories."
+    },
+    {
+      "id": "current",
+      "label": "Current infrastructure and investment levels",
+      "multiplier_adjustment": 0.0,
+      "note": "Based on current ITU 2024 data for Bangladesh."
+    },
+    {
+      "id": "rural_only",
+      "label": "Rural and agricultural context",
+      "multiplier_adjustment": -0.15,
+      "note": "Applies for users outside Dhaka, Chittagong in agricultural or rural service work."
+    }
+  ],
+
+  "source_label": "Frey and Osborne (2013), calibrated for Bangladesh using ITU 2024 and sector investment data",
+  "source_url": "https://www.oxfordmartin.ox.ac.uk/downloads/academic/future-of-employment.pdf"
+}

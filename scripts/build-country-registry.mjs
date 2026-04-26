@@ -1,10 +1,11 @@
 import { createHash } from "node:crypto";
-import { mkdirSync, readFileSync, statSync, writeFileSync } from "node:fs";
+import { existsSync, mkdirSync, readFileSync, readdirSync, statSync, writeFileSync } from "node:fs";
 import { basename, dirname, join, relative, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
 
 const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), "..");
 const COUNTRIES_DIR = join(ROOT, "data", "countries");
+const CONFIG_COUNTRIES_DIR = join(ROOT, "config", "countries");
 const OUTPUT_DIR = join(ROOT, "data", "processed");
 
 const INPUT_FILES = {
@@ -12,8 +13,32 @@ const INPUT_FILES = {
   worldBankCountries: join(COUNTRIES_DIR, "worldbankapicountries.json"),
 };
 
+/**
+ * Country overrides loaded from config/countries/*.json — replaces the old
+ * hardcoded COUNTRY_OVERRIDES object. Any country file added to config/countries/
+ * is automatically picked up here. No code changes needed to add a new country.
+ */
+function loadCountryOverrides() {
+  const overrides = {};
+  if (!existsSync(CONFIG_COUNTRIES_DIR)) return overrides;
+  for (const file of readdirSync(CONFIG_COUNTRIES_DIR).filter((f) => f.endsWith(".json"))) {
+    try {
+      const data = readJson(join(CONFIG_COUNTRIES_DIR, file));
+      const code = data.country_code;
+      if (!code) continue;
+      overrides[code] = {};
+      if (data.education_levels) overrides[code].education_levels = data.education_levels;
+      if (data.priority_sectors) overrides[code].priority_sectors = data.priority_sectors;
+      if (data.priority_isco_groups) overrides[code].priority_isco_groups = data.priority_isco_groups;
+      if (data.ui) overrides[code].ui = data.ui;
+      if (data.default_city) overrides[code].default_city = data.default_city;
+      if (data.language) overrides[code].language = data.language;
+    } catch {}
+  }
+  return overrides;
+}
+
 const DEFAULT_EDUCATION_LEVELS = [
-  { id: "none", label: "No formal education", isced: "0", credential_tier: "none" },
   { id: "primary", label: "Primary", isced: "1", credential_tier: "primary" },
   { id: "lower_secondary", label: "Lower secondary", isced: "2", credential_tier: "lower_secondary" },
   { id: "upper_secondary", label: "Upper secondary", isced: "3", credential_tier: "secondary" },
@@ -23,41 +48,8 @@ const DEFAULT_EDUCATION_LEVELS = [
 
 const RTL_LANGUAGE_CODES = new Set(["ara", "arc", "dv", "fas", "heb", "kur", "prs", "pus", "snd", "urd", "yi"]);
 
-const COUNTRY_OVERRIDES = {
-  GH: {
-    education_levels: [
-      { id: "none", label: "No formal education", isced: "0", credential_tier: "none" },
-      { id: "jhs", label: "Basic / JHS", isced: "2", credential_tier: "lower_secondary" },
-      { id: "wassce", label: "SHS / WASSCE", isced: "3", credential_tier: "secondary" },
-      { id: "tvet", label: "TVET certificate", isced: "3-4", credential_tier: "vocational" },
-      { id: "tertiary", label: "Tertiary / university", isced: "5-7", credential_tier: "tertiary" },
-    ],
-    priority_sectors: ["technical_services", "retail_trade", "construction", "garments", "transport", "food_services"],
-    priority_isco_groups: ["7422", "7421", "5223", "5230", "7115", "7212", "7531", "8322", "9412"],
-  },
-  BD: {
-    education_levels: [
-      { id: "none", label: "No formal education", isced: "0", credential_tier: "none" },
-      { id: "jsc", label: "JSC / lower secondary", isced: "2", credential_tier: "lower_secondary" },
-      { id: "ssc", label: "SSC", isced: "3", credential_tier: "secondary" },
-      { id: "hsc", label: "HSC", isced: "3", credential_tier: "upper_secondary" },
-      { id: "tvet", label: "TVET / technical certificate", isced: "3-4", credential_tier: "vocational" },
-      { id: "tertiary", label: "Tertiary / university", isced: "5-7", credential_tier: "tertiary" },
-    ],
-    priority_sectors: ["garments", "technical_services", "retail_trade", "transport", "construction", "food_services"],
-    priority_isco_groups: ["7531", "7533", "7422", "7421", "5223", "5230", "7115", "8322", "9412"],
-  },
-  PK: {
-    education_levels: [
-      { id: "none", label: "No formal education", isced: "0", credential_tier: "none" },
-      { id: "primary", label: "Primary", isced: "1", credential_tier: "primary" },
-      { id: "ssc", label: "SSC / Matric", isced: "2-3", credential_tier: "lower_secondary" },
-      { id: "hssc", label: "HSSC / Intermediate", isced: "3", credential_tier: "secondary" },
-      { id: "tvet", label: "TVET / vocational", isced: "3-4", credential_tier: "vocational" },
-      { id: "tertiary", label: "Tertiary / university", isced: "5-7", credential_tier: "tertiary" },
-    ],
-  },
-};
+// Overrides are now loaded dynamically from config/countries/*.json — see loadCountryOverrides()
+// This replaces the old hardcoded COUNTRY_OVERRIDES object.
 
 function readJson(path) {
   return JSON.parse(readFileSync(path, "utf-8"));
@@ -135,7 +127,7 @@ function cleanRestCountries(raw) {
     });
 }
 
-function mergeCountry(restCountry, worldBankCountry) {
+function mergeCountry(restCountry, worldBankCountry, COUNTRY_OVERRIDES = {}) {
   const iso2 = restCountry.iso2 || worldBankCountry?.iso2;
   const iso3 = restCountry.iso3 || worldBankCountry?.iso3;
   const override = COUNTRY_OVERRIDES[iso2] ?? {};
@@ -219,13 +211,15 @@ function mergeCountry(restCountry, worldBankCountry) {
 function build() {
   mkdirSync(OUTPUT_DIR, { recursive: true });
 
+  const COUNTRY_OVERRIDES = loadCountryOverrides();
+
   const restCountries = cleanRestCountries(readJson(INPUT_FILES.restCountries));
   const worldBankCountries = cleanWorldBankCountries(readJson(INPUT_FILES.worldBankCountries));
   const worldBankByIso3 = new Map(worldBankCountries.map((country) => [country.iso3, country]));
   const worldBankByIso2 = new Map(worldBankCountries.map((country) => [country.iso2, country]));
 
   const countries = restCountries
-    .map((restCountry) => mergeCountry(restCountry, worldBankByIso3.get(restCountry.iso3) ?? worldBankByIso2.get(restCountry.iso2)))
+    .map((restCountry) => mergeCountry(restCountry, worldBankByIso3.get(restCountry.iso3) ?? worldBankByIso2.get(restCountry.iso2), COUNTRY_OVERRIDES))
     .filter((country) => country.iso2 && country.iso3)
     .sort((a, b) => a.country_name.localeCompare(b.country_name));
 

@@ -1,6 +1,11 @@
 import { readFileSync } from "node:fs";
 import { dirname, join, resolve } from "node:path";
 import { fileURLToPath } from "node:url";
+import {
+  getAllCountrySummaries,
+  getConfigLoaderStats,
+  resolveConfig,
+} from "./configLoader.js";
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = resolve(__dirname, "..", "..", "..");
@@ -28,7 +33,16 @@ const sectorLabels = {
 
 let cachedIntakeOptions;
 
+/**
+ * Returns the fully resolved country config (generated base + manual overrides).
+ * Accepts ISO-2 (GH) or ISO-3 (GHA) codes. Falls back to legacy country registry
+ * if the config loader has no entry for the code.
+ */
 export function getCountry(countryCode = "GH") {
+  const resolved = resolveConfig(countryCode);
+  if (resolved && resolved.country_code) return resolved;
+
+  // Legacy fallback — country_registry.generated.json
   return (
     countryRegistry.by_iso2[countryCode] ??
     countryRegistry.by_iso3[countryCode] ??
@@ -36,7 +50,20 @@ export function getCountry(countryCode = "GH") {
   );
 }
 
+/** Full resolved config (same as getCountry, explicit name for clarity). */
+export function getFullConfig(countryCode = "GH") {
+  return resolveConfig(countryCode);
+}
+
+/**
+ * Returns a lean list of all supported countries.
+ * Uses configLoader when available (200+ countries), falls back to country registry.
+ */
 export function getSupportedCountries() {
+  const summaries = getAllCountrySummaries();
+  if (summaries.length > 0) return summaries;
+
+  // Legacy fallback
   return countryRegistry.countries.map((country) => ({
     country_code: country.country_code,
     iso2: country.iso2,
@@ -50,6 +77,10 @@ export function getSupportedCountries() {
     world_bank: country.world_bank,
     data_adapters: country.data_adapters,
   }));
+}
+
+export function getConfigStats() {
+  return getConfigLoaderStats();
 }
 
 export function getTaxonomyIndex() {
