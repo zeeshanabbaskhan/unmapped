@@ -12,18 +12,18 @@ void main() {
   runApp(
     ChangeNotifierProvider(
       create: (_) => AppState()..loadCountries(),
-      child: const UnmappedApp(),
+      child: const VectraApp(),
     ),
   );
 }
 
-class UnmappedApp extends StatelessWidget {
-  const UnmappedApp({super.key});
+class VectraApp extends StatelessWidget {
+  const VectraApp({super.key});
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'UNMAPPED',
+      title: 'Vectra',
       debugShowCheckedModeBanner: false,
       theme: buildAppTheme(),
       home: const AppShell(),
@@ -59,7 +59,16 @@ class _AppShellState extends State<AppShell> {
 
     return Scaffold(
       appBar: AppBar(
-        title: const Text('UNMAPPED'),
+        title: Row(
+          children: [
+            Image.asset(
+              'assets/vectra.png',
+              height: 28,
+            ),
+            const SizedBox(width: 10),
+            const Text('Vectra'),
+          ],
+        ),
         bottom: PreferredSize(
           preferredSize: const Size.fromHeight(1),
           child: Container(height: 1, color: AppColors.divider),
@@ -83,7 +92,7 @@ class _AppShellState extends State<AppShell> {
                     items: state.countries.map((c) {
                       return DropdownMenuItem(
                         value: c.code,
-                        child: Text('${_flag(c.code)} ${c.code}'),
+                        child: Text('${_flag(c.code)} ${c.name}'),
                       );
                     }).toList(),
                     onChanged: (code) {

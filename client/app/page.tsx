@@ -59,13 +59,13 @@ type Phase = "idle" | "m1_loading" | "m1_done" | "m2_loading" | "m2_done" | "m3_
 // ─── i18n helper ─────────────────────────────────────────────────────────────
 
 const EN_FALLBACK: Record<string, string> = {
-  "intake.welcome": "Build your skills profile",
-  "intake.subtitle": "Tell us about the work you already do. We will translate it into a portable, internationally recognised skills profile.",
-  "intake.work_label": "Describe your work in your own words",
-  "intake.work_placeholder": "Example: I repair phones, replace screens, buy parts, and explain problems to customers.",
-  "intake.submit": "Generate portable skills profile",
-  "intake.submitting": "Generating profile...",
-  "profile.subtitle": "Portable profile",
+  "intake.welcome": "Configure workforce profile input",
+  "intake.subtitle": "Enter respondent or cohort work information to generate standardized skills intelligence for planning.",
+  "intake.work_label": "Work profile description",
+  "intake.work_placeholder": "Example: Repairs phones, replaces screens, manages parts sourcing, and handles customer diagnosis.",
+  "intake.submit": "Generate profile intelligence",
+  "intake.submitting": "Generating intelligence...",
+  "profile.subtitle": "Standardized profile output",
   "profile.occupation_unknown": "Uncertain occupation",
   "profile.mapped_skills": "Mapped skills",
   "profile.local_skills": "Local skills not fully captured by ESCO",
@@ -78,12 +78,12 @@ const EN_FALLBACK: Record<string, string> = {
   "risk.durable_skills": "Durable skills",
   "risk.adjacent_skills": "Adjacent skills to build",
   "opp.title": "Opportunities",
-  "opp.subtitle": "Matched opportunities for your skills profile",
+  "opp.subtitle": "Policy-relevant pathways informed by profile and market signals",
   "opp.wage_signal": "Wage floor",
   "country.switch_label": "Viewing context",
-  "nav.module1": "Skills Profile",
-  "nav.module2": "Risk Lens",
-  "nav.module3": "Opportunities",
+  "nav.module1": "Labor Input",
+  "nav.module2": "Risk Analysis",
+  "nav.module3": "Policy Pathways",
 };
 
 // ─── Utility helpers ─────────────────────────────────────────────────────────
@@ -426,14 +426,14 @@ function Module3Panel({ opp, t }: { opp: Module3Analysis; t: (k: string) => stri
     { label: "Youth unemployment", value: signals.youth_unemployment_rate, source: "WDI ILO modeled" },
     { label: "NEET rate", value: signals.neet_rate?.split("—")[0]?.trim() ?? "—", source: "WDI SL.UEM.NEET.ZS" },
     { label: "GDP per capita", value: signals.gdp_per_capita, source: "World Bank WDI 2024" },
-    { label: "Self-employed", value: signals.self_employed_share?.split("of")[0]?.trim() ?? "—", source: signals.self_employed_share?.includes("WDI") ? "WDI SL.EMP.SELF.ZS" : "ILOSTAT" },
+    { label: "Self-employment share", value: signals.self_employed_share?.split("of")[0]?.trim() ?? "—", source: signals.self_employed_share?.includes("WDI") ? "WDI SL.EMP.SELF.ZS" : "ILOSTAT" },
     { label: "Digital infrastructure", value: signals.digital_infrastructure?.split("—")[0]?.trim() ?? "—", source: "ITU 2024" },
   ].filter((s) => s.value && s.value !== "Not available" && s.value !== "—");
 
   const tabs = [
     { id: "direct" as const, label: "Direct", count: opp.opportunities.direct.length },
     { id: "adjacent" as const, label: "Adjacent", count: opp.opportunities.adjacent.length },
-    { id: "micro_enterprise" as const, label: "Micro / self-employment", count: opp.opportunities.micro_enterprise.length },
+    { id: "micro_enterprise" as const, label: "Microenterprise pathways", count: opp.opportunities.micro_enterprise.length },
   ];
 
   return (
@@ -504,8 +504,8 @@ function Module3Panel({ opp, t }: { opp: Module3Analysis; t: (k: string) => stri
 
       {/* Ranked opportunities */}
       <div className="rounded-3xl border border-stone-200 bg-white p-5 shadow-sm">
-        <h3 className="font-semibold text-stone-950">Ranked by feasibility</h3>
-        <p className="mt-1 text-sm text-stone-500">Ranked by skill match, local demand, and income stability — not prestige</p>
+        <h3 className="font-semibold text-stone-950">Ranked for policy feasibility</h3>
+        <p className="mt-1 text-sm text-stone-500">Prioritized by skill fit, labor demand, and income stability for implementation planning</p>
         <div className="mt-4 flex flex-col gap-3">
           {opp.ranking.map((r, i) => (
             <div key={i} className="flex items-center gap-3">
@@ -706,7 +706,7 @@ const initialAnswers: Module1Answers = {
   work_description: "",
   sector: "technical_services",
   experience_years: 3,
-  employment_type: "self-employed",
+  employment_type: "employed",
   tools: [],
   selected_skills: [],
   languages: ["English"],
@@ -836,7 +836,7 @@ export default function Home() {
       <header className="sticky top-0 z-10 border-b border-stone-200 bg-stone-950 text-white shadow-md">
         <div className="mx-auto flex max-w-7xl items-center justify-between gap-4 px-5 py-3 lg:px-8">
           <div className="flex items-center gap-4">
-            <h1 className="text-xl font-bold tracking-tight">UNMAPPED</h1>
+            <h1 className="text-xl font-bold tracking-tight">Labor Intelligence Dashboard</h1>
             <div className="hidden items-center gap-1 rounded-full border border-white/10 bg-white/5 p-1 sm:flex">
               {[
                 { step: 1, label: t("nav.module1") },
@@ -894,7 +894,7 @@ export default function Home() {
             {/* Intake form */}
             <div className="rounded-3xl border border-stone-200 bg-white p-6 shadow-sm">
               <div className="flex items-center justify-between gap-4">
-                <h3 className="text-lg font-semibold">Intake form</h3>
+                <h3 className="text-lg font-semibold">Labor profile intake</h3>
                 <div className="text-right">
                   <p className="text-xs font-medium text-stone-500">{completion}% ready</p>
                   <div className="mt-1 h-1.5 w-24 rounded-full bg-stone-200">
@@ -965,7 +965,7 @@ export default function Home() {
                     />
                   </label>
                   <label className="flex flex-col gap-1.5">
-                    <span className="text-sm font-medium">Work type</span>
+                    <span className="text-sm font-medium">Employment type</span>
                     <select
                       className="rounded-2xl border border-stone-300 px-4 py-2.5 outline-none focus:border-stone-950"
                       value={answers.employment_type}
@@ -1034,7 +1034,7 @@ export default function Home() {
               <div className="flex items-center justify-center rounded-3xl border border-dashed border-stone-300 bg-white p-8">
                 <div className="text-center">
                   <div className="mx-auto h-10 w-10 animate-spin rounded-full border-4 border-stone-200 border-t-emerald-500" />
-                  <p className="mt-4 font-medium text-stone-700">Extracting skills via LLM...</p>
+                  <p className="mt-4 font-medium text-stone-700">Extracting labor signals via LLM...</p>
                   <p className="mt-1 text-sm text-stone-500">Matching to ESCO/ISCO taxonomy</p>
                 </div>
               </div>
@@ -1043,8 +1043,8 @@ export default function Home() {
             {!profile && phase === "idle" && (
               <aside className="flex items-center justify-center rounded-3xl border border-dashed border-stone-300 bg-white p-8 text-center text-stone-500">
                 <div>
-                  <p className="text-lg font-semibold text-stone-700">Profile output</p>
-                  <p className="mt-2 text-sm">Fill in the form and click Generate. Your portable ESCO/ISCO skills profile will appear here.</p>
+                  <p className="text-lg font-semibold text-stone-700">Policy-ready profile output</p>
+                  <p className="mt-2 text-sm">Complete the intake and run analysis. A standardized ESCO/ISCO profile appears here for program and policy review.</p>
                   <div className="mt-4 rounded-2xl bg-stone-100 p-3 text-xs text-stone-500">
                     ISCO + ESCO + O*NET · LLM extraction · Deterministic scoring · Explainable output
                   </div>

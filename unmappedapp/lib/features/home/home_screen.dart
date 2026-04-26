@@ -31,18 +31,56 @@ const _sectors = [
 ];
 
 const _commonSkills = [
-  'Customer service',
-  'Phone repair',
-  'Sewing / Tailoring',
-  'Driving',
-  'Cooking',
-  'Farming',
-  'Carpentry',
+  'Mobile phone repair',
+  'Electrical wiring',
+  'Plumbing',
+  'Motorcycle repair',
+  'Auto mechanics',
+  'Solar installation',
   'Welding',
-  'Teaching',
-  'Sales',
+  'Carpentry',
+  'Masonry',
+  'Painting',
+  'Tailoring',
+  'Embroidery',
+  'Hair styling',
+  'Beauty services',
+  'Food preparation',
+  'Baking',
+  'Barista service',
+  'Hotel housekeeping',
+  'Waiter service',
+  'Retail sales',
+  'Cash handling',
+  'Stock management',
+  'Merchandising',
+  'Customer service',
+  'Digital marketing',
+  'Social media management',
+  'Graphic design',
+  'Content writing',
   'Data entry',
-  'Social media',
+  'Spreadsheet skills',
+  'Bookkeeping',
+  'Basic accounting',
+  'Teaching assistance',
+  'Childcare',
+  'Elderly care',
+  'Community health support',
+  'Driving',
+  'Delivery logistics',
+  'Farming',
+  'Livestock care',
+  'Irrigation',
+  'Post-harvest handling',
+  'Market trading',
+  'Negotiation',
+  'Team leadership',
+  'Problem solving',
+  'Time management',
+  'Communication',
+  'Customer service',
+  'Sales',
 ];
 
 class HomeScreen extends StatefulWidget {
@@ -55,6 +93,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   final _descController = TextEditingController();
+  final _customSkillController = TextEditingController();
   String _education = 'upper_secondary';
   String _sector = 'other';
   int _years = 1;
@@ -65,6 +104,7 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   void dispose() {
     _descController.dispose();
+    _customSkillController.dispose();
     super.dispose();
   }
 
@@ -95,6 +135,13 @@ class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
     final state = context.watch<AppState>();
+    String selectedCountryName = state.selectedCountry;
+    for (final c in state.countries) {
+      if (c.code == state.selectedCountry) {
+        selectedCountryName = c.name;
+        break;
+      }
+    }
 
     return Scaffold(
       backgroundColor: AppColors.background,
@@ -142,6 +189,52 @@ class _HomeScreenState extends State<HomeScreen> {
             ),
 
             const SizedBox(height: 24),
+            _sectionLabel('Country context'),
+            const SizedBox(height: 8),
+            Container(
+              padding: const EdgeInsets.all(12),
+              decoration: BoxDecoration(
+                color: AppColors.surface,
+                borderRadius: AppRadius.md,
+                border: Border.all(color: AppColors.divider),
+              ),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Selected country: $selectedCountryName (${state.selectedCountry})',
+                    style: const TextStyle(
+                      fontSize: 13,
+                      fontWeight: FontWeight.w600,
+                      color: AppColors.textPrimary,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  if (state.countriesLoading && state.countries.isEmpty)
+                    const Padding(
+                      padding: EdgeInsets.symmetric(vertical: 10),
+                      child: Text(
+                        'Loading countries...',
+                        style: TextStyle(fontSize: 13, color: AppColors.textSecondary),
+                      ),
+                    )
+                  else
+                    DropdownButtonFormField<String>(
+                      initialValue: state.selectedCountry,
+                      decoration: const InputDecoration(),
+                      items: state.countries
+                          .map((c) => DropdownMenuItem<String>(
+                                value: c.code,
+                                child: Text('${c.name} (${c.code})', style: const TextStyle(fontSize: 14)),
+                              ))
+                          .toList(),
+                      onChanged: (v) {
+                        if (v != null) state.selectCountry(v);
+                      },
+                    ),
+                ],
+              ),
+            ),
 
             _sectionLabel('Work experience'),
             const SizedBox(height: 8),
@@ -222,6 +315,16 @@ class _HomeScreenState extends State<HomeScreen> {
             const SizedBox(height: 16),
             _sectionLabel('Skills you have'),
             const SizedBox(height: 8),
+            const Text(
+              'Select all that apply. You can also add your own skill below.',
+              style: TextStyle(fontSize: 12, color: AppColors.textSecondary),
+            ),
+            const SizedBox(height: 6),
+            Text(
+              '${_selectedSkills.length} selected',
+              style: const TextStyle(fontSize: 12, fontWeight: FontWeight.w600, color: AppColors.primary),
+            ),
+            const SizedBox(height: 8),
             Wrap(
               spacing: 8,
               runSpacing: 8,
@@ -258,6 +361,25 @@ class _HomeScreenState extends State<HomeScreen> {
                   ),
                 );
               }).toList(),
+            ),
+            const SizedBox(height: 10),
+            Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    controller: _customSkillController,
+                    decoration: const InputDecoration(
+                      hintText: 'Add your own skill',
+                    ),
+                    onSubmitted: (_) => _addCustomSkill(),
+                  ),
+                ),
+                const SizedBox(width: 8),
+                FilledButton.tonal(
+                  onPressed: _addCustomSkill,
+                  child: const Text('Add'),
+                ),
+              ],
             ),
 
             const SizedBox(height: 20),
@@ -355,6 +477,15 @@ class _HomeScreenState extends State<HomeScreen> {
       letterSpacing: -0.1,
     ),
   );
+
+  void _addCustomSkill() {
+    final skill = _customSkillController.text.trim();
+    if (skill.isEmpty) return;
+    setState(() {
+      _selectedSkills.add(skill);
+      _customSkillController.clear();
+    });
+  }
 
   String? _validateWorkDescription(String rawText) {
     final text = rawText.trim();

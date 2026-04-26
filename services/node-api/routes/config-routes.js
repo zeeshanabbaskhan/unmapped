@@ -13,7 +13,7 @@ const router = Router();
 router.get("/i18n", getI18n);
 router.get("/countries", getCountries);
 router.get("/config/stats", getConfigStatsHandler);
-router.get("/config/:countryCode([A-Za-z]{2,3})", getCountryConfig);
+router.get("/config/:countryCode", getCountryConfig);
 router.get("/module1/metadata", getModule1MetadataHandler);
 router.get("/module1/intake-options", getIntakeOptionsHandler);
 

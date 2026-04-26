@@ -13,7 +13,11 @@ import { calibrateForLMIC, getCountryLaborStats } from "./lmic-calibrator.js";
 import { getTaxonomyIndex } from "./dataStore.js";
 
 const OPENROUTER_MODEL = process.env.OPENROUTER_MODEL ?? "openai/gpt-oss-120b:free";
-const LLM_TIMEOUT_MS   = Number(process.env.LLM_TIMEOUT_MS ?? 20000);
+const LLM_TIMEOUT_MS   = Number(
+  process.env.RISK_LLM_TIMEOUT_MS ??
+  process.env.LLM_TIMEOUT_MS ??
+  35000
+);
 
 let _client = null;
 function getClient() {
@@ -198,15 +202,19 @@ function buildTemplateFallback(occupation, skills, automation, laborStats) {
       ],
     },
     _provider: "template_fallback",
+    _fallback_reason: "unknown",
   };
 }
 
 async function runLLMAnalysis(occupation, skills, country, automation, laborStats) {
   if (!process.env.OPENROUTER_API_KEY) {
-    return buildTemplateFallback(occupation, skills, automation, laborStats);
+    return {
+      ...buildTemplateFallback(occupation, skills, automation, laborStats),
+      _fallback_reason: "missing_openrouter_api_key",
+    };
   }
 
-  try {
+  const callLLMOnce = async () => {
     const client = getClient();
     const result = await withTimeout(
       client.chat.send({
@@ -235,11 +243,29 @@ async function runLLMAnalysis(occupation, skills, country, automation, laborStat
     for (const key of required) {
       if (!parsed[key]) throw new Error(`LLM response missing key: ${key}`);
     }
-    return { ...parsed, _provider: `openrouter/${OPENROUTER_MODEL}` };
-  } catch (err) {
-    console.warn(`[risk-engine] LLM failed (${err.message}) — using template fallback`);
-    return buildTemplateFallback(occupation, skills, automation, laborStats);
+    return parsed;
+  };
+
+  const attempts = [1, 2];
+  let lastError = null;
+  for (const attempt of attempts) {
+    try {
+      const parsed = await callLLMOnce();
+      return { ...parsed, _provider: `openrouter/${OPENROUTER_MODEL}` };
+    } catch (err) {
+      lastError = err;
+      const msg = err instanceof Error ? err.message : String(err);
+      console.warn(`[risk-engine] LLM attempt ${attempt}/${attempts.length} failed (${msg})`);
+      if (attempt < attempts.length) continue;
+    }
   }
+
+  const reason = lastError instanceof Error ? lastError.message : "unknown_llm_error";
+  console.warn(`[risk-engine] LLM failed after retry (${reason}) — using template fallback`);
+  return {
+    ...buildTemplateFallback(occupation, skills, automation, laborStats),
+    _fallback_reason: reason,
+  };
 }
 
 /**
@@ -313,6 +339,9 @@ export async function analyseRisk({ profile, country }) {
 
     _meta: {
       analysis_provider: llmResult._provider ?? "unknown",
+      fallback_reason: llmResult._provider === "template_fallback"
+        ? (llmResult._fallback_reason ?? "unknown")
+        : null,
       profile_id: profile.id,
       generated_at: new Date().toISOString(),
     },

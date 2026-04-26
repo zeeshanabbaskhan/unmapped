@@ -2,8 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "Unmapped Skills Signal Engine",
-  description: "Portable skills identity for informal workers",
+  title: "Vectra Labor Intelligence Dashboard",
+  description: "Policy-facing labor intelligence for workforce planning and investment.",
 };
 
 export default function RootLayout({
